@@ -41,11 +41,12 @@ const WelcomeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        height: "90%",
         alignItems: 'flex-end',
 
     },
     titleContainer: {
-        flex: 1,
+        flex: 2,
         alignItems: 'flex-start',
         justifyContent: 'center',
         marginLeft: 20
@@ -58,6 +59,8 @@ const styles = StyleSheet.create({
     background: {
         // width: '80%',
         // height: '80%',
+        height: "100%",
+        width: "100%",
         justifyContent: 'center',
         resizeMode: 'cover'
     },
@@ -66,11 +69,11 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         marginRight: 15,
         marginBottom: 10,
-        height: 30,
+        minHeight: 50,
         borderRadius: 10,
         alignItems: "center",
         justifyContent: 'center',
-        width: 20,
+        minWidth: 100,
         height: 8
 
     },
