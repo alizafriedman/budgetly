@@ -13,6 +13,7 @@ import Dashboard from './screens/Dashboard'
 import Expenses from './screens/Expenses'
 import Goals from './screens/Goals'
 import Income from './screens/Income'
+import NavBar from './screens/NavBar'
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ export default function App() {
    <NavigationContainer>
      <Stack.Navigator>
        <Stack.Screen name={'Loading'} component={Loading} options={{headerShown: false }}    />
+        <Stack.Screen name={'Nav'} component={NavBar} />
         <Stack.Screen name='Home' component={WelcomeScreen} options={{ headerShown: false }} />
         <Stack.Screen name='Sign Up' component={SignUp} options={{ headerShown: false }} />
         <Stack.Screen name='Sign In' component={SignIn} options={{ headerShown: false }} />

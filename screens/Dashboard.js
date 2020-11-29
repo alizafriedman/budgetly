@@ -3,19 +3,13 @@ import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native'
 import {Appbar, Icon} from 'react-native-paper'
 import firebase from 'firebase/app'
 import {logOut} from '../api/auth'
+import NavBar from '../screens/NavBar'
 
 
 const Dashboard = ({navigation}) => {
 
     const currentUserUID = firebase.auth().currentUser.uid
     const [firstName, setFirstName] = useState('');
-    const [visible, setVisible] = useState(false)
-    const screens = ['Home', 'Dashboard', 'Expenses', 'Income', 'Goals', 'Log Out' ]
-
-    const openMenu = () => setVisible(true)
-    const closeMenu = () => setVisible(false)
-
-
 
     useEffect(() => {
         const getUserInfo = async () => {
@@ -47,41 +41,16 @@ const Dashboard = ({navigation}) => {
         navigation.replace('Home')
     }
  
-
-    const DisplayMenu = ({item}) => {
-        console.log(item)
-        return (
-            <View>
-                    <TouchableOpacity style={styles.button}>
-                    <Text onPress={() => navigation.navigate(`${item}`)}>
-                        {item}
-                        </Text>
-                    </TouchableOpacity>
-            </View>
-        )
-    }
-
     return (
-
-    <>
+     <>
         <View style={styles.container}>
 
-            <Appbar.Header>
-                <Appbar.Action icon='menu' onPress={openMenu}  />
-                <Appbar.Content title="Title" subtitle="Subtitle" />
-                <Appbar.Action icon="magnify"  />
-                <Appbar.Action icon="dots-vertical" />
-            </Appbar.Header>
-
-                {visible && 
-                   ( <FlatList data={screens}
-                    keyExtractor={(item) => item.id}
-                    renderItem={(item) => <DisplayMenu {...item} />}
-                />)}
+            <NavBar navigation={navigation} />
 
             <Text style={styles.titleText} >
                 dashboard
             </Text>
+
             <Text style={styles.text} >
                 hi {firstName}
             </Text>
