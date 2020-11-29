@@ -1,8 +1,5 @@
 import React from 'react';
 import {ImageBackground, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
-// import {TouchableOpacity} from 'react-native-gesture-handler';
-
-
 
 
 const WelcomeScreen = ({navigation}) => {
