@@ -9,11 +9,12 @@ if (!firebase.apps.length) {
     firebase.initializeApp(apiKey.firebaseConfig)
 }
 
+const db = firebase.firestore()
+
 export async function registration(email, password, firstName, lastName) {
     await firebase.auth().createUserWithEmailAndPassword(email, password);
     const currentUser = firebase.auth().currentUser;
     console.log(currentUser)
-    const db = firebase.firestore();
     console.log(db)
 
     db.collection('users')
@@ -37,3 +38,5 @@ export async function logOut() {
 }
 
 
+
+export {db}

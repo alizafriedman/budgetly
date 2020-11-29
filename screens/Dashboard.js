@@ -5,8 +5,10 @@ import {logOut} from '../api/auth'
 
 
 const Dashboard = ({navigation}) => {
-    let currentUserUID = firebase.auth().currentUser.uid
+
+    const currentUserUID = firebase.auth().currentUser.uid
     const [firstName, setFirstName] = useState('');
+
 
     useEffect(() => {
         const getUserInfo = async () => {
@@ -19,6 +21,12 @@ const Dashboard = ({navigation}) => {
         }
         getUserInfo()
     }, [])
+
+
+    const viewExpenses = () => {
+        navigation.replace('Expenses')
+    }
+
 
     const handleLogOut = () => {
         logOut();
@@ -42,6 +50,14 @@ const Dashboard = ({navigation}) => {
                 log out
             </Text>
         </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={viewExpenses}
+            >
+                <Text style={styles.buttonText} >
+                    view expenses
+            </Text>
+            </TouchableOpacity>
 
 
         </View>
@@ -63,6 +79,16 @@ const styles = StyleSheet.create({
     title: {
         color: '#A95EC6',
         fontSize: '16px',
+        textAlign: 'center'
+    },
+    titleText: {
+        color: '#A95EC6',
+        fontSize: '25px',
+        textAlign: 'center'
+    },
+    text: {
+        color: '#A95EC6',
+        fontSize: '20px',
         textAlign: 'center'
     },
     background: {
