@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native'
-import {Appbar, List, Button, Menu, Divider, Provider} from 'react-native-paper'
+import {Appbar, Icon} from 'react-native-paper'
 import firebase from 'firebase/app'
 import {logOut} from '../api/auth'
 
@@ -10,6 +10,7 @@ const Dashboard = ({navigation}) => {
     const currentUserUID = firebase.auth().currentUser.uid
     const [firstName, setFirstName] = useState('');
     const [visible, setVisible] = useState(false)
+    const screens = ['Home', 'Dashboard', 'Expenses', 'Income', 'Goals', 'Log Out' ]
 
     const openMenu = () => setVisible(true)
     const closeMenu = () => setVisible(false)
@@ -27,37 +28,6 @@ const Dashboard = ({navigation}) => {
         }
         getUserInfo()
     }, [])
-
-
-    const DisplayMenu = () => {
-       setVisible(true)
-        return (
-            <Provider>
-            <View
-                style={{
-                    paddingTop: 50,
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    backgroundColor: 'black'
-                }}
-                >
-                <Menu
-                    visible={visible}
-                    onDismiss={closeMenu}
-                    anchor={<Button onPress={openMenu} 
-                    icon='menu' >Show menu</Button>}
-                    >
-                    <Menu.Item>bananan</Menu.Item>
-                    <Menu.Item onPress={() => { }} title="Item 1" />
-                    <Menu.Item onPress={() => { }} title="Item 2" />
-                    <Divider />
-                    <Menu.Item onPress={() => { }} title="Item 3" />
-                </Menu>
-            </View>
-            </Provider>
-        )
-
-    }
 
 
     const viewExpenses = () => {
@@ -78,18 +48,36 @@ const Dashboard = ({navigation}) => {
     }
  
 
+    const DisplayMenu = ({item}) => {
+        console.log(item)
+        return (
+            <View>
+                    <TouchableOpacity style={styles.button}>
+                    <Text onPress={() => navigation.navigate(`${item}`)}>
+                        {item}
+                        </Text>
+                    </TouchableOpacity>
+            </View>
+        )
+    }
 
     return (
 
     <>
-            <View style={styles.container} >
-    <Appbar.Header>
-        <Appbar.Action icon='menu' onPress={DisplayMenu}  />
-        <Appbar.Content title="Title" subtitle="Subtitle" />
-        <Appbar.Action icon="magnify"  />
-        <Appbar.Action icon="dots-vertical" />
-    </Appbar.Header>
+        <View style={styles.container}>
 
+            <Appbar.Header>
+                <Appbar.Action icon='menu' onPress={openMenu}  />
+                <Appbar.Content title="Title" subtitle="Subtitle" />
+                <Appbar.Action icon="magnify"  />
+                <Appbar.Action icon="dots-vertical" />
+            </Appbar.Header>
+
+                {visible && 
+                   ( <FlatList data={screens}
+                    keyExtractor={(item) => item.id}
+                    renderItem={(item) => <DisplayMenu {...item} />}
+                />)}
 
             <Text style={styles.titleText} >
                 dashboard
@@ -130,8 +118,6 @@ const Dashboard = ({navigation}) => {
                     view income
             </Text>
             </TouchableOpacity>
-
-
         </View>
         </>
     )

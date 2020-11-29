@@ -66,7 +66,7 @@ const Expenses = ({navigation}) => {
 
     
             
-    //  console.log(expenses)
+     console.log(expenses)
     //  console.log(userId)
 
     const DisplayExpenses = ({id, name, amount, category, recurring}) => {
