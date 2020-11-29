@@ -13,8 +13,8 @@ const Dashboard = ({navigation}) => {
             const doc = await firebase.firestore().collection('users').doc(currentUserUID).get()
             
             if(doc.exists) {
-                return data = doc.data();
-                setFirstName(data.firstName)
+                const userData = doc.data();
+                setFirstName(userData.firstName)
             }
         }
         getUserInfo()
@@ -52,7 +52,7 @@ const Dashboard = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'flex-end'
+        alignItems: 'center'
     },
     titleContainer: {
         flex: 1,

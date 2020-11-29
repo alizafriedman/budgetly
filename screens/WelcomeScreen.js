@@ -13,9 +13,7 @@ const WelcomeScreen = ({navigation}) => {
         source={require('../assets/background.jpg')}
         >
             <View style={styles.titleContainer}>
-            {/* <Text style={styles.title} >
-                apple
-            </Text> */}
+           
 
             <TouchableOpacity 
             style={styles.button}
@@ -23,10 +21,7 @@ const WelcomeScreen = ({navigation}) => {
             >
                 <Text style={styles.buttonText}> Sign Up </Text>
             </TouchableOpacity>
-                {/* <Text style={styles.title}
-                >
-                    Already have an account
-                </Text> */}
+                
                 <TouchableOpacity
                 style={styles.button}
                 onPress={() => navigation.navigate('Sign In')}
