@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'
-import {View, Appbar, FlatList, ScrollView } from 'react-native'
+import {View, Appbar, FlatList, ScrollView, Text } from 'react-native'
 import {TextInput, Button,List} from 'react-native-paper'
 import firebase from 'firebase/app'
 import {db} from '../api/auth'
 
 
 const Expenses = ({navigation}) => {
+
     const [expenses, setExpenses] = useState('')
     const[name, setName] = useState('')
     const [amount, setAmount] = useState('')
@@ -27,13 +28,14 @@ const Expenses = ({navigation}) => {
                     category,
                     name,
                     amount,
-                    recurrings
+                    recurring
                 })
             })
 
             setExpenses(expenseList)
         })
     }, [])
+
 
     const addExpense = async () => {
         await ref.add({
@@ -50,25 +52,30 @@ const Expenses = ({navigation}) => {
         setRecurring('')
     }
 
+
     const returnHome = () => {
         navigation.navigate('Home')
     }
+
 
     const returnDash = () => {
         navigation.navigate('Dashboard')
     }
 
+    
+            
+     
     return (
         <>
             <View>
+                <List.AccordionGroup>
+                    <List.Accordion title={`Expense Name: ${name}`} id="1"  >
+                        <List.Item title={`Category: ${category}`}  />
+                    <List.Item title={`Amount: $${amount}`}  />
+                    <List.Item title={`Recurring: ${recurring}`}  />
+                    </List.Accordion>
+                </List.AccordionGroup>
                 <ScrollView>
-                    {/* <FlatList
-                        style={{ flex: 1 }}
-                        data={expenses}
-                        keyExtractor={(item) => item.id}
-                        renderItem={({ item }) => <ExpensesItems {...item} style={{ color: '#661327' }} />}
-                    /> */}
-
                     <TextInput label={'category '} editable={true} value={category} onChangeText={setCategory} />
                     <TextInput label={'name '} value={name} onChangeText={setName} />
                     <TextInput label={'amount'} value={amount} onChangeText={setAmount} />

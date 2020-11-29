@@ -78,22 +78,22 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#A95EC6',
-        fontSize: '16px',
+        fontSize: 16,
         textAlign: 'center'
     },
     titleText: {
         color: '#A95EC6',
-        fontSize: '25px',
+        fontSize: 25,
         textAlign: 'center'
     },
     text: {
         color: '#A95EC6',
-        fontSize: '20px',
+        fontSize: 20,
         textAlign: 'center'
     },
     background: {
-        width: '100vw',
-        height: '100vh',
+        width: 100,
+        height: 100,
     },
     button: {
         backgroundColor: '#3D2247',
@@ -104,14 +104,13 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         alignItems: "center",
         justifyContent: 'center',
-        width: '20vw',
-        height: '8vh'
+        width: 20,
+        height: 8
 
     },
     buttonText: {
         color: '#D2ADE0',
-        fontSize: '25px',
-        fontFamily: 'arial'
+        fontSize: 25,
     },
     buttonTitle: {
         color: 'white',
