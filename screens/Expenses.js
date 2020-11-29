@@ -5,6 +5,7 @@ import firebase from 'firebase/app'
 import {db} from '../api/auth'
 
 
+
 const Expenses = ({navigation}) => {
 
     const [expenses, setExpenses] = useState([])
@@ -38,7 +39,7 @@ const Expenses = ({navigation}) => {
     }, [])
 
 
-    const addExpense = async () => {
+    const addExpense = async (e) => {
         await ref.add({
             category: category,
             name: name,
@@ -65,25 +66,32 @@ const Expenses = ({navigation}) => {
 
     
             
-     
+    //  console.log(expenses)
+    //  console.log(userId)
+
+    const DisplayExpenses = ({id, name, amount, category, recurring}) => {
+        return (
+            <View>
+                <List.AccordionGroup>
+                    <List.Accordion title={`Expense Name: ${name}`} id='1' >
+                        <List.Item title={`Category: ${category}`} />
+                        <List.Item title={`Amount: $${amount}`} />
+                        <List.Item title={`Recurring: ${recurring}`} />
+                    </List.Accordion>
+                </List.AccordionGroup>
+            </View>
+        )
+    }
+
+
     return (
         <>
             <View>
+                <FlatList data={expenses}
+                keyExtractor={(item) => item.id }
+                renderItem={({item}) => <DisplayExpenses {...item}  />}
+                    />
 
-               {(
-                   <>
-                   {expenses.map((expense) => {
-                       return (<List.AccordionGroup>
-                           <List.Accordion title={`Expense Name: ${name}`}  id='1' >
-                               <List.Item title={`Category: ${category}`} />
-                               <List.Item title={`Amount: $${amount}`} />
-                               <List.Item title={`Recurring: ${recurring}`} />
-                           </List.Accordion>
-                       </List.AccordionGroup>)
-                   })}
-               
-                </>
-                )}
 
                 <ScrollView>
                     <TextInput label={'category '} editable={true} value={category} onChangeText={setCategory} />

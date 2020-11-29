@@ -24,14 +24,18 @@ const Dashboard = ({navigation}) => {
 
 
     const viewExpenses = () => {
-        navigation.replace('Expenses')
+        navigation.navigate('Expenses')
     }
 
-
+    const viewGoals = () => {
+        navigation.navigate('Goals')
+    }
+ 
     const handleLogOut = () => {
         logOut();
         navigation.replace('Home')
     }
+ 
 
     return (
         <View style={styles.container} >
@@ -56,6 +60,14 @@ const Dashboard = ({navigation}) => {
             >
                 <Text style={styles.buttonText} >
                     view expenses
+            </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={viewGoals}
+            >
+                <Text style={styles.buttonText} >
+                    view goals
             </Text>
             </TouchableOpacity>
 

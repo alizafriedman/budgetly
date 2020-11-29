@@ -11,6 +11,7 @@ import SignIn from './screens/SignIn'
 import Loading from './screens/Loading'
 import Dashboard from './screens/Dashboard'
 import Expenses from './screens/Expenses'
+import Goals from './screens/Goals'
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,7 @@ export default function App() {
         <Stack.Screen name='Sign In' component={SignIn} options={{ headerShown: false }} />
         <Stack.Screen name={'Dashboard'} component={Dashboard} options={{ headerShown: false }} />
        <Stack.Screen name={'Expenses'} component={Expenses} options={{headerShown:false}} />
+     <Stack.Screen name={'Goals'} component={Goals} options={{headerShown:false}} />
      </Stack.Navigator>
    </NavigationContainer>
   );
