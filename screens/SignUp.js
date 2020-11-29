@@ -57,7 +57,7 @@ const SignUp = ({navigation}) => {
 
                 <TextInput
                     style={styles.TextInput}
-                    placeholder='email '
+                    placeholder='email'
                     value={email}
                     onChangeText={(email) => setEmail(email)}
                     keyboardType='email-address'
@@ -98,6 +98,7 @@ const SignUp = ({navigation}) => {
             style={styles.button}
             onPress={() => navigation.navigate('Sign In')}
             >
+                        <Text style={styles.buttonText} > Sign In</Text>
 
             </TouchableOpacity>
             </ScrollView> 
@@ -114,18 +115,20 @@ const styles = StyleSheet.create({
     title: {
 
     },
-    logo: {
-        flex: 1,
-        height: 120,
-        width: 90,
-        alignSelf: "center",
-        margin: 30
+    text: {
+        color: '#A95EC6',
+        fontSize: '16px',
+        textAlign: 'center'
     },
-    input: {
+
+    TextInput: {
         height: 48,
-        borderRadius: 5,
-        overflow: 'hidden',
-        backgroundColor: 'white',
+        // border: 'none',
+        // borderRadius: 5,
+        // borderColor: '#3D2247',
+        // overflow: 'hidden',
+        backgroundColor: '#D2ADE0',
+        color: '#573066',
         marginTop: 10,
         marginBottom: 10,
         marginLeft: 30,
@@ -133,12 +136,12 @@ const styles = StyleSheet.create({
         paddingLeft: 16
     },
     button: {
-        backgroundColor: '#788eec',
-        marginLeft: 30,
-        marginRight: 30,
-        marginTop: 20,
-        height: 48,
-        borderRadius: 5,
+        backgroundColor: '#3D2247',
+        marginLeft: 15,
+        marginRight: 15,
+        marginTop: 10,
+        height: 30,
+        borderRadius: 10,
         alignItems: "center",
         justifyContent: 'center'
     },
@@ -146,6 +149,9 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 16,
         fontWeight: "bold"
+    },
+    buttonText: {
+        color: 'white'
     },
     footerView: {
         flex: 1,
