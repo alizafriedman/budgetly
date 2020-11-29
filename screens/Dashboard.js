@@ -80,10 +80,11 @@ const Dashboard = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        height: 100,
         alignItems: 'center'
     },
     titleContainer: {
-        flex: 1,
+        flex: 2,
         alignItems: 'flex-start',
         justifyContent: 'center',
         marginLeft: 300
@@ -104,8 +105,8 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     background: {
-        width: 100,
-        height: 100,
+        width: "100%",
+        height: "100%",
     },
     button: {
         backgroundColor: '#3D2247',
