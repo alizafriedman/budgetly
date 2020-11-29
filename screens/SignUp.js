@@ -28,7 +28,7 @@ const SignUp = ({navigation}) => {
             lastName,
             firstName
         );
-        navigation.navigate('Loading');
+        navigation.navigate('Home');
         emptyForm();
     }
 
@@ -85,7 +85,7 @@ const SignUp = ({navigation}) => {
 
             <TouchableOpacity
             style={styles.button}
-            onPress={() => {handleRegistration}}
+            onPress={() => {handleRegistration()}}
             >
                 <Text style={styles.buttonText} > Sign Up</Text>
             </TouchableOpacity>

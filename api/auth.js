@@ -1,12 +1,20 @@
-import * as firebase from 'firebase';
-import 'firebase/firestore';
+import firebase from 'firebase/app';
+import '@firebase/auth';
+import '@firebase/firestore';
+import apiKey from '../config/keys'
 
 
+if (!firebase.apps.length) {
+    console.log('connected with firebase')
+    firebase.initializeApp(apiKey.firebaseConfig)
+}
 
 export async function registration(email, password, firstName, lastName) {
     await firebase.auth().createUserWithEmailAndPassword(email, password);
-    const currentUser = firebase.auth().currentUser
-    const db = firebase.firestore()
+    const currentUser = firebase.auth().currentUser;
+    console.log(currentUser)
+    const db = firebase.firestore();
+    console.log(db)
 
     db.collection('users')
         .doc(currentUser.uid)
@@ -28,3 +36,5 @@ export async function logOut() {
     await firebase.auth().signOut()
 }
 
+
+export {firebase}
