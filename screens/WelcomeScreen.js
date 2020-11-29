@@ -1,14 +1,16 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 
 const WelcomeScreen = ({navigation}) => {
 
     return (
-        <ImageBackground
+        <View style={styles.container}>
+
+        <Image
         style={styles.background}
         source={require('../assets/background.jpg')}
-        >
+        />
             <View style={styles.titleContainer}>
            
 
@@ -29,21 +31,21 @@ const WelcomeScreen = ({navigation}) => {
                 </Text>
                 </TouchableOpacity>
             </View>
-
-        </ImageBackground>
+            </View>
     )
 
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        height: "90%",
-        alignItems: 'flex-end',
+        flex: 100,
+        // height: "90%",
+        alignItems: 'center',
+        backgroundColor: "white"
 
     },
     titleContainer: {
-        flex: 2,
+        flex: 50,
         alignItems: 'flex-start',
         justifyContent: 'center',
         marginLeft: 20
@@ -54,12 +56,11 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     background: {
-        // width: '80%',
-        // height: '80%',
         height: "100%",
         width: "100%",
         justifyContent: 'center',
-        resizeMode: 'cover'
+        resizeMode: 'cover',
+        flex: 50
     },
     button: {
         backgroundColor: '#3D2247',

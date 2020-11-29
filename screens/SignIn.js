@@ -17,7 +17,7 @@ const SignIn = () => {
     return  (
         <View style={styles.container}>
             <Text style={styles.text}>
-                sign into your account
+               Sign in to your account
             </Text>
             <TextInput
                 style={styles.TextInput}
@@ -49,14 +49,15 @@ const SignIn = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        justifyContent: 'center',
+        alignItems: "center"
     },
     title: {
 
     },
     text: {
         color: '#A95EC6',
-        fontSize: 16,
+        fontSize: 32,
         textAlign: 'center'
     },
 
@@ -70,27 +71,34 @@ const styles = StyleSheet.create({
         color: '#573066',
         marginTop: 10,
         marginBottom: 10,
-        marginLeft: 30,
-        marginRight: 30,
-        paddingLeft: 16
+        marginLeft: 40,
+        marginRight: 40,
+        paddingLeft: 16,
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: 'center',
+        width: "90%",
+        borderRadius: 10
     },
     button: {
         backgroundColor: '#3D2247',
         marginLeft: 15,
         marginRight: 15,
         marginTop: 10,
-        height: 30,
+        height: 40,
+        width: 100,
         borderRadius: 10,
         alignItems: "center",
         justifyContent: 'center'
     },
     buttonTitle: {
         color: 'white',
-        fontSize: 16,
+        fontSize: 24,
         fontWeight: "bold"
     },
     buttonText: {
-        color: 'white'
+        color: 'white',
+        fontSize: 22
     },
 })
 
