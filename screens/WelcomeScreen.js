@@ -41,13 +41,14 @@ const WelcomeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'flex-end'
+        alignItems: 'flex-end',
+
     },
     titleContainer: {
         flex: 1,
         alignItems: 'flex-start',
         justifyContent: 'center',
-        marginLeft: 300
+        marginLeft: 20
     },
     title: {
         color: '#A95EC6',
@@ -55,8 +56,10 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     background: {
-        width: '90%',
-        height: '100%',
+        // width: '80%',
+        // height: '80%',
+        justifyContent: 'center',
+        resizeMode: 'cover'
     },
     button: {
         backgroundColor: '#3D2247',

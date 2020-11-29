@@ -7,12 +7,12 @@ import {db} from '../api/auth'
 
 const Expenses = ({navigation}) => {
 
-    const [expenses, setExpenses] = useState('')
+    const [expenses, setExpenses] = useState([])
     const[name, setName] = useState('')
     const [amount, setAmount] = useState('')
     const[category, setCategory]=useState('')
     const [recurring, setRecurring] = useState('')
-    const[loading, setLoading] = useState(true)
+    const[loaded, setLoaded] = useState(false)
 
     const userId = firebase.auth().currentUser.uid
     const ref = db.collection(`users/${userId}/expenses`)
@@ -33,6 +33,7 @@ const Expenses = ({navigation}) => {
             })
 
             setExpenses(expenseList)
+            // setLoaded(true)
         })
     }, [])
 
@@ -68,13 +69,22 @@ const Expenses = ({navigation}) => {
     return (
         <>
             <View>
-                <List.AccordionGroup>
-                    <List.Accordion title={`Expense Name: ${name}`} id="1"  >
-                        <List.Item title={`Category: ${category}`}  />
-                    <List.Item title={`Amount: $${amount}`}  />
-                    <List.Item title={`Recurring: ${recurring}`}  />
-                    </List.Accordion>
-                </List.AccordionGroup>
+
+               {(
+                   <>
+                   {expenses.map((expense) => {
+                       return (<List.AccordionGroup>
+                           <List.Accordion title={`Expense Name: ${name}`}  id='1' >
+                               <List.Item title={`Category: ${category}`} />
+                               <List.Item title={`Amount: $${amount}`} />
+                               <List.Item title={`Recurring: ${recurring}`} />
+                           </List.Accordion>
+                       </List.AccordionGroup>)
+                   })}
+               
+                </>
+                )}
+
                 <ScrollView>
                     <TextInput label={'category '} editable={true} value={category} onChangeText={setCategory} />
                     <TextInput label={'name '} value={name} onChangeText={setName} />
