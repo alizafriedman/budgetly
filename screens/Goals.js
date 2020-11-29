@@ -53,26 +53,34 @@ const Goals = ({navigation}) => {
         setTimeframe('')
     }
 
+    const DisplayGoals = ({goalName, projectedAmount, description, timeframe}) => {
+        
+            return (
+                <View>
+            <List.AccordionGroup>
+                <List.Accordion title={`Goal Name: ${goalName}`} id="1" >
+                    <List.Item title={`Projected Amount: $${projectedAmount}`} />
+                    <List.Item title={`Description: ${description}`} />
+                    <List.Item title={`Timeframe: ${timeframe}`} />
+                </List.Accordion>
+            </List.AccordionGroup>
+                </View>
+            )
+    }
 
     return (
         <>
             <View>
+                <FlatList data={goals}
+                keyExtractor={(item) => item.id}
+                renderItem={({item}) => <DisplayGoals {...item} />}
 
-                {( <>{goals.map((goal) => {
-                    <List.AccordionGroup>
-                        <List.Accordion title={`Goal Name: ${goalName}`} id="1" >
-                            <List.Item title={`Projected Amount: ${projectedAmount}`} />
-                            <List.Item title={`Description: $${description}`} />
-                            <List.Item title={`Timeframe: ${timeframe}`} />
-                        </List.Accordion>
-                    </List.AccordionGroup>
-                })}  </>)}
-
+                 />
 
 
                 <ScrollView>
                     <TextInput label={'Goal'} value={goalName} onChangeText={setGoalName} />
-                    <TextInput label={'projected amount '} value={projectedAmount} onChangeText={setProjectedAmount} />
+                    <TextInput label={'projected amount'} value={projectedAmount} onChangeText={setProjectedAmount} />
                     <TextInput label={'description '} value={description} onChangeText={setDescription} />
                     <TextInput label={'time frame'} value={timeframe} onChangeText={setTimeframe} />
 
