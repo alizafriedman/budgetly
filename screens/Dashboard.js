@@ -30,6 +30,10 @@ const Dashboard = ({navigation}) => {
     const viewGoals = () => {
         navigation.navigate('Goals')
     }
+
+    const viewIncome = () => {
+        navigation.navigate('Income')
+    }
  
     const handleLogOut = () => {
         logOut();
@@ -68,6 +72,14 @@ const Dashboard = ({navigation}) => {
             >
                 <Text style={styles.buttonText} >
                     view goals
+            </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={viewIncome}
+            >
+                <Text style={styles.buttonText} >
+                    view income
             </Text>
             </TouchableOpacity>
 

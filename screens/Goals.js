@@ -5,8 +5,6 @@ import firebase from 'firebase/app'
 import {db} from '../api/auth'
 
 
-
-
 const Goals = ({navigation}) => {
     const [goals, setGoals] = useState([])
     const [goalName, setGoalName] = useState('')
@@ -53,19 +51,24 @@ const Goals = ({navigation}) => {
         setTimeframe('')
     }
 
+    const returnDash = () => {
+        navigation.navigate('Dashboard')
+    }
+
+
     const DisplayGoals = ({goalName, projectedAmount, description, timeframe}) => {
         
-            return (
-                <View>
-            <List.AccordionGroup>
-                <List.Accordion title={`Goal Name: ${goalName}`} id="1" >
-                    <List.Item title={`Projected Amount: $${projectedAmount}`} />
-                    <List.Item title={`Description: ${description}`} />
-                    <List.Item title={`Timeframe: ${timeframe}`} />
-                </List.Accordion>
-            </List.AccordionGroup>
-                </View>
-            )
+        return (
+            <View>
+                <List.AccordionGroup>
+                    <List.Accordion title={`Goal Name: ${goalName}`} id="1" >
+                        <List.Item title={`Projected Amount: $${projectedAmount}`} />
+                        <List.Item title={`Description: ${description}`} />
+                        <List.Item title={`Timeframe: ${timeframe}`} />
+                    </List.Accordion>
+                </List.AccordionGroup>
+            </View>
+        )
     }
 
     return (
@@ -85,6 +88,8 @@ const Goals = ({navigation}) => {
                     <TextInput label={'time frame'} value={timeframe} onChangeText={setTimeframe} />
 
                     <Button onPress={() => addGoals()}>Add Goals</Button>
+                    <Button onPress={() => returnDash()}>Return to Dashboard</Button>
+
                 </ScrollView>
             </View>
         </>
