@@ -36,7 +36,7 @@ const SignUp = ({navigation}) => {
         <SafeAreaView>
             <View style={styles.container} >
                 <Text style={styles.text} >
-                    create an account
+                   Create an Account
                 </Text>
             <ScrollView
             onBlur={Keyboard.dismiss}
@@ -110,7 +110,8 @@ const SignUp = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        justifyContent: 'center',
+        alignItems: "center"
     },
     title: {
 
@@ -118,7 +119,9 @@ const styles = StyleSheet.create({
     text: {
         color: '#A95EC6',
         fontSize: 16,
-        textAlign: 'center'
+        textAlign: 'center',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
     TextInput: {
@@ -131,27 +134,37 @@ const styles = StyleSheet.create({
         color: '#573066',
         marginTop: 10,
         marginBottom: 10,
-        marginLeft: 30,
-        marginRight: 30,
-        paddingLeft: 16
+        marginLeft: 40,
+        marginRight: 40,
+        paddingLeft: 16,
+        borderRadius: 10,
+        alignItems: 'center',
+        textAlign: 'center',
+        width: "80%"
+
     },
     button: {
+        flexDirection: "center",
         backgroundColor: '#3D2247',
-        marginLeft: 15,
+        marginLeft: "40%",
         marginRight: 15,
         marginTop: 10,
-        height: 30,
+        height: 40,
+        width: "40%",
         borderRadius: 10,
         alignItems: "center",
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     buttonTitle: {
         color: 'white',
-        fontSize: 16,
-        fontWeight: "bold"
+        fontSize: 24,
+        fontWeight: "bold",
+        alignItems: "center",
+        justifyContent: "center"
     },
     buttonText: {
-        color: 'white'
+        color: 'white',
+        fontSize: 22
     },
     footerView: {
         flex: 1,
