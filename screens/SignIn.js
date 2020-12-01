@@ -17,7 +17,7 @@ const SignIn = ({navigation}) => {
 
     return  (
         <View style={styles.container}>
-            <NavBar />
+            <NavBar navigation={navigation} />
             <Text style={styles.text}>
                Sign in to your account
             </Text>

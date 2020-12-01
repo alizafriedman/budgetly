@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { View, Text, TextInput, Alert, ScrollView, Keyboard, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 import { registration } from '../api/auth';
+import NavBar from './NavBar'
 
 
 
@@ -35,6 +36,7 @@ const SignUp = ({navigation}) => {
     return (
         <SafeAreaView>
             <View style={styles.container} >
+                <NavBar navigation={navigation} />
                 <Text style={styles.text} >
                    Create an Account
                 </Text>
