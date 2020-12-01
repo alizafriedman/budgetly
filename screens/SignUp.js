@@ -109,7 +109,6 @@ const SignUp = ({navigation}) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: "center"
     },
@@ -144,7 +143,7 @@ const styles = StyleSheet.create({
 
     },
     button: {
-        flexDirection: "center",
+        flexDirection: "row",
         backgroundColor: '#3D2247',
         marginLeft: "40%",
         marginRight: 15,
