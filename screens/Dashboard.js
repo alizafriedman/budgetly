@@ -96,14 +96,9 @@ const Dashboard = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        height: 100,
-        alignItems: 'center'
-    },
-    titleContainer: {
-        flex: 2,
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        marginLeft: 300
+        // height: 100,
+        // width: 80,
+        alignItems: 'stretch'
     },
     title: {
         color: '#A95EC6',
@@ -119,10 +114,6 @@ const styles = StyleSheet.create({
         color: '#A95EC6',
         fontSize: 20,
         textAlign: 'center'
-    },
-    background: {
-        width: "100%",
-        height: "100%",
     },
     button: {
         backgroundColor: '#3D2247',

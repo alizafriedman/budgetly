@@ -23,11 +23,10 @@ const NavBar = ({navigation}) => {
 
 
     const DisplayMenu = ({ item }) => {
-        console.log(item)
         return (
-            <View>
+            <View  style={styles.listContainer} >
                 <TouchableOpacity style={styles.button}>
-                    <Text onPress={() => navigation.navigate(`${item}`)}>
+                    <Text style={styles.list} onPress={() => navigation.navigate(`${item}`)}>
                         {item}
                     </Text>
                     <Text onPress={handleLogOut}>
@@ -63,14 +62,19 @@ const NavBar = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        height: 100,
-        alignItems: 'center'
+        alignItems: 'flex-start'
+    },
+    listContainer: {
+        backgroundColor: '#D2ADE0',
+        justifyContent: "space-around",
+        height: 60,
+        width: 60
     },
     button: {
         backgroundColor: '#3D2247',
-        marginLeft: 15,
-        marginRight: 15,
-        marginBottom: 10,
+        // marginLeft: 15,
+        // marginRight: 15,
+        // marginBottom: 10,
         height: 30,
         borderRadius: 10,
         alignItems: "center",
@@ -87,6 +91,10 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 16,
         fontWeight: "bold"
-    },})
+    },
+    list: {
+        fontSize: 16,
+    }
+})
 
 export default NavBar;
