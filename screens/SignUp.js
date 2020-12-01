@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
 
     },
     button: {
-        flexDirection: "center",
+        flexDirection: "row",
         backgroundColor: '#3D2247',
         marginLeft: "40%",
         marginRight: 15,
