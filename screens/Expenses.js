@@ -3,6 +3,7 @@ import {View, Appbar, FlatList, ScrollView, Text } from 'react-native'
 import {TextInput, Button,List} from 'react-native-paper'
 import firebase from 'firebase/app'
 import {db} from '../api/auth'
+import NavBar from './NavBar'
 
 
 
@@ -87,6 +88,7 @@ const Expenses = ({navigation}) => {
     return (
         <>
             <View>
+                <NavBar navigation={navigation} />
                 <FlatList data={expenses}
                 keyExtractor={(item) => item.id }
                 renderItem={({item}) => <DisplayExpenses {...item}  />}

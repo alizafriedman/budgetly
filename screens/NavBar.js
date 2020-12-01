@@ -41,6 +41,7 @@ const NavBar = ({navigation}) => {
         <View style={styles.container}>
 
             <Appbar.Header>
+                <Appbar.BackAction onPress={() => navigation.goBack()} />
                 <Appbar.Action icon='menu' onPress={openMenu} />
                 <Appbar.Content title="Title" subtitle="Subtitle" />
                 <Appbar.Action icon="magnify" />

@@ -3,6 +3,7 @@ import { View, Appbar, FlatList, ScrollView } from 'react-native'
 import { Button, TextInput, List } from 'react-native-paper'
 import firebase from 'firebase/app'
 import {db} from '../api/auth'
+import NavBar from './NavBar'
 
 
 //adding works + querying/get for display = needs delete, edit/update +  needs styling desperately
@@ -82,6 +83,7 @@ const Income = ({navigation}) => {
     return (
         <>
             <View>
+                <NavBar navigation={navigation} />
                 <ScrollView>
                     <FlatList
                         style={{ flex: 1 }}

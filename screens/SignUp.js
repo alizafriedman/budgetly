@@ -28,7 +28,7 @@ const SignUp = ({navigation}) => {
             lastName,
             firstName
         );
-        navigation.navigate('Dasboard');
+        navigation.navigate('Dashboard');
         emptyForm();
     }
 

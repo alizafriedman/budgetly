@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native'
 import {signIn} from '../api/auth'
+import NavBar from './NavBar'
 
 
-const SignIn = () => {
+const SignIn = ({navigation}) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -16,6 +17,7 @@ const SignIn = () => {
 
     return  (
         <View style={styles.container}>
+            <NavBar />
             <Text style={styles.text}>
                Sign in to your account
             </Text>
