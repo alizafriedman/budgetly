@@ -24,14 +24,14 @@ export default function App() {
    <NavigationContainer>
      <Stack.Navigator>
        <Stack.Screen name={'Loading'} component={Loading} options={{headerShown: false }}    />
-        <Stack.Screen name={'Home'} component={WelcomeScreen} options={{ headerShown: false }} />
-        <Stack.Screen name={'Sign Up' }component={SignUp} options={{ headerShown: false }} />
-        <Stack.Screen name={'Sign In'} component={SignIn} options={{ headerShown: false }} />
+        <Stack.Screen name={'Nav'} component={NavBar} />
+        <Stack.Screen name={'Home'} component={WelcomeScreen} options={{ headerShown: false }} /> 
+        <Stack.Screen name={'Sign Up'} component={SignUp} options={{ headerShown: false }} /> 
+        <Stack.Screen name={'Sign In'} component={SignIn} options={{ headerShown: false }} /> 
         <Stack.Screen name={'Dashboard'} component={Dashboard} options={{ headerShown: false }} />
         <Stack.Screen name={'Expenses'} component={Expenses} options={{headerShown:false}} />
         <Stack.Screen name={'Goals'} component={Goals} options={{headerShown:false}} />
         <Stack.Screen name={'Income'} component={Income} options={{ headerShown: false }} />
-        <Stack.Screen name={'Nav'} component={NavBar} />  
      </Stack.Navigator>
    </NavigationContainer>
   );

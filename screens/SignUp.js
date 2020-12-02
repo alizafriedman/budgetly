@@ -36,13 +36,14 @@ const SignUp = ({navigation}) => {
     return (
         <SafeAreaView>
             <View style={styles.container} >
-                <NavBar navigation={navigation} />
+            <NavBar style={styles.navBar} navigation={navigation} />
                 <Text style={styles.text} >
                    Create an Account
                 </Text>
             <ScrollView
             onBlur={Keyboard.dismiss}
             >
+                <View style={styles.inputWrapper}>
                 <TextInput
                 style={styles.TextInput}
                 placeholder='first name'
@@ -73,7 +74,7 @@ const SignUp = ({navigation}) => {
                     value={password}
                     onChangeText={(password) => setPassword(password)}
                     secureTextEntry={true}
-                />
+                />                                                       
 
                     <TextInput
                         style={styles.TextInput}
@@ -82,9 +83,10 @@ const SignUp = ({navigation}) => {
                         onChangeText={(password2) => setConfirmPassword(password2)}
                         secureTextEntry={true}
                     />
+                </View>
+             <View style={styles.test} >
 
-
-
+        
             <TouchableOpacity
             style={styles.button}
             onPress={() => {handleRegistration()}}
@@ -103,6 +105,7 @@ const SignUp = ({navigation}) => {
                         <Text style={styles.buttonText} > Sign In</Text>
 
             </TouchableOpacity>
+            </View>
             </ScrollView> 
             </View>
         </SafeAreaView>
@@ -110,12 +113,25 @@ const SignUp = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
+    navBar: {
+        width: '100%',
+        // justifyContent: 'center'
+    },
     container: {
-        justifyContent: 'center',
-        alignItems: "center"
+        // flexDirection: 'column',
+        // alignItems: "stretch",
+        // padding: '10%',
+        aspectRatio: 1/2,
+        alignContent: 'center',
+        justifyContent: 'center'
     },
     title: {
 
+    },
+    inputWrapper: {
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center"
     },
     text: {
         color: '#A95EC6',
@@ -144,17 +160,23 @@ const styles = StyleSheet.create({
         width: "80%"
 
     },
+    test: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: "center"
+    },
     button: {
-        flexDirection: "row",
+        // flexDirection:  "row",
         backgroundColor: '#3D2247',
-        marginLeft: "40%",
-        marginRight: 15,
+        // marginLeft: "15%",
+        // marginRight: 10,
         marginTop: 10,
         height: 40,
-        width: "40%",
+        width: '30%',
         borderRadius: 10,
         alignItems: "center",
         justifyContent: 'center',
+        // aspectRatio: 5
     },
     buttonTitle: {
         color: 'white',
@@ -165,7 +187,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: 'white',
-        fontSize: 22
+        fontSize: 22,
     },
     footerView: {
         flex: 1,
