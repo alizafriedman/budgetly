@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native'
+import {View, Text, TextInput, StyleSheet, TouchableOpacity, SafeAreaView} from 'react-native'
 import {signIn} from '../api/auth'
 import NavBar from './NavBar'
 
@@ -17,10 +17,12 @@ const SignIn = ({navigation}) => {
 
     return  (
         <View style={styles.container}>
-            <NavBar navigation={navigation} />
+        <NavBar navigation={navigation} style={styles.navBar}/>
+        <View style={styles.signIn}>
             <Text style={styles.text}>
                Sign in to your account
-            </Text>
+            </Text >
+            <View style={styles.inputWrapper}>
             <TextInput
                 style={styles.TextInput}
                 placeholder='email'
@@ -36,30 +38,55 @@ const SignIn = ({navigation}) => {
                 value={password}
                 onChangeText={(password) => setPassword(password)}
                 secureTextEntry={true}
-            />
-            
+            />    
+            </View>
+            <View style={styles.buttonWrapper}>
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => { handleSignIn() }}
-            >
+                >
                 <Text style={styles.buttonText} > Sign In</Text>
             </TouchableOpacity>
+
+            </View>
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        aspectRatio: 1 / 2
+        aspectRatio: 1 / 2,
+        alignContent: "center",
+        justifyContent: "center"
+    },
+    navBar: {
+        width: "100%"
     },
     title: {
 
     },
+    signIn: {
+        flex: 1,
+
+    },
+    inputWrapper: {
+        flex: 2,
+        // justifyContent: "center",
+        alignItems: "center",
+    },
+    buttonWrapper: {
+        flex: 100,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: "center"
+    },
     text: {
         color: '#A95EC6',
         fontSize: 32,
-        textAlign: 'center'
+        textAlign: 'center',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
     TextInput: {
@@ -75,19 +102,18 @@ const styles = StyleSheet.create({
         marginLeft: 40,
         marginRight: 40,
         paddingLeft: 16,
-        alignItems: "center",
         justifyContent: "center",
         textAlign: 'center',
-        width: "90%",
+        width: "80%",
         borderRadius: 10
     },
     button: {
         backgroundColor: '#3D2247',
-        marginLeft: 15,
-        marginRight: 15,
+        // marginLeft: 15,
+        // marginRight: 15,
         marginTop: 10,
         height: 40,
-        width: 100,
+        width: "30%",
         borderRadius: 10,
         alignItems: "center",
         justifyContent: 'center'
