@@ -63,7 +63,7 @@ const NavBar = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'flex-start'
+        // justifyContent: 'flex-start'
     },
     listContainer: {
         backgroundColor: '#D2ADE0',

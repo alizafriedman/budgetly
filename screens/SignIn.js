@@ -19,10 +19,10 @@ const SignIn = ({navigation}) => {
         <View style={styles.container}>
         <NavBar navigation={navigation} style={styles.navBar}/>
         <View style={styles.signIn}>
+            <View style={styles.inputWrapper}>
             <Text style={styles.text}>
                Sign in to your account
             </Text >
-            <View style={styles.inputWrapper}>
             <TextInput
                 style={styles.TextInput}
                 placeholder='email'
@@ -39,16 +39,16 @@ const SignIn = ({navigation}) => {
                 onChangeText={(password) => setPassword(password)}
                 secureTextEntry={true}
             />    
-            </View>
-            <View style={styles.buttonWrapper}>
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => { handleSignIn() }}
                 >
                 <Text style={styles.buttonText} > Sign In</Text>
             </TouchableOpacity>
-
             </View>
+            {/* <View style={styles.buttonWrapper}>
+
+            </View> */}
             </View>
         </View>
     )
@@ -61,24 +61,25 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     navBar: {
-        width: "100%"
+        width: "100%",
     },
     title: {
 
     },
     signIn: {
-        flex: 1,
-
+        paddingTop: 40,
+        flex: 2,
+        alignSelf: "center"
     },
     inputWrapper: {
-        flex: 2,
-        // justifyContent: "center",
+        flex: 3,
+        justifyContent: "flex-start",
         alignItems: "center",
     },
     buttonWrapper: {
-        flex: 100,
+        flex: 4,
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: "center"
     },
     text: {

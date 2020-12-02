@@ -37,13 +37,13 @@ const SignUp = ({navigation}) => {
         <SafeAreaView>
             <View style={styles.container} >
             <NavBar style={styles.navBar} navigation={navigation} />
-                <Text style={styles.text} >
-                   Create an Account
-                </Text>
             <ScrollView
             onBlur={Keyboard.dismiss}
             >
                 <View style={styles.inputWrapper}>
+                <Text style={styles.text} >
+                   Create an Account
+                </Text>
                 <TextInput
                 style={styles.TextInput}
                 placeholder='first name'
@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
 
     },
     inputWrapper: {
+        paddingTop: 50,
         justifyContent: "center",
         flexDirection: "column",
         alignItems: "center"
