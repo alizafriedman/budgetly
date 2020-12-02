@@ -138,7 +138,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: 'center',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingTop: 10
     },
 
     TextInput: {
