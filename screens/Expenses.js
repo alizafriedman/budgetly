@@ -15,6 +15,7 @@ const Expenses = ({navigation}) => {
     const [amount, setAmount] = useState('')
     const[category, setCategory]=useState('')
     const [recurring, setRecurring] = useState('')
+    const [docId, setDocId] = useState('')
     const[loaded, setLoaded] = useState(false)
     const [updateCategory, setUpdateCategory] = useState('')
     const [visible, setVisible] = useState(false)
@@ -27,6 +28,7 @@ const Expenses = ({navigation}) => {
             const expenseList = []
             querySnapshot.forEach(doc => {
                 const {category, name, amount, recurring} = doc.data()
+                setDocId(doc.id)
                 expenseList.push({
                     id: doc.id,
                     category,
@@ -35,18 +37,17 @@ const Expenses = ({navigation}) => {
                     recurring
                 })
             })
-
             setExpenses(expenseList)
             // setLoaded(true)
         })
     }, [])
-
+    console.log(docId)
 
     const addExpense = async (e) => {
         await ref.add({
             category: category,
             name: name,
-            amount: parseInt(amount),
+            amount: parseInt(amount),   
             recurring: recurring
 
         });
@@ -72,7 +73,7 @@ const Expenses = ({navigation}) => {
     //  console.log(expenses)
     //  console.log(userId)
 
-    const DisplayExpenses = ({id, name, amount, category, recurring}) => {
+    const DisplayExpenses = ({docId, name, amount, category, recurring}) => {
         return (
             <View>
                 <List.AccordionGroup>
@@ -80,7 +81,7 @@ const Expenses = ({navigation}) => {
                         <List.Item title={`Category: ${category}`}  />
                         <List.Item title={`Amount: $${amount}`} />
                         <List.Item title={`Recurring: ${recurring}`} />
-                        <UpdateExpense category={category} name={name} amount={amount} recurring={recurring} />
+                        <UpdateExpense docId={docId} category={category} name={name} amount={amount} recurring={recurring} />
                     </List.Accordion>
                 </List.AccordionGroup>
             </View>
@@ -109,8 +110,6 @@ const Expenses = ({navigation}) => {
                     <Button onPress={() => addExpense()}>Add Expense</Button>
                     <Button onPress={() => returnHome()}>Return Home</Button>
                     <Button onPress={() => returnDash()}>Return to Dashboard</Button>
-                    {/* <Button onPress={() => <UpdateExpense />}>test update</Button> */}
-                    {/* <UpdateExpense category={category} setCategory={setCategory} /> */}
 
             </ScrollView>
             </View>
