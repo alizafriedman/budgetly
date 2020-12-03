@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import {View, Appbar, FlatList, ScrollView, Text } from 'react-native'
-import {TextInput, Button,List} from 'react-native-paper'
+import {View, Appbar, FlatList, ScrollView, Text, Pressable, TouchableOpacity } from 'react-native'
+import {TextInput, Button,List, Dialog, Portal} from 'react-native-paper'
 import firebase from 'firebase/app'
 import {db} from '../api/auth'
 import NavBar from './NavBar'
+import UpdateExpense from './UpdateExpense'
 
 
 
@@ -15,10 +16,11 @@ const Expenses = ({navigation}) => {
     const[category, setCategory]=useState('')
     const [recurring, setRecurring] = useState('')
     const[loaded, setLoaded] = useState(false)
+    const [updateCategory, setUpdateCategory] = useState('')
+    const [visible, setVisible] = useState(false)
 
     const userId = firebase.auth().currentUser.uid
     const ref = db.collection(`users/${userId}/expenses`)
-
 
     useEffect(() => {
         return ref.onSnapshot((querySnapshot) => {
@@ -67,17 +69,18 @@ const Expenses = ({navigation}) => {
 
     
             
-     console.log(expenses)
+    //  console.log(expenses)
     //  console.log(userId)
 
     const DisplayExpenses = ({id, name, amount, category, recurring}) => {
         return (
             <View>
                 <List.AccordionGroup>
-                    <List.Accordion title={`Expense Name: ${name}`} id='1' >
-                        <List.Item title={`Category: ${category}`} />
+                    <List.Accordion title={`Expense Name: ${name}`} id='1'  >
+                        <List.Item title={`Category: ${category}`}  />
                         <List.Item title={`Amount: $${amount}`} />
                         <List.Item title={`Recurring: ${recurring}`} />
+                        <UpdateExpense category={category} name={name} amount={amount} recurring={recurring} />
                     </List.Accordion>
                 </List.AccordionGroup>
             </View>
@@ -100,12 +103,14 @@ const Expenses = ({navigation}) => {
                     <TextInput label={'name '} value={name} onChangeText={setName} />
                     <TextInput label={'amount'} value={amount} onChangeText={setAmount} />
                     <TextInput label={'recurring'} value={recurring} onChangeText={setRecurring} />
-
+                    
 
 
                     <Button onPress={() => addExpense()}>Add Expense</Button>
                     <Button onPress={() => returnHome()}>Return Home</Button>
                     <Button onPress={() => returnDash()}>Return to Dashboard</Button>
+                    {/* <Button onPress={() => <UpdateExpense />}>test update</Button> */}
+                    {/* <UpdateExpense category={category} setCategory={setCategory} /> */}
 
             </ScrollView>
             </View>
