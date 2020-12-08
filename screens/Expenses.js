@@ -41,7 +41,8 @@ const Expenses = ({navigation}) => {
             // setLoaded(true)
         })
     }, [])
-    console.log(docId)
+    console.log(docId) 
+    //why is this rerendering with each typed character
 
     const addExpense = async (e) => {
         await ref.add({

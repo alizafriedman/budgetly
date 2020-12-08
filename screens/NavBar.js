@@ -6,14 +6,14 @@ import { logOut } from '../api/auth'
 
 
 const NavBar = ({navigation}) => {
-    const [visible, setVisible] = useState()
+    const [visible, setVisible] = useState(false)
     const screens = ['Home', 'Dashboard', 'Expenses', 'Income', 'Goals']
+    // const miscId = Math.random()
 
     const handleLogOut = () => {
         logOut();
         navigation.replace('Home')
     }
-
 
 
     return (
@@ -22,21 +22,23 @@ const NavBar = ({navigation}) => {
             <Appbar.Header>
                 <Appbar.BackAction onPress={() => navigation.goBack()} />
                 <Appbar.Action icon='menu' onPress={() => setVisible(true)} />
-                <Appbar.Content title="Title" subtitle="Subtitle" />
+                <Appbar.Content title="Title" subtitle="Subtitle" onPress={() => setVisible(false)} />
                 <Appbar.Action icon="magnify" />
                 <Appbar.Action icon="dots-vertical" />
             </Appbar.Header>
-
+        
                 {visible && 
                 screens.map((screen) => (
                         <Drawer.Item 
                         label={`${screen}`}
-                        onPress={() => navigation.navigate(`${screen}`)}
-                        />))}
+                        // key={miscId}
+                        onPress={() => {
+                            setVisible(false)
+                            navigation.navigate(`${screen}`)}}
+                        />))} 
+
         </View>
     )
-
-
 
 }
 
