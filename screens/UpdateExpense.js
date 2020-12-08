@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { Button, Dialog, Portal, Provider, TextInput } from 'react-native-paper';
 import {db} from '../api/auth'
 import firebase from 'firebase/app'
 
 
 
-const UpdateExpense = ({docId, category, name, amount, recurring}) => {
+const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) => {
     const [visible, setVisible] = useState(false);
     const [updateCategory, setUpdateCategory] = useState(category)
     const [updateName, setUpdateName] = useState(name)
@@ -21,16 +21,19 @@ const UpdateExpense = ({docId, category, name, amount, recurring}) => {
    
     const submitEdits = async (e) => {
         // e.preventDefault()
-       await  ref.doc(docId).update({
+       await  ref.doc(docId).set({
             category: updateCategory,
             name: updateName,
             amount: parseInt(updateAmount),
             recurring: updateRecurring
         });
+
+        setCategory(updateCategory)
+        hideDialog()
+        
     }
 
 
-    console.log(updateRecurring)
     
     return (
         <Provider>
@@ -44,8 +47,9 @@ const UpdateExpense = ({docId, category, name, amount, recurring}) => {
                             <TextInput label={'name'} editable={true} value={updateName} onChangeText={setUpdateName} />
                             <TextInput label={'amount'} editable={true} value={updateAmount} onChangeText={setUpdateAmount} />
                             <TextInput label={'recurring'} editable={true} value={updateRecurring} onChangeText={setUpdateRecurring} />
-                            <Button onPress={submitEdits}>edit</Button>
-
+                            <TouchableOpacity onPress={submitEdits} >
+                            <Button >edit</Button>
+                            </TouchableOpacity>
                         </Dialog.Content>
                         <Dialog.Actions>
                             <Button onPress={hideDialog}>Done</Button>

@@ -1,16 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
-import { Appbar, Icon } from 'react-native-paper'
+import { Appbar, Icon, Drawer } from 'react-native-paper'
 import firebase from 'firebase/app'
 import { logOut } from '../api/auth'
 
 
 const NavBar = ({navigation}) => {
-    const [visible, setVisible] = useState(false)
+    const [visible, setVisible] = useState()
     const screens = ['Home', 'Dashboard', 'Expenses', 'Income', 'Goals']
 
-    const openMenu = () => setVisible(true)
-    const closeMenu = () => setVisible(false)
+    const [active, setActive] = useState('')
 
 
    
@@ -22,37 +21,71 @@ const NavBar = ({navigation}) => {
 
 
 
-    const DisplayMenu = ({ item }) => {
-        return (
-            <View  style={styles.listContainer} >
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.list} onPress={() => navigation.navigate(`${item}`)}>
-                        {item}
-                    </Text>
-                    <Text onPress={handleLogOut}>
-                        Log Out
-                    </Text>
-                </TouchableOpacity>
-            </View>
-        )
-    }
+    // const openMenu = () => {
+    //     return (
+    //         <View>
+    //     <Drawer.Section title='apple' >
+    //         <Drawer.Item
+    //         label='banana'
+    //         active={active === 'orange'}
+    //         onPress={() => setActive('orange')}
+    //         />
+
+    //                 <Drawer.Item
+    //                     label="Second Item"
+    //                     active={active === 'second'}
+    //                     onPress={() => setActive('second')}
+    //                 />
+
+    //     </Drawer.Section>
+    //         </View>
+    //     )
+    // }
 
     return (
         <View style={styles.container}>
 
             <Appbar.Header>
                 <Appbar.BackAction onPress={() => navigation.goBack()} />
-                <Appbar.Action icon='menu' onPress={openMenu} />
+                <Appbar.Action icon='menu' onPress={() => setVisible(true)} />
                 <Appbar.Content title="Title" subtitle="Subtitle" />
                 <Appbar.Action icon="magnify" />
                 <Appbar.Action icon="dots-vertical" />
             </Appbar.Header>
-
+{/* 
             {visible &&
                 (<FlatList data={screens}
                     keyExtractor={(item) => item.id}
                     renderItem={(item) => <DisplayMenu {...item} />}
-                />)}
+                />)} */}
+                {visible && (
+                <Drawer.Section title='Screens' >
+                    <Drawer.Item
+                        label='Dashboard'
+                        onPress={() => navigation.navigate('Dashboard')}
+                    />
+                    <Drawer.Item
+                        label='Expenses'
+                        onPress={() => navigation.navigate('Expenses')}
+                    />
+
+                    <Drawer.Item
+                        label='Income'
+                        onPress={() => navigation.navigate('Income')}
+                    />
+
+                    <Drawer.Item
+                        label='Goals'
+                        onPress={() => navigation.navigate('Goals')}
+                    />
+                    <Drawer.Item
+                        label='Log Out'
+                        // onPress={() => navigation.navigate('Income')}
+                    />
+                  
+
+                </Drawer.Section>
+                )}
         </View>
     )
 

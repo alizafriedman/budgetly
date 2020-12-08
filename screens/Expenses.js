@@ -77,11 +77,13 @@ const Expenses = ({navigation}) => {
         return (
             <View>
                 <List.AccordionGroup>
+
                     <List.Accordion title={`Expense Name: ${name}`} id='1'  >
                         <List.Item title={`Category: ${category}`}  />
                         <List.Item title={`Amount: $${amount}`} />
                         <List.Item title={`Recurring: ${recurring}`} />
-                        <UpdateExpense docId={docId} category={category} name={name} amount={amount} recurring={recurring} />
+                        <UpdateExpense docId={docId} category={category} name={name} amount={amount} recurring={recurring} setCategory={setCategory} />
+
                     </List.Accordion>
                 </List.AccordionGroup>
             </View>
