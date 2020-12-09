@@ -8,7 +8,6 @@ import {screens} from '../api/misc'
 
 const NavBar = ({navigation}) => {
     const [visible, setVisible] = useState(false)
-    // const miscId = Math.random()
 
     const handleLogOut = () => {
         logOut();
@@ -27,10 +26,10 @@ const NavBar = ({navigation}) => {
             </Appbar.Header>
         
                 {visible && 
-                screens.map((screen) => (
+                screens.map((screen, idx) => (
                         <Drawer.Item 
                         label={`${screen}`}
-                        // key={miscId}
+                        key={idx}
                         onPress={() => {
                             setVisible(false)
                             navigation.navigate(`${screen}`)}}

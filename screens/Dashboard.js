@@ -26,24 +26,7 @@ const Dashboard = ({navigation}) => {
     }, [])
 
 
-    const viewExpenses = () => {
-        navigation.navigate('Expenses')
-    }
-
-    const viewGoals = () => {
-        navigation.navigate('Goals')
-    }
-
-    const viewIncome = () => {
-        navigation.navigate('Income')
-    }
- 
-    const handleLogOut = () => {
-        logOut();
-        navigation.replace('Home')
-    }
- 
-    console.log(screens)
+  
     return (
         <View style={styles.container}>
 
@@ -58,13 +41,12 @@ const Dashboard = ({navigation}) => {
                 hi {firstName}
             </Text>
 
-                      {screens.map((screen) => (
-                          <List.Section>
+                      {screens.map((screen, idx) => (
                           <List.Item
                            title={`${screen}`} 
+                           key={idx}
                            onPress={() => {navigation.navigate(`${screen}`)}}
                            />
-                          </List.Section>
                       ))}
         </View>
     
