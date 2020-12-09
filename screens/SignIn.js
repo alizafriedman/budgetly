@@ -12,6 +12,7 @@ const SignIn = ({navigation}) => {
         signIn(email, password)
         setEmail('')
         setPassword('')
+        navigation.navigate('Dashboard')
     }
 
 

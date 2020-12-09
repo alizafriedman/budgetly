@@ -45,65 +45,29 @@ const Dashboard = ({navigation}) => {
  
     console.log(screens)
     return (
-     <>
         <View style={styles.container}>
 
             <NavBar navigation={navigation} />
 
             <Text style={styles.titleText} >
                 dashboard 
+                
             </Text>
 
             <Text style={styles.text} >
                 hi {firstName}
             </Text>
 
-                <View>
-
-                      {screens.map((screen) => {
+                      {screens.map((screen) => (
                           <List.Section>
-                          <List.Item title={`${screen}`} />
+                          <List.Item
+                           title={`${screen}`} 
+                           onPress={() => {navigation.navigate(`${screen}`)}}
+                           />
                           </List.Section>
-                      })}
-
-                </View>
-
-
-
-        {/* <TouchableOpacity
-        style={styles.button}
-        onPress={handleLogOut}
-        >
-            <Text style={styles.buttonText} >
-                log out
-            </Text>
-        </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.button}
-                onPress={viewExpenses}
-            >
-                <Text style={styles.buttonText} >
-                    view expenses
-            </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.button}
-                onPress={viewGoals}
-            >
-                <Text style={styles.buttonText} >
-                    view goals
-            </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.button}
-                onPress={viewIncome}
-            >
-                <Text style={styles.buttonText} >
-                    view income
-            </Text>
-            </TouchableOpacity> */}
+                      ))}
         </View>
-        </>
+    
     )
 
 }
