@@ -58,16 +58,15 @@ const Dashboard = ({navigation}) => {
                 hi {firstName}
             </Text>
 
-                  
+                <View>
+
                       {screens.map((screen) => {
-                          <List.AccordionGroup>
-                          <List.Accordion title={screens} id='1'>
+                          <List.Section>
                           <List.Item title={`${screen}`} />
-                          </List.Accordion>
-                          </List.AccordionGroup>
-
-
+                          </List.Section>
                       })}
+
+                </View>
 
 
 
