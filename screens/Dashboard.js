@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native'
 import {Appbar, Icon, List, Drawer, Button} from 'react-native-paper'
 import firebase from 'firebase/app'
 import {logOut} from '../api/auth'
-import {screens} from '../api/misc'
+import {dashScreens} from '../api/misc'
 import NavBar from '../screens/NavBar'
 
 
@@ -26,7 +26,7 @@ const Dashboard = ({navigation}) => {
     }, [])
 
 
-  
+  console.log(currentUserUID)
     return (
         <View style={styles.container}>
 
@@ -41,13 +41,17 @@ const Dashboard = ({navigation}) => {
                 hi {firstName}
             </Text>
 
-                      {screens.map((screen, idx) => (
+                      {dashScreens.map((screen, idx) => (
                           <List.Item
                            title={`${screen}`} 
                            key={idx}
                            onPress={() => {navigation.navigate(`${screen}`)}}
                            />
                       ))}
+                      <List.Item 
+                      title='Log Out'
+                      onPress={() => {navigation.navigate('Home')}} 
+                      />
         </View>
     
     )

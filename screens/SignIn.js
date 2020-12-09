@@ -47,9 +47,7 @@ const SignIn = ({navigation}) => {
                 <Text style={styles.buttonText} > Sign In</Text>
             </TouchableOpacity>
             </View>
-            {/* <View style={styles.buttonWrapper}>
-
-            </View> */}
+            
             </View>
         </View>
     )

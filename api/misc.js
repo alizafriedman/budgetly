@@ -1,7 +1,7 @@
 
 
-const screens = ['Home', 'Dashboard', 'Expenses', 'Income', 'Goals']
+const screens = ['Home', 'Dashboard', 'Expenses', 'Income', 'Goals', 'Log Out']
+const dashScreens = ['Expenses', 'Income', 'Goals']
 
 
-
- export {screens}
+ export {screens, dashScreens}

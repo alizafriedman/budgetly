@@ -1,8 +1,9 @@
 import React from 'react';
 import {Image, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
-
+import firebase from 'firebase/app'
 
 const WelcomeScreen = ({navigation}) => {
+    console.log(firebase.auth().currentUser.uid)
 
     return (
         <View style={styles.container}>
