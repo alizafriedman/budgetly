@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native'
-import {Appbar, Icon} from 'react-native-paper'
+import {Appbar, Icon, List, Drawer, Button} from 'react-native-paper'
 import firebase from 'firebase/app'
 import {logOut} from '../api/auth'
+import {screens} from '../api/misc'
 import NavBar from '../screens/NavBar'
 
 
@@ -10,6 +11,7 @@ const Dashboard = ({navigation}) => {
 
     const currentUserUID = firebase.auth().currentUser.uid
     const [firstName, setFirstName] = useState('');
+
 
     useEffect(() => {
         const getUserInfo = async () => {
@@ -41,6 +43,7 @@ const Dashboard = ({navigation}) => {
         navigation.replace('Home')
     }
  
+    console.log(screens)
     return (
      <>
         <View style={styles.container}>
@@ -48,14 +51,27 @@ const Dashboard = ({navigation}) => {
             <NavBar navigation={navigation} />
 
             <Text style={styles.titleText} >
-                dashboard
+                dashboard 
             </Text>
 
             <Text style={styles.text} >
                 hi {firstName}
             </Text>
 
-        <TouchableOpacity
+                  
+                      {screens.map((screen) => {
+                          <List.AccordionGroup>
+                          <List.Accordion title={screens} id='1'>
+                          <List.Item title={`${screen}`} />
+                          </List.Accordion>
+                          </List.AccordionGroup>
+
+
+                      })}
+
+
+
+        {/* <TouchableOpacity
         style={styles.button}
         onPress={handleLogOut}
         >
@@ -86,7 +102,7 @@ const Dashboard = ({navigation}) => {
                 <Text style={styles.buttonText} >
                     view income
             </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
         </View>
         </>
     )
@@ -117,15 +133,16 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#3D2247',
+        color: 'white',
         marginLeft: 15,
         marginRight: 15,
         marginBottom: 10,
-        height: 30,
+        height: 90,
         borderRadius: 10,
         alignItems: "center",
         justifyContent: 'center',
-        width: 20,
-        height: 8
+        width: 1000,
+        height: 25
 
     },
     buttonText: {

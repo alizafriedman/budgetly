@@ -3,18 +3,17 @@ import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native
 import { Appbar, Icon, Drawer } from 'react-native-paper'
 import firebase from 'firebase/app'
 import { logOut } from '../api/auth'
+import {screens} from '../api/misc'
 
 
 const NavBar = ({navigation}) => {
     const [visible, setVisible] = useState(false)
-    const screens = ['Home', 'Dashboard', 'Expenses', 'Income', 'Goals']
     // const miscId = Math.random()
 
     const handleLogOut = () => {
         logOut();
         navigation.replace('Home')
     }
-
 
     return (
         <View style={styles.container}>
