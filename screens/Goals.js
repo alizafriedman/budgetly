@@ -4,6 +4,7 @@ import { TextInput, Button, List } from 'react-native-paper'
 import firebase from 'firebase/app'
 import {db} from '../api/auth'
 import NavBar from './NavBar'
+import UpdateGoals from './UpdateGoals'
 
 
 const Goals = ({navigation}) => {
@@ -12,6 +13,7 @@ const Goals = ({navigation}) => {
     const [projectedAmount, setProjectedAmount] = useState('')
     const [description, setDescription] = useState('')
     const [timeframe, setTimeframe] = useState('')
+    const [docId, setDocId] = useState('')
     const [loading, setLoading] = useState(true)
 
     const userId = firebase.auth().currentUser.uid
@@ -23,6 +25,7 @@ const Goals = ({navigation}) => {
             const goalsList = []
             querySnapshot.forEach(doc => {
                 const { goalName, projectedAmount, description, timeframe } = doc.data();
+                setDocId(doc.id)
                 goalsList.push({
                     id: doc.id,
                     goalName,
@@ -66,7 +69,15 @@ const Goals = ({navigation}) => {
                         <List.Item title={`Projected Amount: $${projectedAmount}`} />
                         <List.Item title={`Description: ${description}`} />
                         <List.Item title={`Timeframe: ${timeframe}`} />
-                    </List.Accordion>
+                        
+                        <UpdateGoals 
+                        docId={docId} 
+                        goalName={goalName}
+                         projectedAmount={projectedAmount} 
+                         description={description} 
+                         timeframe = {timeframe} />
+                
+                </List.Accordion>
                 </List.AccordionGroup>
             </View>
         )

@@ -41,8 +41,7 @@ const Expenses = ({navigation}) => {
             // setLoaded(true)
         })
     }, [])
-    console.log(docId) 
-    //why is this rerendering with each typed character
+   
 
     const addExpense = async (e) => {
         await ref.add({
@@ -59,20 +58,6 @@ const Expenses = ({navigation}) => {
         setRecurring('')
     }
 
-
-    const returnHome = () => {
-        navigation.navigate('Home')
-    }
-
-
-    const returnDash = () => {
-        navigation.navigate('Dashboard')
-    }
-
-    
-            
-    //  console.log(expenses)
-    //  console.log(userId)
 
     const DisplayExpenses = ({docId, name, amount, category, recurring}) => {
         return (
@@ -93,8 +78,7 @@ const Expenses = ({navigation}) => {
 
 
     return (
-        <>
-            <View>
+        <ScrollView>
                 <NavBar navigation={navigation} />
                 <FlatList data={expenses}
                 keyExtractor={(item) => item.id }
@@ -102,21 +86,15 @@ const Expenses = ({navigation}) => {
                     />
 
 
-                <ScrollView>
+               
                     <TextInput label={'category '} editable={true} value={category} onChangeText={setCategory} />
                     <TextInput label={'name '} value={name} onChangeText={setName} />
                     <TextInput label={'amount'} value={amount} onChangeText={setAmount} />
                     <TextInput label={'recurring'} value={recurring} onChangeText={setRecurring} />
                     
-
-
                     <Button onPress={() => addExpense()}>Add Expense</Button>
-                    <Button onPress={() => returnHome()}>Return Home</Button>
-                    <Button onPress={() => returnDash()}>Return to Dashboard</Button>
-
             </ScrollView>
-            </View>
-        </>
+            
     )
 }
 

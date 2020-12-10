@@ -4,6 +4,7 @@ import { Button, TextInput, List } from 'react-native-paper'
 import firebase from 'firebase/app'
 import {db} from '../api/auth'
 import NavBar from './NavBar'
+import UpdateIncome from './UpdateIncome'
 
 
 //adding works + querying/get for display = needs delete, edit/update +  needs styling desperately
@@ -13,7 +14,9 @@ const Income = ({navigation}) => {
     const [type, setType] = useState('')
     const [amount, setAmount] = useState('')
     const [loading, setLoading] = useState(true)
+    const [docId, setDocId] = useState('')
     const [incomes, setIncomes] = useState([])
+
 
     const userId = firebase.auth().currentUser.uid
     const ref = db.collection(`users/${userId}/income`)
@@ -24,6 +27,7 @@ const Income = ({navigation}) => {
             const incomeList = []
             querySnapshot.forEach(doc => {
                 const { type, amount } = doc.data();
+                setDocId(doc.id)
                 incomeList.push({
                     id: doc.id,
                     type,
@@ -57,28 +61,21 @@ const Income = ({navigation}) => {
     const DisplayIncome = ({type, amount}) => {
         return (
             <View>
+                <List.Subheader>Misc item
+                    <UpdateIncome docId={docId} type={type} amount={amount} />
+                </List.Subheader>
                 <List.Item
                     title={`Type: ${type}`}
                     description={`Amount: $${amount}`}
                 />
             </View>
         )
-    }
+    };
 
-    const returnHome = () => {
-        navigation.navigate('Home')
-    }
-
-
-    const returnDash = () => {
-        navigation.navigate('Dashboard')
-    }
-
-    //the fuck is wrong with this
-
+    
     const deleteIncome = async () => {
         await ref.remove(`users/${userId}/income`)
-    }
+    };
 
     return (
         <>
@@ -98,8 +95,7 @@ const Income = ({navigation}) => {
 
                     <Button onPress={() => addIncome()}>Add income</Button>
                     <Button onPress={() => deleteIncome()} >delete Income info</Button>
-                    <Button onPress={() => returnHome()}>Return Home</Button>
-                    <Button onPress={() => returnDash()}>Return to Dashboard</Button>
+                    
                 </ScrollView>
             </View>
         </>

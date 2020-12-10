@@ -27,6 +27,7 @@ const Dashboard = ({navigation}) => {
 
 
   console.log(currentUserUID)
+  
     return (
         <View style={styles.container}>
 
@@ -50,7 +51,9 @@ const Dashboard = ({navigation}) => {
                       ))}
                       <List.Item 
                       title='Log Out'
-                      onPress={() => {navigation.navigate('Home')}} 
+                      onPress={() => {
+                          logOut()
+                          navigation.navigate('Home')}} 
                       />
         </View>
     

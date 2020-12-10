@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { Button, Dialog, Portal, Provider, TextInput } from 'react-native-paper';
 import {db} from '../api/auth'
 import firebase from 'firebase/app'
@@ -22,43 +22,64 @@ const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) 
     const submitEdits = async (e) => {
         // e.preventDefault()
        await  ref.doc(docId).set({
+           amount: parseInt(updateAmount),
             category: updateCategory,
             name: updateName,
-            amount: parseInt(updateAmount),
             recurring: updateRecurring
         });
-
-        setCategory(updateCategory)
+        console.log(updateCategory)
         hideDialog()
+        setVisible(false)
         
     }
 
 
-    
+    console.log(category)
+    console.log(updateCategory)
     return (
         <Provider>
-            <View>
+            <ScrollView>
                 <Button onPress={showDialog}>edit</Button>
                 <Portal>
                     <Dialog visible={visible} onDismiss={hideDialog}>
                         <Dialog.Title>Update Expense</Dialog.Title>
                         <Dialog.Content>
-                            <TextInput label={'category'} editable={true} value={updateCategory} onChangeText={setUpdateCategory} />
+                            <TextInput label={'category'} editable={true} value={updateCategory} onChangeText={(text) => setUpdateCategory(text)} />
                             <TextInput label={'name'} editable={true} value={updateName} onChangeText={setUpdateName} />
                             <TextInput label={'amount'} editable={true} value={updateAmount} onChangeText={setUpdateAmount} />
                             <TextInput label={'recurring'} editable={true} value={updateRecurring} onChangeText={setUpdateRecurring} />
-                            <TouchableOpacity onPress={submitEdits} >
-                            <Button >edit</Button>
+                            <TouchableOpacity  >
+                                <Button style={styles.button} onPress={() => submitEdits()} >done edits</Button>
                             </TouchableOpacity>
                         </Dialog.Content>
                         <Dialog.Actions>
-                            <Button onPress={hideDialog}>Done</Button>
+                            {/* <Button onPress={hideDialog}>Done</Button> */}
                         </Dialog.Actions>
                     </Dialog>
                 </Portal>
-            </View>
+            </ScrollView>
         </Provider>
     );
 };
+
+const styles = StyleSheet.create({
+
+    button: {
+        backgroundColor: '#3D2247',
+        marginLeft: 15,
+        marginRight: 15,
+        marginBottom: 10,
+        minHeight: 50,
+        borderRadius: 10,
+        alignItems: "center",
+        justifyContent: 'center',
+        minWidth: 100,
+        height: 8,
+        zIndex: 100
+
+    },
+
+
+})
 
 export default UpdateExpense;

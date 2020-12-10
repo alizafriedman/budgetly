@@ -14,12 +14,13 @@ const db = firebase.firestore()
 export async function registration(email, password, firstName, lastName) {
     await firebase.auth().createUserWithEmailAndPassword(email, password);
     const currentUser = firebase.auth().currentUser;
+    
     console.log(currentUser)
     console.log(db)
 
     db.collection('users')
         .doc(currentUser.uid)
-        .set({
+        .set({ 
             email: currentUser.email,
             lastName: lastName,
             firstName: firstName
@@ -32,7 +33,7 @@ export async function signIn(email, password) {
 
 }
 
-
+//pass props??
 export async function logOut() {
     await firebase.auth().signOut()
     
