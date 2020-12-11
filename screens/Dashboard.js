@@ -26,7 +26,6 @@ const Dashboard = ({navigation}) => {
     }, [])
 
 
-  console.log(currentUserUID)
   
     return (
         <View style={styles.container}>
