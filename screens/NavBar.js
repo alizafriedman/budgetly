@@ -6,6 +6,7 @@ import { logOut } from '../api/auth'
 import {screens} from '../api/misc'
 
 
+
 //is there a way to set turnary logic to switch onpress to false/true depending on the switch
 //keep or remove three dots -- possible access to easy logout?
 // search queries ? does firestore support ability to search by keyword
@@ -29,7 +30,7 @@ return (
                 {/* <Appbar.Action icon="magnify" /> */}
                 <Appbar.Action icon="dots-vertical" />
             </Appbar.Header>
-        
+            <View style={styles.list}>
                 {visible && 
                 screens.map((screen, idx) => (
                         <Drawer.Item 
@@ -40,7 +41,7 @@ return (
                             navigation.navigate(`${screen}`)}}
                         onPressOut={() => {setVisible(false)}}
                         />))} 
-
+            </View>
         </View>
     )
 
@@ -49,6 +50,9 @@ return (
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        zIndex: 3,
+        elevation: 3,
+
         // justifyContent: 'flex-start'
     },
     listContainer: {
@@ -81,6 +85,7 @@ const styles = StyleSheet.create({
     },
     list: {
         fontSize: 16,
+        backgroundColor: 'white'
     }
 })
 

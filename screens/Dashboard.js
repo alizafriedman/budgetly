@@ -31,6 +31,7 @@ const Dashboard = ({navigation}) => {
   
         <View style={styles.container}>
         <NavBar navigation={navigation} />
+        <View style={styles.dashboard}>
 
             <Text style={styles.titleText} >
                 dashboard 
@@ -40,6 +41,7 @@ const Dashboard = ({navigation}) => {
             <Text style={styles.text} >
                 hi {firstName}
             </Text>
+          
 
                       {dashScreens.map((screen, idx) => (
                           <List.Item
@@ -54,6 +56,8 @@ const Dashboard = ({navigation}) => {
                           logOut()
                           navigation.navigate('Home')}} 
                       />
+          
+        </View>
         </View>
     )
 
@@ -76,10 +80,18 @@ const styles = StyleSheet.create({
         fontSize: 25,
         textAlign: 'center'
     },
-    text: {
+    dashboardMenu: {
+        flex: 4,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+        text: {
         color: '#A95EC6',
         fontSize: 20,
         textAlign: 'center'
+    },
+    dashboard: {
+        flex: 5
     },
     button: {
         backgroundColor: '#3D2247',
