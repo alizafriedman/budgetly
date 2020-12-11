@@ -3,7 +3,7 @@ import {ScrollView, TouchableOpacity, View } from 'react-native'
 import { Button, Dialog, Portal, Provider, TextInput} from 'react-native-paper'
 import firebase from 'firebase/app'
 import {db} from '../api/auth'
-import Income from './Income'
+// import Income from './Income'
 
 
 

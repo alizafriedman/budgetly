@@ -85,8 +85,8 @@ const Goals = ({navigation}) => {
 
     return (
         <>
-            <View>
                 <NavBar navigation={navigation} />
+                <View>
                 <FlatList data={goals}
                 keyExtractor={(item) => item.id}
                 renderItem={({item}) => <DisplayGoals {...item} />}

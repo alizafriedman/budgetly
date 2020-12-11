@@ -26,12 +26,11 @@ const Dashboard = ({navigation}) => {
     }, [])
 
 
-  console.log(currentUserUID)
   
     return (
+  
         <View style={styles.container}>
-
-            <NavBar navigation={navigation} />
+        <NavBar navigation={navigation} />
 
             <Text style={styles.titleText} >
                 dashboard 
@@ -56,7 +55,6 @@ const Dashboard = ({navigation}) => {
                           navigation.navigate('Home')}} 
                       />
         </View>
-    
     )
 
 }
