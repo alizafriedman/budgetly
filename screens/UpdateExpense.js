@@ -45,9 +45,9 @@ const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) 
                         <Dialog.Title>Update Expense</Dialog.Title>
                         <Dialog.Content>
                             <TextInput label={'category'} editable={true} value={updateCategory} onChangeText={(text) => setUpdateCategory(text)} />
-                            <TextInput label={'name'} editable={true} value={updateName} onChangeText={setUpdateName} />
-                            <TextInput label={'amount'} editable={true} value={updateAmount} onChangeText={setUpdateAmount} />
-                            <TextInput label={'recurring'} editable={true} value={updateRecurring} onChangeText={setUpdateRecurring} />
+                            <TextInput label={'name'} editable={true} value={updateName} onChangeText={(text) => setUpdateName(text)} />
+                            <TextInput label={'amount'} editable={true} value={updateAmount} onChangeText={(text)=> setUpdateAmount(text)} />
+                            <TextInput label={'recurring'} editable={true} value={updateRecurring} onChangeText={(text) => setUpdateRecurring(text)} />
                             <TouchableOpacity  >
                                 <Button style={styles.button} onPress={() => submitEdits()} >done edits</Button>
                             </TouchableOpacity>

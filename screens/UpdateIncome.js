@@ -41,7 +41,7 @@ return (
                 <Dialog visible={visible} >
                     <Dialog.Title> update income </Dialog.Title>
                     <Dialog.Content>
-                        <TextInput label={'type'} editable={true} value={updateType} onChangeText={setUpdateType} />
+                        <TextInput label={'type'} editable={true} value={updateType} onChangeText={(text) => setUpdateType(text)} />
                         <TextInput label={'amount'} editable={true} value={updateAmount} onChangeText={setUpdateAmount} />
                         
                         <Button onPress={submitEdits} > submit edits </Button>
