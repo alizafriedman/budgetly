@@ -14,9 +14,6 @@ const UpdateIncome = ({docId, type, amount}) => {
     const [updateAmount, setUpdateAmount] = useState(amount)
 
 
-    //is there a way to pass this down as props from App or another component -
-    //maybe add to misc file in api somehow
-
     const userId = firebase.auth().currentUser.uid
     const ref = db.collection(`users/${userId}/income`)
 
@@ -42,7 +39,7 @@ return (
                     <Dialog.Title> update income </Dialog.Title>
                     <Dialog.Content>
                         <TextInput label={'type'} editable={true} value={updateType} onChangeText={(text) => setUpdateType(text)} />
-                        <TextInput label={'amount'} editable={true} value={updateAmount} onChangeText={setUpdateAmount} />
+                        <TextInput label={'amount'} editable={true} value={updateAmount} onChangeText={(text) => setUpdateAmount(text)} />
                         
                         <Button onPress={submitEdits} > submit edits </Button>
 

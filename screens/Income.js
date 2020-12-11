@@ -61,13 +61,13 @@ const Income = ({navigation}) => {
     const DisplayIncome = ({type, amount}) => {
         return (
             <View>
-                <List.Subheader>Misc item
-                    <UpdateIncome docId={docId} type={type} amount={amount} />
-                </List.Subheader>
-                <List.Item
-                    title={`Type: ${type}`}
-                    description={`Amount: $${amount}`}
-                />
+                <List.AccordionGroup>
+                    <List.Accordion title={`Income Type: ${type}`} id='1' >
+                <List.Item title={`Type: ${type}`}/>
+                        <List.Item title={`Amount: $${amount}`} />
+                        <UpdateIncome docId={docId} type={type} amount={amount} />
+                    </List.Accordion>
+                </List.AccordionGroup>
             </View>
         )
     };
@@ -87,7 +87,7 @@ const Income = ({navigation}) => {
                         style={{ flex: 1 }}
                         data={incomes}
                         keyExtractor={(item) => item.id}
-                        renderItem={({ item }) => <DisplayIncome{...item} style={{ color: '#661327' }} />}
+                        renderItem={({ item }) => <DisplayIncome {...item} style={{ color: '#661327' }} />}
                     />
 
                     <TextInput label={'type'} value={type} onChangeText={setType} />
