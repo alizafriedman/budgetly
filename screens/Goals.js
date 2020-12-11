@@ -85,8 +85,9 @@ const Goals = ({navigation}) => {
 
     return (
         <>
+                <ScrollView>
                 <NavBar navigation={navigation} />
-                <View>
+
                 <FlatList data={goals}
                 keyExtractor={(item) => item.id}
                 renderItem={({item}) => <DisplayGoals {...item} />}
@@ -94,7 +95,6 @@ const Goals = ({navigation}) => {
                  />
 
 
-                <ScrollView>
                     <TextInput label={'Goal'} value={goalName} onChangeText={setGoalName} />
                     <TextInput label={'projected amount'} value={projectedAmount} onChangeText={setProjectedAmount} />
                     <TextInput label={'description '} value={description} onChangeText={setDescription} />
@@ -104,7 +104,6 @@ const Goals = ({navigation}) => {
                     <Button onPress={() => returnDash()}>Return to Dashboard</Button>
 
                 </ScrollView>
-            </View>
         </>
     )
 }
