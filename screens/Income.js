@@ -81,7 +81,8 @@ const Income = ({navigation}) => {
         <>
             <View>
                 <ScrollView>
-                <NavBar navigation={navigation} />
+                    <NavBar navigation={navigation} />
+
                     <FlatList
                         style={{ flex: 1 }}
                         data={incomes}

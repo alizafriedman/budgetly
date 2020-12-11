@@ -20,6 +20,7 @@ const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) 
     const hideDialog = () => setVisible(false);
    
     const submitEdits = async (e) => {
+        setVisible(false)
         // e.preventDefault()
        await  ref.doc(docId).set({
            amount: parseInt(updateAmount),
@@ -27,15 +28,13 @@ const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) 
             name: updateName,
             recurring: updateRecurring
         });
-        console.log(updateCategory)
-        hideDialog()
+        // hideDialog()
         setVisible(false)
         
     }
 
 
-    console.log(category)
-    console.log(updateCategory)
+
     return (
         <Provider>
             <ScrollView>
