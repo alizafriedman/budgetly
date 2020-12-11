@@ -39,7 +39,7 @@ const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) 
         <Provider>
             <ScrollView>
                 <Button onPress={showDialog}>edit</Button>
-                <Portal>
+                <Portal.Host>
                     <Dialog visible={visible} onDismiss={hideDialog}>
                         <Dialog.Title>Update Expense</Dialog.Title>
                         <Dialog.Content>
@@ -55,7 +55,7 @@ const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) 
                             {/* <Button onPress={hideDialog}>Done</Button> */}
                         </Dialog.Actions>
                     </Dialog>
-                </Portal>
+                </Portal.Host>
             </ScrollView>
         </Provider>
     );

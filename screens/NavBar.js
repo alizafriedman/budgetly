@@ -38,6 +38,7 @@ return (
                         onPress={() => {
                             setVisible(false)
                             navigation.navigate(`${screen}`)}}
+                        onPressOut={() => {setVisible(false)}}
                         />))} 
 
         </View>
