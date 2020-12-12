@@ -85,8 +85,6 @@ const Expenses = ({navigation}) => {
                 renderItem={({item}) => <DisplayExpenses {...item}  />}
                     />
 
-
-               
                     <TextInput label={'category '} editable={true} value={category} onChangeText={setCategory} />
                     <TextInput label={'name '} value={name} onChangeText={setName} />
                     <TextInput label={'amount'} value={amount} onChangeText={setAmount} />
