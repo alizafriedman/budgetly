@@ -36,6 +36,7 @@ const Income = ({navigation}) => {
             });
 
             setIncomes(incomeList)
+            setLoading(false)
 
             if (loading) {
                 setLoading(false)
@@ -58,6 +59,11 @@ const Income = ({navigation}) => {
     }
 
 
+    // const deleteIncome = async () => {
+    //     await ref.remove(`users/${userId}/income`)
+    // };
+
+
     const DisplayIncome = ({type, amount}) => {
         return (
             <View>
@@ -65,17 +71,16 @@ const Income = ({navigation}) => {
                     <List.Accordion title={`Income Type: ${type}`} id='1' >
                 <List.Item title={`Type: ${type}`}/>
                         <List.Item title={`Amount: $${amount}`} />
-                        <UpdateIncome docId={docId} type={type} amount={amount} />
+                        <UpdateIncome docId={docId} type={type} amount={amount} loading={loading} />
                     </List.Accordion>
                 </List.AccordionGroup>
             </View>
         )
     };
 
-    
-    const deleteIncome = async () => {
-        await ref.remove(`users/${userId}/income`)
-    };
+
+
+
 
     return (
         <>

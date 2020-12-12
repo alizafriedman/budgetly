@@ -34,7 +34,8 @@ const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) 
     }
 
 
-
+    console.log(amount)
+    console.log(updateAmount)
     return (
         <Provider>
             <ScrollView>

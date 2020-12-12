@@ -16,7 +16,7 @@ const Expenses = ({navigation}) => {
     const[category, setCategory]=useState('')
     const [recurring, setRecurring] = useState('')
     const [docId, setDocId] = useState('')
-    const[loaded, setLoaded] = useState(false)
+    const [loading, setLoading] =useState(true)
     const [updateCategory, setUpdateCategory] = useState('')
     const [visible, setVisible] = useState(false)
 
@@ -38,7 +38,7 @@ const Expenses = ({navigation}) => {
                 })
             })
             setExpenses(expenseList)
-            // setLoaded(true)
+            setLoading(false)
         })
     }, [])
    

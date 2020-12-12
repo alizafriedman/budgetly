@@ -8,10 +8,11 @@ import {db} from '../api/auth'
 
 
 
-const UpdateIncome = ({docId, type, amount}) => {
+const UpdateIncome = ({docId, type, amount, loading}) => {
     const[visible, setVisible] = useState(false)
     const [updateType, setUpdateType] = useState(type)
     const [updateAmount, setUpdateAmount] = useState(amount)
+
 
 
     const userId = firebase.auth().currentUser.uid
@@ -21,14 +22,18 @@ const UpdateIncome = ({docId, type, amount}) => {
     const hideDialog = () => setVisible(false)
 
     const submitEdits = async() => {
+        if(loading) {
+            setLoading(false)
+        }
         await ref.doc(docId).set({
             type: updateType,
             amount: parseInt(updateAmount)
         });
-        hideDialog()
     }
 
-
+    console.log(docId)
+    console.log(updateType)
+    console.log(type)
 return (
 
     <Provider>
@@ -55,17 +60,7 @@ return (
     </Provider>
 
 
-
-
-
-
-
-
 )
-
-
-
-
 
 }
 
