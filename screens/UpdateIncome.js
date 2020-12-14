@@ -8,28 +8,36 @@ import {db} from '../api/auth'
 
 
 
-const UpdateIncome = ({docId, type, amount, loading, setLoading}) => {
+const UpdateIncome = ({docId, type, amount, loading, setLoading, navigation}) => {
     const[visible, setVisible] = useState(false)
     const [updateType, setUpdateType] = useState(type)
     const [updateAmount, setUpdateAmount] = useState(amount)
 
 
-
     const userId = firebase.auth().currentUser.uid
-    const ref = db.collection(`users/${userId}/income`)
-
+    const ref = db.collection(`users/${userId}/income`).doc(docId)
     const showDialog = () => setVisible(true)
     const hideDialog = () => setVisible(false)
 
     const submitEdits = async() => {
-        if(loading) {
-            setLoading(false)
-        }
-        await ref.doc(docId).set({
+        // if(loading) {
+        //     setLoading(false)
+        // }
+        // await ref.doc(docId).set({
+        //     type: updateType,
+        //     amount: parseInt(updateAmount)
+        // });
+        await ref.set({
             type: updateType,
             amount: parseInt(updateAmount)
-        });
-        setLoading(true)
+        })
+
+        setUpdateType('')
+        setUpdateAmount('')
+        console.log(amount)
+        console.log(updateAmount)
+        setLoading(false)
+        // setLoading(true)
     }
 
    
@@ -42,13 +50,12 @@ return (
                 <Dialog visible={visible} >
                     <Dialog.Title> update income </Dialog.Title>
                     <Dialog.Content>
-                        <TextInput label={'type'} editable={true} value={updateType} onChangeText={(text) => setUpdateType(text)} />
-                        <TextInput label={'amount'} editable={true} value={updateAmount} onChangeText={(text) => setUpdateAmount(text)} />
+                        <TextInput label={'type'} editable={true} value={updateType} onChangeText={(text) => setUpdateType(text, 'type')} />
+                        <TextInput label={'amount'} editable={true} value={updateAmount} onChangeText={(text) => setUpdateAmount(text, 'amount')} />
                         
                         <Button onPress={submitEdits} > submit edits </Button>
 
                     <Dialog.Actions>
-                        {/* <Button onPress={hideDialog} > close dialog </Button> */}
                     </Dialog.Actions>
                     </Dialog.Content>
                 </Dialog>

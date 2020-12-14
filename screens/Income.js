@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View, Appbar, FlatList, ScrollView } from 'react-native'
-import { Button, TextInput, List } from 'react-native-paper'
+import { Button, TextInput, List, Provider, Dialog, Portal } from 'react-native-paper'
 import firebase from 'firebase/app'
 import {db} from '../api/auth'
 import NavBar from './NavBar'
@@ -15,6 +15,7 @@ const Income = ({navigation}) => {
     const [amount, setAmount] = useState('')
     const [loading, setLoading] = useState(true)
     const [docId, setDocId] = useState('')
+    const [visible, setVisible] = useState(false)
     const [incomes, setIncomes] = useState([])
 
 
@@ -55,12 +56,13 @@ const Income = ({navigation}) => {
 
         setType('')
         setAmount('')
+        setVisible(false)
 
     }
 
 
     const deleteIncome = async () => {
-        await ref.doc(docId).remove()
+        await ref.doc(docId).delete()
     };
 
 
@@ -71,8 +73,8 @@ const Income = ({navigation}) => {
                     <List.Accordion title={`Income Type: ${type}`} id='1' >
                 <List.Item title={`Type: ${type}`}/>
                         <List.Item title={`Amount: $${amount}`} />
-                        <UpdateIncome docId={docId} type={type} amount={amount} loading={loading} setLoading={setLoading} />
-                        <Button onPress={() => deleteIncome()} >delete Income info</Button>
+                        <UpdateIncome docId={docId} type={type} amount={amount} loading={loading} setLoading={setLoading} navigation={navigation} />
+                        {/* <Button onPress={() => deleteIncome()} >delete Income info</Button> */}
                     </List.Accordion>
                 </List.AccordionGroup>
             </View>
@@ -88,6 +90,7 @@ const Income = ({navigation}) => {
             <View>
                 <ScrollView>
                     <NavBar navigation={navigation} />
+                    <Button onPress={() =>setVisible(true)} >Add income</Button>
 
                     <FlatList
                         style={{ flex: 1 }}
@@ -96,11 +99,35 @@ const Income = ({navigation}) => {
                         renderItem={({ item }) => <DisplayIncome {...item} style={{ color: '#661327' }} />}
                     />
 
-                    <TextInput label={'type'} value={type} onChangeText={setType} />
-                    <TextInput label={'amount'} value={amount} onChangeText={setAmount} />
+                    {visible && 
+                    <Provider>
+                        <ScrollView>
+                            {/* <Button onPress={showDialog}> edit here </Button> */}
+                            <Portal>
+                                <Dialog visible={visible} >
+                                    <Dialog.Title> update income </Dialog.Title>
+                                    <Dialog.Content>
+                                        <TextInput label={'type'} value={type} onChangeText={setType} />
+                                        <TextInput label={'amount'} value={amount} onChangeText={setAmount} />
+
+                                        <Button onPress={() => addIncome()} > submit edits </Button>
+
+                                        <Dialog.Actions>
+                                        </Dialog.Actions>
+                                    </Dialog.Content>
+                                </Dialog>
+
+                            </Portal>
+
+                        </ScrollView>
+                    </Provider>
+
+                    
+                    }
+                    {/* <TextInput label={'type'} value={type} onChangeText={setType} />
+                    <TextInput label={'amount'} value={amount} onChangeText={setAmount} /> */}
 
 
-                    <Button onPress={() => addIncome()}>Add income</Button>
                     
                 </ScrollView>
             </View>
