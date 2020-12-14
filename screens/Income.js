@@ -17,6 +17,7 @@ const Income = ({navigation}) => {
     const [docId, setDocId] = useState('')
     const [visible, setVisible] = useState(false)
     const [incomes, setIncomes] = useState([])
+    const [visibleEdit, setVisibleEdit] = useState(false)
 
 
     const userId = firebase.auth().currentUser.uid
@@ -73,17 +74,17 @@ const Income = ({navigation}) => {
                     <List.Accordion title={`Income Type: ${type}`} id='1' >
                 <List.Item title={`Type: ${type}`}/>
                         <List.Item title={`Amount: $${amount}`} />
-                        <Button onPress={() => setVisible(true)}> edit </Button>
-                        {/* <UpdateIncome docId={docId} type={type} amount={amount} loading={loading} setLoading={setLoading} navigation={navigation} /> */}
-                        {/* <Button onPress={() => deleteIncome()} >delete Income info</Button> */}
+                        <Button onPress={() => setVisibleEdit(true)} >testing</Button>
+                        
+                        {visibleEdit &&
+                            <UpdateIncome docId={docId} type={type} amount={amount} loading={loading} setLoading={setLoading} navigation={navigation} />
+
+                         }
                     </List.Accordion>
                 </List.AccordionGroup>
             </View>
         )
     };
-
-
-
 
 
     return (
@@ -103,7 +104,6 @@ const Income = ({navigation}) => {
                     {visible && 
                     <Provider>
                         <ScrollView>
-                            {/* <Button onPress={showDialog}> edit here </Button> */}
                             <Portal>
                                 <Dialog visible={visible} >
                                     <Dialog.Title> add new income </Dialog.Title>
