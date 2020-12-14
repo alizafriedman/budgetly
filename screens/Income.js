@@ -73,7 +73,8 @@ const Income = ({navigation}) => {
                     <List.Accordion title={`Income Type: ${type}`} id='1' >
                 <List.Item title={`Type: ${type}`}/>
                         <List.Item title={`Amount: $${amount}`} />
-                        <UpdateIncome docId={docId} type={type} amount={amount} loading={loading} setLoading={setLoading} navigation={navigation} />
+                        <Button onPress={() => setVisible(true)}> edit </Button>
+                        {/* <UpdateIncome docId={docId} type={type} amount={amount} loading={loading} setLoading={setLoading} navigation={navigation} /> */}
                         {/* <Button onPress={() => deleteIncome()} >delete Income info</Button> */}
                     </List.Accordion>
                 </List.AccordionGroup>
@@ -105,12 +106,12 @@ const Income = ({navigation}) => {
                             {/* <Button onPress={showDialog}> edit here </Button> */}
                             <Portal>
                                 <Dialog visible={visible} >
-                                    <Dialog.Title> update income </Dialog.Title>
+                                    <Dialog.Title> add new income </Dialog.Title>
                                     <Dialog.Content>
                                         <TextInput label={'type'} value={type} onChangeText={setType} />
                                         <TextInput label={'amount'} value={amount} onChangeText={setAmount} />
 
-                                        <Button onPress={() => addIncome()} > submit edits </Button>
+                                        <Button onPress={() => addIncome()} > submit income </Button>
 
                                         <Dialog.Actions>
                                         </Dialog.Actions>
