@@ -8,7 +8,7 @@ import {db} from '../api/auth'
 
 
 
-const UpdateIncome = ({docId, type, amount, loading}) => {
+const UpdateIncome = ({docId, type, amount, loading, setLoading}) => {
     const[visible, setVisible] = useState(false)
     const [updateType, setUpdateType] = useState(type)
     const [updateAmount, setUpdateAmount] = useState(amount)
@@ -29,11 +29,10 @@ const UpdateIncome = ({docId, type, amount, loading}) => {
             type: updateType,
             amount: parseInt(updateAmount)
         });
+        setLoading(true)
     }
 
-    console.log(docId)
-    console.log(updateType)
-    console.log(type)
+   
 return (
 
     <Provider>

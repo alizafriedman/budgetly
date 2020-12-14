@@ -41,7 +41,7 @@ const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) 
             <ScrollView>
                 <Button onPress={showDialog}>edit</Button>
                 <Portal.Host>
-                    <Dialog visible={visible} onDismiss={hideDialog}>
+                    <Dialog visible={visible}>
                         <Dialog.Title>Update Expense</Dialog.Title>
                         <Dialog.Content>
                             <TextInput label={'category'} editable={true} value={updateCategory} onChangeText={(text) => setUpdateCategory(text)} />

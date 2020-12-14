@@ -59,9 +59,9 @@ const Income = ({navigation}) => {
     }
 
 
-    // const deleteIncome = async () => {
-    //     await ref.remove(`users/${userId}/income`)
-    // };
+    const deleteIncome = async () => {
+        await ref.doc(docId).remove()
+    };
 
 
     const DisplayIncome = ({type, amount}) => {
@@ -71,7 +71,8 @@ const Income = ({navigation}) => {
                     <List.Accordion title={`Income Type: ${type}`} id='1' >
                 <List.Item title={`Type: ${type}`}/>
                         <List.Item title={`Amount: $${amount}`} />
-                        <UpdateIncome docId={docId} type={type} amount={amount} loading={loading} />
+                        <UpdateIncome docId={docId} type={type} amount={amount} loading={loading} setLoading={setLoading} />
+                        <Button onPress={() => deleteIncome()} >delete Income info</Button>
                     </List.Accordion>
                 </List.AccordionGroup>
             </View>
@@ -100,7 +101,6 @@ const Income = ({navigation}) => {
 
 
                     <Button onPress={() => addIncome()}>Add income</Button>
-                    <Button onPress={() => deleteIncome()} >delete Income info</Button>
                     
                 </ScrollView>
             </View>
