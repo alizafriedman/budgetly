@@ -43,6 +43,8 @@ const Goals = ({navigation}) => {
 
 
     const addGoals = async () => {
+        setVisible(false)
+
         await ref.add({
             goalName: goalName,
             projectedAmount: parseInt(projectedAmount),
@@ -54,7 +56,6 @@ const Goals = ({navigation}) => {
         setProjectedAmount('')
         setDescription('')
         setTimeframe('')
-        setVisible(false)
     }
 
     const returnDash = () => {
@@ -100,8 +101,7 @@ const Goals = ({navigation}) => {
 
                 {visible && 
                 <Provider>
-
-                <ScrollView>
+                    <ScrollView>
                         <Portal>
                             <Dialog visible={visible} > 
                                 <Dialog.Title>add new goal</Dialog.Title>
@@ -118,8 +118,7 @@ const Goals = ({navigation}) => {
                             </Dialog>
                         </Portal>
                 </ScrollView> 
-                                    </Provider>
-
+            </Provider>
                 }
     </ScrollView>
 

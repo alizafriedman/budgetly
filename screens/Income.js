@@ -15,7 +15,7 @@ const Income = ({navigation}) => {
     const [docId, setDocId] = useState('')
     const [visible, setVisible] = useState(false)
     const [incomes, setIncomes] = useState([])
-    const [visibleEdit, setVisibleEdit] = useState(false)
+    // const [visibleEdit, setVisibleEdit] = useState(false)
 
 
     const userId = firebase.auth().currentUser.uid
@@ -38,12 +38,12 @@ const Income = ({navigation}) => {
             setIncomes(incomeList)
             setLoading(false)
 
-            if (loading) {
-                setLoading(false)
+            // if (loading) {
+            //     setLoading(false)
                 
-            }
+            // }
         })
-    }, [incomes])
+    }, [])
 
 
     const addIncome = async () => {
@@ -74,20 +74,12 @@ const Income = ({navigation}) => {
                     <List.Accordion title={`Income Type: ${type}`} id='1' >
                         <List.Item title={`Type: ${type}`}/>
                         <List.Item title={`Amount: $${amount}`} />
-                            <Button 
-                            onPress={() =>
-                            {
-                                //  setVisibleEdit(true)
-                            setVisible(true)
-                            }}
-                            // onPressOut={() => {setVisible(false)
-                            //     setVisibleEdit(false)
-                            // }}
-                            >testing</Button>
+                         
                         
-                        {visibleEdit && 
+                        {/* {visibleEdit && 
                             <UpdateIncome docId={docId} type={type} amount={amount} loading={loading} setLoading={setLoading} navigation={navigation} />
-                         }
+                         } */}
+                        <UpdateIncome docId={docId} type={type} amount={amount} loading={loading} setLoading={setLoading} navigation={navigation} />
 
                     </List.Accordion>
                 </List.AccordionGroup>
@@ -100,7 +92,7 @@ const Income = ({navigation}) => {
         <>
                 <ScrollView>
                     <NavBar navigation={navigation} />
-                    <Button onPress={() => setVisible(true)} onPressOut={() => setVisible(false)}>Add income</Button>
+                    <Button onPress={() => setVisible(true)}>Add income</Button>
 
                     <FlatList
                         style={{ flex: 1 }}
@@ -118,12 +110,12 @@ const Income = ({navigation}) => {
                                     <Dialog.Content>
                                         <TextInput label={'type'} value={type} onChangeText={setType} />
                                         <TextInput label={'amount'} value={amount} onChangeText={setAmount} />
+                                    </Dialog.Content>
 
                                         <Dialog.Actions>
                                         <Button onPress={() => addIncome()} > submit income </Button>
                                         </Dialog.Actions>
 
-                                    </Dialog.Content>
                                 </Dialog>
                             </Portal>
                         </ScrollView>
