@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View, Appbar, ScrollView, FlatList} from 'react-native'
-import { TextInput, Button, List } from 'react-native-paper'
+import { TextInput, Button, List, Dialog, Portal,Provider } from 'react-native-paper'
 import firebase from 'firebase/app'
 import {db} from '../api/auth'
 import NavBar from './NavBar'
@@ -15,6 +15,7 @@ const Goals = ({navigation}) => {
     const [timeframe, setTimeframe] = useState('')
     const [docId, setDocId] = useState('')
     const [loading, setLoading] = useState(true)
+    const [visible, setVisible] = useState(false)
 
     const userId = firebase.auth().currentUser.uid
     const ref = db.collection(`users/${userId}/goals`)
@@ -53,6 +54,7 @@ const Goals = ({navigation}) => {
         setProjectedAmount('')
         setDescription('')
         setTimeframe('')
+        setVisible(false)
     }
 
     const returnDash = () => {
@@ -84,9 +86,10 @@ const Goals = ({navigation}) => {
     }
 
     return (
-        <>
+    
                 <ScrollView>
                 <NavBar navigation={navigation} />
+                <Button onPress={() => setVisible(true)} > add goals</Button>
 
                 <FlatList data={goals}
                 keyExtractor={(item) => item.id}
@@ -95,16 +98,31 @@ const Goals = ({navigation}) => {
                  />
 
 
-                    <TextInput label={'Goal'} value={goalName} onChangeText={setGoalName} />
-                    <TextInput label={'projected amount'} value={projectedAmount} onChangeText={setProjectedAmount} />
-                    <TextInput label={'description '} value={description} onChangeText={setDescription} />
-                    <TextInput label={'time frame'} value={timeframe} onChangeText={setTimeframe} />
+                {visible && 
+                <Provider>
 
-                    <Button onPress={() => addGoals()}>Add Goals</Button>
-                    <Button onPress={() => returnDash()}>Return to Dashboard</Button>
+                <ScrollView>
+                        <Portal>
+                            <Dialog visible={visible} > 
+                                <Dialog.Title>add new goal</Dialog.Title>
+                                <Dialog.Content>
+                                    <TextInput label={'Goal'} value={goalName} onChangeText={setGoalName} />
+                                    <TextInput label={'projected amount'} value={projectedAmount} onChangeText={setProjectedAmount} />
+                                    <TextInput label={'description '} value={description} onChangeText={setDescription} />
+                                    <TextInput label={'time frame'} value={timeframe} onChangeText={setTimeframe} />
+                                </Dialog.Content>
+                                <Dialog.Actions>
+                                    <Button onPress={() => addGoals()}>Add Goals</Button>
+                                    <Button onPress={() => returnDash()}>Return to Dashboard</Button>
+                                </Dialog.Actions>
+                            </Dialog>
+                        </Portal>
+                </ScrollView> 
+                                    </Provider>
 
-                </ScrollView>
-        </>
+                }
+    </ScrollView>
+
     )
 }
 

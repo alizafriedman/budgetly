@@ -31,37 +31,21 @@ const Dashboard = ({navigation}) => {
   
         <View style={styles.container}>
         <NavBar navigation={navigation} />
-        <View style={styles.dashboard}>
 
-            <Text style={styles.titleText} >
-                dashboard 
-                
-            </Text>
+            <View style={styles.dashboard}>
+                <Text style={styles.titleText} > dashboard </Text>
+                <Text style={styles.text} > hi {firstName} </Text>
+            
+                    {dashScreens.map((screen, idx) => (
+                        <List.Item title={`${screen}`} key={idx} onPress={() => {navigation.navigate(`${screen}`)}} />))}
 
-            <Text style={styles.text} >
-                hi {firstName}
-            </Text>
-          
-
-                      {dashScreens.map((screen, idx) => (
-                          <List.Item
-                           title={`${screen}`} 
-                           key={idx}
-                           onPress={() => {navigation.navigate(`${screen}`)}}
-                           />
-                      ))}
-                      <List.Item 
-                      title='Log Out'
-                      onPress={() => {
-                          logOut()
-                          navigation.navigate('Home')}} 
-                      />
-          
-        </View>
+                        <List.Item title='Log Out' 
+                        onPress={() => { logOut() 
+                        navigation.navigate('Home')}}/>
+            </View>
         </View>
     )
-
-}
+};
 
 const styles = StyleSheet.create({
     container: {

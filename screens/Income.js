@@ -7,8 +7,6 @@ import NavBar from './NavBar'
 import UpdateIncome from './UpdateIncome'
 
 
-//adding works + querying/get for display = needs delete, edit/update +  needs styling desperately
-
 
 const Income = ({navigation}) => {
     const [type, setType] = useState('')
@@ -42,13 +40,15 @@ const Income = ({navigation}) => {
 
             if (loading) {
                 setLoading(false)
-                return
+                
             }
         })
-    }, [])
+    }, [incomes])
 
 
     const addIncome = async () => {
+        setVisible(false)
+
         await ref.add({
             type: type,
             amount: parseInt(amount),
@@ -57,29 +57,38 @@ const Income = ({navigation}) => {
 
         setType('')
         setAmount('')
-        setVisible(false)
 
     }
 
-
+    //real time db code or firestore -- delete() or remove()
     const deleteIncome = async () => {
         await ref.doc(docId).delete()
     };
 
 
     const DisplayIncome = ({type, amount}) => {
+        
         return (
             <View>
                 <List.AccordionGroup>
                     <List.Accordion title={`Income Type: ${type}`} id='1' >
-                <List.Item title={`Type: ${type}`}/>
+                        <List.Item title={`Type: ${type}`}/>
                         <List.Item title={`Amount: $${amount}`} />
-                        <Button onPress={() => setVisibleEdit(true)} >testing</Button>
+                            <Button 
+                            onPress={() =>
+                            {
+                                //  setVisibleEdit(true)
+                            setVisible(true)
+                            }}
+                            // onPressOut={() => {setVisible(false)
+                            //     setVisibleEdit(false)
+                            // }}
+                            >testing</Button>
                         
-                        {visibleEdit &&
+                        {visibleEdit && 
                             <UpdateIncome docId={docId} type={type} amount={amount} loading={loading} setLoading={setLoading} navigation={navigation} />
-
                          }
+
                     </List.Accordion>
                 </List.AccordionGroup>
             </View>
@@ -89,10 +98,9 @@ const Income = ({navigation}) => {
 
     return (
         <>
-            <View>
                 <ScrollView>
                     <NavBar navigation={navigation} />
-                    <Button onPress={() =>setVisible(true)} >Add income</Button>
+                    <Button onPress={() => setVisible(true)} onPressOut={() => setVisible(false)}>Add income</Button>
 
                     <FlatList
                         style={{ flex: 1 }}
@@ -111,27 +119,17 @@ const Income = ({navigation}) => {
                                         <TextInput label={'type'} value={type} onChangeText={setType} />
                                         <TextInput label={'amount'} value={amount} onChangeText={setAmount} />
 
-                                        <Button onPress={() => addIncome()} > submit income </Button>
-
                                         <Dialog.Actions>
+                                        <Button onPress={() => addIncome()} > submit income </Button>
                                         </Dialog.Actions>
+
                                     </Dialog.Content>
                                 </Dialog>
-
                             </Portal>
-
                         </ScrollView>
                     </Provider>
-
-                    
                     }
-                    {/* <TextInput label={'type'} value={type} onChangeText={setType} />
-                    <TextInput label={'amount'} value={amount} onChangeText={setAmount} /> */}
-
-
-                    
-                </ScrollView>
-            </View>
+            </ScrollView>
         </>
     )
 }

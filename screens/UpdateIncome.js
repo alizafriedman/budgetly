@@ -8,7 +8,7 @@ import {db} from '../api/auth'
 
 
 
-const UpdateIncome = ({docId, type, amount, loading, setLoading, navigation}) => {
+const UpdateIncome = ({docId, type, amount, loading, setLoading, navigation, setVisibleEdit}) => {
     const[visible, setVisible] = useState(false)
     const [updateType, setUpdateType] = useState(type)
     const [updateAmount, setUpdateAmount] = useState(amount)
@@ -36,7 +36,8 @@ const UpdateIncome = ({docId, type, amount, loading, setLoading, navigation}) =>
         setUpdateAmount('')
         console.log(amount)
         console.log(updateAmount)
-        setLoading(false)
+        // setLoading(false)
+        hideDialog()
         // setLoading(true)
     }
 
@@ -45,9 +46,9 @@ return (
 
     <Provider>
         <ScrollView>
-            <Button onPress={showDialog}> edit here </Button>
+            <Button onPress={showDialog} onPressOut={hideDialog} > edit here </Button>
             <Portal>
-                <Dialog visible={visible} >
+                <Dialog visible={visible}>
                     <Dialog.Title> update income </Dialog.Title>
                     <Dialog.Content>
                         <TextInput label={'type'} editable={true} value={updateType} onChangeText={(text) => setUpdateType(text, 'type')} />
