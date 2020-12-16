@@ -40,7 +40,7 @@ const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) 
         <Provider>
             <ScrollView>
                 <Button onPress={showDialog}>edit</Button>
-                <Portal.Host>
+                <Portal>
                     <Dialog visible={visible}>
                         <Dialog.Title>Update Expense</Dialog.Title>
                         <Dialog.Content>
@@ -48,15 +48,15 @@ const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) 
                             <TextInput label={'name'} editable={true} value={updateName} onChangeText={(text) => setUpdateName(text)} />
                             <TextInput label={'amount'} editable={true} value={updateAmount} onChangeText={(text)=> setUpdateAmount(text)} />
                             <TextInput label={'recurring'} editable={true} value={updateRecurring} onChangeText={(text) => setUpdateRecurring(text)} />
-                            <TouchableOpacity  >
+                            {/* <TouchableOpacity  > */}
                                 <Button style={styles.button} onPress={() => submitEdits()} >done edits</Button>
-                            </TouchableOpacity>
+                            {/* </TouchableOpacity> */}
                         </Dialog.Content>
                         <Dialog.Actions>
                             {/* <Button onPress={hideDialog}>Done</Button> */}
                         </Dialog.Actions>
                     </Dialog>
-                </Portal.Host>
+                </Portal>
             </ScrollView>
         </Provider>
     );

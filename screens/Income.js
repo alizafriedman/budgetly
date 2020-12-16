@@ -102,24 +102,24 @@ const Income = ({navigation}) => {
                     />
 
                     {visible && 
-                    <Provider>
-                        <ScrollView>
-                            <Portal>
-                                <Dialog visible={visible} >
-                                    <Dialog.Title> add new income </Dialog.Title>
-                                    <Dialog.Content>
-                                        <TextInput label={'type'} value={type} onChangeText={setType} />
-                                        <TextInput label={'amount'} value={amount} onChangeText={setAmount} />
-                                    </Dialog.Content>
+                        <Provider>
+                            <ScrollView>
+                                <Portal>
+                                    <Dialog visible={visible} >
+                                        <Dialog.Title> add new income </Dialog.Title>
+                                        <Dialog.Content>
+                                            <TextInput label={'type'} value={type} onChangeText={setType} />
+                                            <TextInput label={'amount'} value={amount} onChangeText={setAmount} />
+                                        </Dialog.Content>
 
-                                        <Dialog.Actions>
-                                        <Button onPress={() => addIncome()} > submit income </Button>
-                                        </Dialog.Actions>
+                                            <Dialog.Actions>
+                                            <Button onPress={() => addIncome()} > submit income </Button>
+                                            </Dialog.Actions>
 
-                                </Dialog>
-                            </Portal>
-                        </ScrollView>
-                    </Provider>
+                                    </Dialog>
+                                </Portal>
+                            </ScrollView>
+                        </Provider>
                     }
             </ScrollView>
         </>

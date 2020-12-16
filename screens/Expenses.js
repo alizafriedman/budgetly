@@ -86,7 +86,9 @@ const Expenses = ({navigation}) => {
                 <NavBar navigation={navigation} />
                 <Button onPress={() => setVisible(true)} >add expense blah blah</Button>
                 
-                <FlatList data={expenses}
+                <FlatList 
+                style={{ flex: 1}}
+                data={expenses}
                 keyExtractor={(item) => item.id }
                 renderItem={({item}) => <DisplayExpenses {...item}  />}
                     />
