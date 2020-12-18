@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { ScrollView, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { ScrollView, TouchableOpacity, View, StyleSheet, ShadowPropTypesIOS } from 'react-native';
 import { Button, Dialog, Portal, Provider, TextInput } from 'react-native-paper';
 import {db} from '../api/auth'
 import firebase from 'firebase/app'
@@ -20,6 +20,7 @@ const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) 
     const hideDialog = () => setVisible(false);
    
     const submitEdits = async (e) => {
+        hideDialog();
         setVisible(false)
         // e.preventDefault()
        await  ref.doc(docId).set({
@@ -27,19 +28,14 @@ const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) 
             category: updateCategory,
             name: updateName,
             recurring: updateRecurring
-        });
-        // hideDialog()
-        setVisible(false)
-        
+        });        
     }
 
-
-    console.log(amount)
-    console.log(updateAmount)
+   
     return (
         <Provider>
             <ScrollView>
-                <Button onPress={showDialog}>edit</Button>
+                <Button onPress={() => showDialog()}>edit</Button>
                 <Portal>
                     <Dialog visible={visible}>
                         <Dialog.Title>Update Expense</Dialog.Title>
@@ -48,9 +44,11 @@ const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) 
                             <TextInput label={'name'} editable={true} value={updateName} onChangeText={(text) => setUpdateName(text)} />
                             <TextInput label={'amount'} editable={true} value={updateAmount} onChangeText={(text)=> setUpdateAmount(text)} />
                             <TextInput label={'recurring'} editable={true} value={updateRecurring} onChangeText={(text) => setUpdateRecurring(text)} />
-                            {/* <TouchableOpacity  > */}
-                                <Button style={styles.button} onPress={() => submitEdits()} >done edits</Button>
-                            {/* </TouchableOpacity> */}
+                            <TouchableOpacity  >
+                                <Button style={styles.button} onPress={() => 
+                                    {   hideDialog()
+                                        submitEdits()  }} >done edits</Button>
+                            </TouchableOpacity>
                         </Dialog.Content>
                         <Dialog.Actions>
                             {/* <Button onPress={hideDialog}>Done</Button> */}

@@ -6,7 +6,7 @@ import {db} from '../api/auth'
 import NavBar from './NavBar'
 import UpdateExpense from './UpdateExpense'
 
-
+//needs styling -- wont allow ability to scroll to fill out box to add
 
 const Expenses = ({navigation}) => {
 
@@ -62,10 +62,14 @@ const Expenses = ({navigation}) => {
         setRecurring('')
     }
 
+    const deleteExpense = async () => {
+        await ref.doc(docId).delete()
+    }
+
 
     const DisplayExpenses = ({docId, name, amount, category, recurring}) => {
         return (
-            <View>
+            <ScrollView>
                 <List.AccordionGroup>
                     <List.Accordion title={`Expense Name: ${name}`} id='1'  >
                         <List.Item title={`Category: ${category}`}  />
@@ -73,10 +77,11 @@ const Expenses = ({navigation}) => {
                         <List.Item title={`Recurring: ${recurring}`} />
 
                         <UpdateExpense docId={docId} category={category} name={name} amount={amount} recurring={recurring} setCategory={setCategory} />
+                        {/* <Button onPress={() => deleteExpense()} >delete</Button> */}
 
                     </List.Accordion>
                 </List.AccordionGroup>
-            </View>
+            </ScrollView>
         )
     }
 

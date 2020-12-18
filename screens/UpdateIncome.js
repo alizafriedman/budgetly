@@ -16,7 +16,7 @@ const UpdateIncome = ({docId, type, amount, loading, setLoading, navigation, set
 
     const userId = firebase.auth().currentUser.uid
     const ref = db.collection(`users/${userId}/income`).doc(docId)
-    
+
     const showDialog = () => setVisible(true)
     const hideDialog = () => setVisible(false)
 
@@ -61,9 +61,7 @@ return (
                     </Dialog.Actions>
                     </Dialog.Content>
                 </Dialog>
-
             </Portal>
-
         </ScrollView>
     </Provider>
 

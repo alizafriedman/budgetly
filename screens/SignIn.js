@@ -19,37 +19,39 @@ const SignIn = ({navigation}) => {
     return  (
         <View style={styles.container}>
         <NavBar navigation={navigation} style={styles.navBar}/>
-        <View style={styles.signIn}>
-            <View style={styles.inputWrapper}>
-            <Text style={styles.text}>
-               Sign in to your account
-            </Text >
-            <TextInput
-                style={styles.TextInput}
-                placeholder='email'
-                value={email}
-                onChangeText={(email) => setEmail(email)}
-                keyboardType='email-address'
-                autoCapitalize='none'
-            />
 
-            <TextInput
-                style={styles.TextInput}
-                placeholder='password'
-                value={password}
-                onChangeText={(password) => setPassword(password)}
-                secureTextEntry={true}
-            />    
-            <TouchableOpacity
-                style={styles.button}
-                onPress={() => { handleSignIn() }}
-                >
-                <Text style={styles.buttonText} > Sign In</Text>
-            </TouchableOpacity>
-            </View>
+         <View style={styles.signIn}>
+             <View style={styles.inputWrapper}>
+           
+                <Text style={styles.text}> Sign in to your account </Text >
             
+                <TextInput
+                    style={styles.TextInput}
+                    placeholder='email'
+                    value={email}
+                    onChangeText={(email) => setEmail(email)}
+                    keyboardType='email-address'
+                    autoCapitalize='none'
+                />
+
+                <TextInput
+                    style={styles.TextInput}
+                    placeholder='password'
+                    value={password}
+                    onChangeText={(password) => setPassword(password)}
+                    secureTextEntry={true}
+                />    
+
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => { handleSignIn() }}
+                    >
+                    <Text style={styles.buttonText} > Sign In</Text>
+                </TouchableOpacity>
+                
             </View>
-        </View>
+         </View>
+     </View>
     )
 }
 

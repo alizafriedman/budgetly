@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import { View, Text, TextInput, Alert, ScrollView, Keyboard, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
-// import { TouchableOpacity } from 'react-native-gesture-handler';
 import { registration } from '../api/auth';
 import NavBar from './NavBar'
 
@@ -37,44 +36,43 @@ const SignUp = ({navigation}) => {
         <SafeAreaView>
             <View style={styles.container} >
             <NavBar style={styles.navBar} navigation={navigation} />
-            <ScrollView
-            onBlur={Keyboard.dismiss}
-            >
+            <ScrollView onBlur={Keyboard.dismiss} >
+
                 <View style={styles.inputWrapper}>
-                <Text style={styles.text} >
-                   Create an Account
-                </Text>
-                <TextInput
-                style={styles.TextInput}
-                placeholder='first name'
-                value={firstName}
-                onChangeText={(name) => setFirstName(name)}
-                 />
-
-                <TextInput
+                    <Text style={styles.text} >
+                    Create an Account
+                    </Text>
+                    <TextInput
                     style={styles.TextInput}
-                    placeholder='last name'
-                    value={lastName}
-                    onChangeText={(name) => setLastName(name)}
-                />
+                    placeholder='first name'
+                    value={firstName}
+                    onChangeText={(name) => setFirstName(name)}
+                    />
 
-                <TextInput
-                    style={styles.TextInput}
-                    placeholder='email'
-                    value={email}
-                    onChangeText={(email) => setEmail(email)}
-                    keyboardType='email-address'
-                    autoCapitalize='none'
-                />
+                    <TextInput
+                        style={styles.TextInput}
+                        placeholder='last name'
+                        value={lastName}
+                        onChangeText={(name) => setLastName(name)}
+                    />
 
-            
-                <TextInput
-                    style={styles.TextInput}
-                    placeholder='password'
-                    value={password}
-                    onChangeText={(password) => setPassword(password)}
-                    secureTextEntry={true}
-                />                                                       
+                    <TextInput
+                        style={styles.TextInput}
+                        placeholder='email'
+                        value={email}
+                        onChangeText={(email) => setEmail(email)}
+                        keyboardType='email-address'
+                        autoCapitalize='none'
+                    />
+
+                
+                    <TextInput
+                        style={styles.TextInput}
+                        placeholder='password'
+                        value={password}
+                        onChangeText={(password) => setPassword(password)}
+                        secureTextEntry={true}
+                    />                                                       
 
                     <TextInput
                         style={styles.TextInput}
@@ -87,26 +85,26 @@ const SignUp = ({navigation}) => {
              <View style={styles.test} >
 
         
-            <TouchableOpacity
-            style={styles.button}
-            onPress={() => {handleRegistration()}}
-            >
-                <Text style={styles.buttonText} > Sign Up</Text>
-            </TouchableOpacity>
+                <TouchableOpacity
+                style={styles.button}
+                onPress={() => {handleRegistration()}}
+                >
+                    <Text style={styles.buttonText} > Sign Up</Text>
+                </TouchableOpacity>
 
 
-            <Text style={styles.text}  >
-                Already have an account?
-            </Text>
-            <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('Sign In')}
-            >
-                        <Text style={styles.buttonText} > Sign In</Text>
+                    <Text style={styles.text}  >
+                        Already have an account?
+                    </Text>
 
-            </TouchableOpacity>
-            </View>
-            </ScrollView> 
+                <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate('Sign In')}
+                >
+                    <Text style={styles.buttonText} > Sign In</Text>
+                </TouchableOpacity>
+                </View>
+             </ScrollView> 
             </View>
         </SafeAreaView>
     )
