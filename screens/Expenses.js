@@ -29,11 +29,10 @@ const Expenses = ({navigation}) => {
         return ref.onSnapshot((querySnapshot) => {
             const expenseList = []
             querySnapshot.forEach(doc => {
-                const {category, name, amount, recurring, docId} = doc.data()
-                // setDocId(doc.id)
+                const {category, name, amount, recurring} = doc.data()
+                setDocId(doc.id)
                 expenseList.push({
                     id: doc.id,
-                    docId,
                     category,
                     name,
                     amount,
@@ -48,9 +47,7 @@ const Expenses = ({navigation}) => {
 
     const addExpense = async (e) => {
         setVisible(false)
-console.log(docId)
         await ref.add({
-            docId: docId,
             category: category,
             name: name,
             amount: parseInt(amount),   
@@ -71,6 +68,7 @@ console.log(docId)
 
 
     const DisplayExpenses = ({docId, name, amount, category, recurring}) => {
+        console.log(docId)
         return (
             <ScrollView>
                 <List.AccordionGroup>
@@ -79,10 +77,8 @@ console.log(docId)
                         <List.Item title={`Amount: $${amount}`} />
                         <List.Item title={`Recurring: ${recurring}`} />
                     
-                        <List.Item title={`document id: ${docId}`} />
-
                         <UpdateExpense docId={docId} category={category} name={name} amount={amount} recurring={recurring} setCategory={setCategory} />
-                        <Button onPress={() => deleteExpense()} >delete</Button>
+                        {/* <Button onPress={() => deleteExpense()} >delete</Button> */}
 
                     </List.Accordion>
                 </List.AccordionGroup>
@@ -90,6 +86,7 @@ console.log(docId)
         )
     }
 
+    console.log(docId)
 
     return (
         <ScrollView>
@@ -100,7 +97,7 @@ console.log(docId)
                 style={{ flex: 1}}
                 data={expenses}
                 keyExtractor={(item) => item.id }
-                renderItem={({item}) => <DisplayExpenses {...item}  />}
+                renderItem={({item}) => <DisplayExpenses {...item} docId={docId}  />}
                     />
                     
 

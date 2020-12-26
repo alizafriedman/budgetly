@@ -12,6 +12,7 @@ const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) 
     const [updateName, setUpdateName] = useState(name)
     const [updateAmount, setUpdateAmount] = useState(amount)
     const [updateRecurring, setUpdateRecurring] = useState(recurring)
+    const [loading, setLoading] = useState(true)
     
     const userId = firebase.auth().currentUser.uid
     const ref = db.collection(`users/${userId}/expenses`)
@@ -31,7 +32,6 @@ const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) 
         });        
     }
 
-   
     return (
         <Provider>
             <ScrollView>
@@ -44,11 +44,11 @@ const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) 
                             <TextInput label={'name'} editable={true} value={updateName} onChangeText={(text) => setUpdateName(text)} />
                             <TextInput label={'amount'} editable={true} value={updateAmount} onChangeText={(text)=> setUpdateAmount(text)} />
                             <TextInput label={'recurring'} editable={true} value={updateRecurring} onChangeText={(text) => setUpdateRecurring(text)} />
-                            <TouchableOpacity  >
+                            {/* <TouchableOpacity  > */}
                                 <Button style={styles.button} onPress={() => 
                                     {   hideDialog()
                                         submitEdits()  }} >done edits</Button>
-                            </TouchableOpacity>
+                            {/* </TouchableOpacity> */}
                         </Dialog.Content>
                         <Dialog.Actions>
                             {/* <Button onPress={hideDialog}>Done</Button> */}
