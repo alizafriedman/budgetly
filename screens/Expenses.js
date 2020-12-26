@@ -15,7 +15,7 @@ const Expenses = ({navigation}) => {
     const [amount, setAmount] = useState('')
     const[category, setCategory]=useState('')
     const [recurring, setRecurring] = useState('')
-    const [docId, setDocId] = useState('')
+    const [docId, setDocId] = useState()
     const [loading, setLoading] =useState(true)
     const [updateCategory, setUpdateCategory] = useState('')
     const [visible, setVisible] = useState(false)
@@ -29,10 +29,11 @@ const Expenses = ({navigation}) => {
         return ref.onSnapshot((querySnapshot) => {
             const expenseList = []
             querySnapshot.forEach(doc => {
-                const {category, name, amount, recurring} = doc.data()
-                setDocId(doc.id)
+                const {category, name, amount, recurring, docId} = doc.data()
+                // setDocId(doc.id)
                 expenseList.push({
                     id: doc.id,
+                    docId,
                     category,
                     name,
                     amount,
@@ -47,8 +48,9 @@ const Expenses = ({navigation}) => {
 
     const addExpense = async (e) => {
         setVisible(false)
-
+console.log(docId)
         await ref.add({
+            docId: docId,
             category: category,
             name: name,
             amount: parseInt(amount),   
@@ -63,6 +65,7 @@ const Expenses = ({navigation}) => {
     }
 
     const deleteExpense = async () => {
+        console.log(docId)
         await ref.doc(docId).delete()
     }
 
@@ -75,9 +78,11 @@ const Expenses = ({navigation}) => {
                         <List.Item title={`Category: ${category}`}  />
                         <List.Item title={`Amount: $${amount}`} />
                         <List.Item title={`Recurring: ${recurring}`} />
+                    
+                        <List.Item title={`document id: ${docId}`} />
 
                         <UpdateExpense docId={docId} category={category} name={name} amount={amount} recurring={recurring} setCategory={setCategory} />
-                        {/* <Button onPress={() => deleteExpense()} >delete</Button> */}
+                        <Button onPress={() => deleteExpense()} >delete</Button>
 
                     </List.Accordion>
                 </List.AccordionGroup>
