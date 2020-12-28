@@ -13,33 +13,25 @@ const UpdateIncome = ({docId, type, amount, loading, setLoading, navigation, set
     const [updateType, setUpdateType] = useState(type)
     const [updateAmount, setUpdateAmount] = useState(amount)
 
+    const showDialog = () => setVisible(true)
+    const hideDialog = () => setVisible(false)
 
     const userId = firebase.auth().currentUser.uid
     const ref = db.collection(`users/${userId}/income`).doc(docId)
 
-    const showDialog = () => setVisible(true)
-    const hideDialog = () => setVisible(false)
+   
 
     const submitEdits = async() => {
-        // if(loading) {
-        //     setLoading(false)
-        // }
-        // await ref.doc(docId).set({
-        //     type: updateType,
-        //     amount: parseInt(updateAmount)
-        // });
-        await ref.set({
+        setVisible(false)
+
+        await ref.doc(docId).set({
             type: updateType,
             amount: parseInt(updateAmount)
         })
 
-        setUpdateType('')
-        setUpdateAmount('')
-        console.log(amount)
-        console.log(updateAmount)
-        // setLoading(false)
-        hideDialog()
-        // setLoading(true)
+        // setUpdateType('')
+        // setUpdateAmount('')
+       
     }
 
    
@@ -52,10 +44,15 @@ return (
                 <Dialog visible={visible}>
                     <Dialog.Title> update income </Dialog.Title>
                     <Dialog.Content>
-                        <TextInput label={'type'} editable={true} value={updateType} onChangeText={(text) => setUpdateType(text, 'type')} />
-                        <TextInput label={'amount'} editable={true} value={updateAmount} onChangeText={(text) => setUpdateAmount(text, 'amount')} />
+                        <TextInput label={'type'} editable={true} value={updateType} onChangeText={setUpdateType} />
+                        <TextInput label={'amount'} editable={true} value={updateAmount} onChangeText={setUpdateAmount} />
                         
-                        <Button onPress={submitEdits} > submit edits </Button>
+                        <Button onPress={
+                            ()=> {
+                                hideDialog()
+                                submitEdits()
+                            }
+                        } > submit edits </Button>
 
                     <Dialog.Actions>
                     </Dialog.Actions>

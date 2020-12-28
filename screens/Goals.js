@@ -62,8 +62,12 @@ const Goals = ({navigation}) => {
         navigation.navigate('Dashboard')
     }
 
+    const deleteGoal = async (docId) => {
+        await ref.doc(docId).delete();
 
-    const DisplayGoals = ({goalName, projectedAmount, description, timeframe}) => {
+    }
+
+    const DisplayGoals = ({docId, goalName, projectedAmount, description, timeframe}) => {
         
         return (
             <View>
@@ -79,7 +83,9 @@ const Goals = ({navigation}) => {
                          projectedAmount={projectedAmount} 
                          description={description} 
                          timeframe = {timeframe} />
-                
+                        <View>
+                            <Button onPress={(docId) => deleteGoal(docId)} >delete</Button>
+                        </View>
                 </List.Accordion>
                 </List.AccordionGroup>
             </View>
@@ -92,9 +98,11 @@ const Goals = ({navigation}) => {
                 <NavBar navigation={navigation} />
                 <Button onPress={() => setVisible(true)} > add goals</Button>
 
-                <FlatList data={goals}
+                <FlatList 
+                style={{ flex: 1 }}
+                data={goals}
                 keyExtractor={(item) => item.id}
-                renderItem={({item}) => <DisplayGoals {...item} />}
+                renderItem={({item}) => <DisplayGoals {...item} docId={docId}  />}
 
                  />
 
@@ -113,7 +121,7 @@ const Goals = ({navigation}) => {
                                 </Dialog.Content>
                                 <Dialog.Actions>
                                     <Button onPress={() => addGoals()}>Add Goals</Button>
-                                    <Button onPress={() => returnDash()}>Return to Dashboard</Button>
+                                    {/* <Button onPress={() => returnDash()}>Return to Dashboard</Button> */}
                                 </Dialog.Actions>
                             </Dialog>
                         </Portal>

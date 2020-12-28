@@ -15,7 +15,7 @@ const Income = ({navigation}) => {
     const [docId, setDocId] = useState('')
     const [visible, setVisible] = useState(false)
     const [incomes, setIncomes] = useState([])
-    // const [visibleEdit, setVisibleEdit] = useState(false)
+    const [visibleEdit, setVisibleEdit] = useState(false)
 
 
     const userId = firebase.auth().currentUser.uid
@@ -38,10 +38,6 @@ const Income = ({navigation}) => {
             setIncomes(incomeList)
             setLoading(false)
 
-            // if (loading) {
-            //     setLoading(false)
-                
-            // }
         })
     }, [])
 
@@ -60,13 +56,12 @@ const Income = ({navigation}) => {
 
     }
 
-    //real time db code or firestore -- delete() or remove()
     const deleteIncome = async () => {
         await ref.doc(docId).delete()
     };
 
 
-    const DisplayIncome = ({type, amount}) => {
+    const DisplayIncome = ({docId, type, amount}) => {
         
         return (
             <View>
@@ -80,7 +75,9 @@ const Income = ({navigation}) => {
                             <UpdateIncome docId={docId} type={type} amount={amount} loading={loading} setLoading={setLoading} navigation={navigation} />
                          } */}
                         <UpdateIncome docId={docId} type={type} amount={amount} loading={loading} setLoading={setLoading} navigation={navigation} />
-
+                        <View>
+                            <Button onPress={() => deleteExpense()} >delete</Button>
+                        </View>
                     </List.Accordion>
                 </List.AccordionGroup>
             </View>

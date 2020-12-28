@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {TouchableOpacity, View, ScrollView} from 'react-native'
+import {TouchableOpacity, View, ScrollView, StyleSheet} from 'react-native'
 import {Button, Dialog,Portal, Provider, TextInput} from 'react-native-paper'
 import firebase from 'firebase/app'
 import {db} from '../api/auth'
@@ -22,14 +22,14 @@ const UpdateGoals = ({docId, goalName, projectedAmount, description, timeframe})
 
 
     const submitEdits = async () => {
+        setVisible(false)
+
         await ref.doc(docId).set({
             goalName: updateGoalName,
             projectedAmount: parseInt(updateProjAmount),
             description: updateDescription,
             timeframe: parseInt(updateTimeframe)
         });
-        hideDialog()
-        setVisible(false)
     }
 
 
@@ -47,11 +47,13 @@ const UpdateGoals = ({docId, goalName, projectedAmount, description, timeframe})
                             <TextInput label={'description'} editable={true} value={updateDescription} onChangeText={setUpdateDescription} />
                             <TextInput label={'timeframe'} editable={true} value={updateTimeframe} onChangeText={setUpdateTimeframe} />
                         
+                      
+                                <Button style={styles.button} onPress={() => {
+                                hideDialog()
+                                submitEdits() }} >submit edit</Button>
+                        </Dialog.Content>  
                         <Dialog.Actions>
-                            <Button onPress={submitEdits} >submit edit</Button>
                         </Dialog.Actions>
-                        </Dialog.Content>   
-
                     </Dialog>
                 </Portal>
             </ScrollView>
@@ -62,6 +64,25 @@ const UpdateGoals = ({docId, goalName, projectedAmount, description, timeframe})
 
 }
 
+const styles = StyleSheet.create({
+
+    button: {
+        backgroundColor: '#3D2247',
+        marginLeft: 15,
+        marginRight: 15,
+        marginBottom: 10,
+        minHeight: 50,
+        borderRadius: 10,
+        alignItems: "center",
+        justifyContent: 'center',
+        minWidth: 100,
+        height: 8,
+        zIndex: 100
+
+    },
+
+
+})
 
 
 export default UpdateGoals;

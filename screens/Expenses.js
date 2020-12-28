@@ -62,13 +62,14 @@ const Expenses = ({navigation}) => {
     }
 
     const deleteExpense = async () => {
-        console.log(docId)
+        console.log('log 1', docId)
         await ref.doc(docId).delete()
     }
 
 
     const DisplayExpenses = ({docId, name, amount, category, recurring}) => {
-        console.log(docId)
+        console.log('log 2',docId)
+        
         return (
             <ScrollView>
                 <List.AccordionGroup>
@@ -78,16 +79,17 @@ const Expenses = ({navigation}) => {
                         <List.Item title={`Recurring: ${recurring}`} />
                     
                         <UpdateExpense docId={docId} category={category} name={name} amount={amount} recurring={recurring} setCategory={setCategory} />
-                        {/* <Button onPress={() => deleteExpense()} >delete</Button> */}
-
+                       <View>
+                        <Button onPress={() => deleteExpense()} >delete</Button>
+                        </View>
                     </List.Accordion>
                 </List.AccordionGroup>
             </ScrollView>
         )
     }
 
-    console.log(docId)
-
+    console.log('log 3', docId)
+    console.log(expenses.id)
     return (
         <ScrollView>
                 <NavBar navigation={navigation} />

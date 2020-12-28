@@ -6,7 +6,7 @@ import firebase from 'firebase/app'
 
 
 
-const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) => {
+const UpdateExpense = ({docId, category, name, amount, recurring}) => {
     const [visible, setVisible] = useState(false);
     const [updateCategory, setUpdateCategory] = useState(category)
     const [updateName, setUpdateName] = useState(name)
@@ -21,9 +21,8 @@ const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) 
     const hideDialog = () => setVisible(false);
    
     const submitEdits = async (e) => {
-        hideDialog();
         setVisible(false)
-        // e.preventDefault()
+
        await  ref.doc(docId).set({
            amount: parseInt(updateAmount),
             category: updateCategory,
@@ -32,18 +31,19 @@ const UpdateExpense = ({docId, category, name, amount, recurring, setCategory}) 
         });        
     }
 
+
     return (
         <Provider>
             <ScrollView>
-                <Button onPress={() => showDialog()}>edit</Button>
+                <Button onPress={showDialog}>edit</Button>
                 <Portal>
                     <Dialog visible={visible}>
                         <Dialog.Title>Update Expense</Dialog.Title>
                         <Dialog.Content>
-                            <TextInput label={'category'} editable={true} value={updateCategory} onChangeText={(text) => setUpdateCategory(text)} />
-                            <TextInput label={'name'} editable={true} value={updateName} onChangeText={(text) => setUpdateName(text)} />
-                            <TextInput label={'amount'} editable={true} value={updateAmount} onChangeText={(text)=> setUpdateAmount(text)} />
-                            <TextInput label={'recurring'} editable={true} value={updateRecurring} onChangeText={(text) => setUpdateRecurring(text)} />
+                            <TextInput label={'category'} editable={true} value={updateCategory} onChangeText={setUpdateCategory} />
+                            <TextInput label={'name'} editable={true} value={updateName} onChangeText={setUpdateName} />
+                            <TextInput label={'amount'} editable={true} value={updateAmount} onChangeText={setUpdateAmount} />
+                            <TextInput label={'recurring'} editable={true} value={updateRecurring} onChangeText={setUpdateRecurring} />
                             {/* <TouchableOpacity  > */}
                                 <Button style={styles.button} onPress={() => 
                                     {   hideDialog()
