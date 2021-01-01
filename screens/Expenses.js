@@ -16,14 +16,13 @@ const Expenses = ({navigation, userId}) => {
     const [amount, setAmount] = useState('')
     const[category, setCategory]=useState('')
     const [recurring, setRecurring] = useState('')
-    const [docId, setDocId] = useState()
+    const [docId, setDocId] = useState('')
     // const [loading, setLoading] =useState(true)
-    const [updateCategory, setUpdateCategory] = useState('')
     const [visible, setVisible] = useState(false)
 
     // const userId = firebase.auth().currentUser.uid
     const expenseRef = db.collection(`users/${userId}/expenses`)
-
+    
 
 
     
@@ -31,8 +30,7 @@ const Expenses = ({navigation, userId}) => {
         return expenseRef.onSnapshot((querySnapshot) => {
             const expenseList = []
             querySnapshot.forEach(doc => {
-                const {category, name, amount, recurring} = doc.data()
-                setDocId(doc.id)
+                const {category, name, amount, recurring, id} = doc.data()
                 expenseList.push({
                     id: doc.id,
                     category,
@@ -40,9 +38,9 @@ const Expenses = ({navigation, userId}) => {
                     amount,
                     recurring
                 })
+                setDocId(doc.id)
             })
             setExpenses(expenseList)
-            // setLoading(false)
         })
     }, [])
   
@@ -113,7 +111,7 @@ const Expenses = ({navigation, userId}) => {
                                 <Dialog visible={visible} >
                                     <Dialog.Title>add new expense</Dialog.Title>
                                         <Dialog.Content>
-                                            <TextInput label={'category '} editable={true} value={category} onChangeText={setCategory} />
+                                            <TextInput label={'category '} value={category} onChangeText={setCategory} />
                                             <TextInput label={'name '} value={name} onChangeText={setName} />
                                             <TextInput label={'amount'} value={amount} onChangeText={setAmount} />
                                             <TextInput label={'recurring'} value={recurring} onChangeText={setRecurring} />

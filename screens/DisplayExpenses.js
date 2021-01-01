@@ -3,7 +3,7 @@ import { View, Appbar, FlatList, ScrollView, Text, Pressable, TouchableOpacity }
 import { TextInput, Button, List, Dialog, Portal, Provider } from 'react-native-paper'
 import firebase from 'firebase/app'
 import { db } from '../api/auth'
-import NavBar from './NavBar'
+// import NavBar from './NavBar'
 import UpdateExpense from './UpdateExpense'
 
 
@@ -13,9 +13,9 @@ import UpdateExpense from './UpdateExpense'
 
 const DisplayExpenses = ({ docId, name, amount, category, recurring, expenseRef }) => {
     console.log('log 2', docId)
-    const [expenses, setExpenses] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [visible, setVisible] = useState(false)
+    // const [expenses, setExpenses] = useState([])
+    // const [loading, setLoading] = useState(true)
+    // const [visible, setVisible] = useState(false)
 
     // const userId = firebase.auth().currentUser.uid
     // const ref = db.collection(`users/${userId}/expenses`)
