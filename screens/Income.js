@@ -60,7 +60,7 @@ const Income = ({navigation}) => {
         await ref.doc(docId).delete()
     };
 
-
+    console.log(docId)
     const DisplayIncome = ({docId, type, amount}) => {
         
         return (

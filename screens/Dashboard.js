@@ -9,24 +9,26 @@ import NavBar from '../screens/NavBar'
 
 const Dashboard = ({navigation}) => {
 
-    const currentUserUID = firebase.auth().currentUser.uid
+    const userId = firebase.auth().currentUser.uid
     const [firstName, setFirstName] = useState('');
 
-
-    useEffect(() => {
-        const getUserInfo = async () => {
-            const doc = await firebase.firestore().collection('users').doc(currentUserUID).get()
+//switch to custom hook 
+    // useEffect(() => {
+    //     const getUserInfo = async () => {
+    //         const doc = await firebase.firestore().collection('users').doc(userId).get()
             
-            if(doc.exists) {
-                const userData = doc.data();
-                setFirstName(userData.firstName)
-            }
-        }
-        getUserInfo()
-    }, [])
+    //         // if(doc.exists) {
+    //         //     const userData = doc.data();
+    //         //     setFirstName(userData.firstName)
+    //         // }
+    //     }
+    //     getUserInfo()
+    // }, [])
+
+    
 
 
-  
+  //dump auth here
     return (
   
         <View style={styles.container}>
@@ -37,7 +39,7 @@ const Dashboard = ({navigation}) => {
                 <Text style={styles.text} > hi {firstName} </Text>
             
                     {dashScreens.map((screen, idx) => (
-                        <List.Item title={`${screen}`} key={idx} onPress={() => {navigation.navigate(`${screen}`)}} />))}
+                        <List.Item userId={userId} title={`${screen}`} key={idx} onPress={() => {navigation.navigate(`${screen}`)}} />))}
 
                         <List.Item title='Log Out' 
                         onPress={() => { logOut() 

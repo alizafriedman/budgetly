@@ -6,16 +6,16 @@ import firebase from 'firebase/app'
 
 
 
-const UpdateExpense = ({docId, category, name, amount, recurring}) => {
+const UpdateExpense = ({docId, category, name, amount, recurring, expenseRef}) => {
     const [visible, setVisible] = useState(false);
     const [updateCategory, setUpdateCategory] = useState(category)
     const [updateName, setUpdateName] = useState(name)
     const [updateAmount, setUpdateAmount] = useState(amount)
     const [updateRecurring, setUpdateRecurring] = useState(recurring)
-    const [loading, setLoading] = useState(true)
+    // const [loading, setLoading] = useState(true)
     
-    const userId = firebase.auth().currentUser.uid
-    const ref = db.collection(`users/${userId}/expenses`)
+    // const userId = firebase.auth().currentUser.uid
+    // const ref = db.collection(`users/${userId}/expenses`)
 
     const showDialog = () => setVisible(true);
     const hideDialog = () => setVisible(false);
@@ -23,7 +23,7 @@ const UpdateExpense = ({docId, category, name, amount, recurring}) => {
     const submitEdits = async (e) => {
         setVisible(false)
 
-       await  ref.doc(docId).set({
+       await  expenseRef.doc(docId).set({
            amount: parseInt(updateAmount),
             category: updateCategory,
             name: updateName,

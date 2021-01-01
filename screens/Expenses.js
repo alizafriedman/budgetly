@@ -5,10 +5,11 @@ import firebase from 'firebase/app'
 import {db} from '../api/auth'
 import NavBar from './NavBar'
 import UpdateExpense from './UpdateExpense'
+import DisplayExpenses from './DisplayExpenses'
 
 //needs styling -- wont allow ability to scroll to fill out box to add
 
-const Expenses = ({navigation}) => {
+const Expenses = ({navigation, userId}) => {
 
     const [expenses, setExpenses] = useState([])
     const[name, setName] = useState('')
@@ -16,17 +17,18 @@ const Expenses = ({navigation}) => {
     const[category, setCategory]=useState('')
     const [recurring, setRecurring] = useState('')
     const [docId, setDocId] = useState()
-    const [loading, setLoading] =useState(true)
+    // const [loading, setLoading] =useState(true)
     const [updateCategory, setUpdateCategory] = useState('')
     const [visible, setVisible] = useState(false)
 
-    const userId = firebase.auth().currentUser.uid
-    const ref = db.collection(`users/${userId}/expenses`)
+    // const userId = firebase.auth().currentUser.uid
+    const expenseRef = db.collection(`users/${userId}/expenses`)
+
 
 
     
     useEffect(() => {
-        return ref.onSnapshot((querySnapshot) => {
+        return expenseRef.onSnapshot((querySnapshot) => {
             const expenseList = []
             querySnapshot.forEach(doc => {
                 const {category, name, amount, recurring} = doc.data()
@@ -40,14 +42,39 @@ const Expenses = ({navigation}) => {
                 })
             })
             setExpenses(expenseList)
-            setLoading(false)
+            // setLoading(false)
         })
     }, [])
-   
+  
+
+
+    // useEffect(() => {
+    //    const test = async() => {
+    //     const expenseList = []
+    //     const expenses = await expenseRef.get()
+    //     expenses.forEach(doc => {
+    //         const {category, name, amount, recurring} = doc.data()
+    //         setDocId(doc.id)
+    //         expenseList.push({
+    //             id: doc.id,
+    //             category, 
+    //             name, 
+    //             amount, 
+    //             recurring
+    //         })
+    //         setExpenses(expenseList)
+
+    //     })}
+
+    //     setLoading(false)
+    //     test()
+    // }, [])
+
+
 
     const addExpense = async (e) => {
         setVisible(false)
-        await ref.add({
+        await expenseRef.add({
             category: category,
             name: name,
             amount: parseInt(amount),   
@@ -61,35 +88,11 @@ const Expenses = ({navigation}) => {
         setRecurring('')
     }
 
-    const deleteExpense = async () => {
-        console.log('log 1', docId)
-        await ref.doc(docId).delete()
-    }
+  
 
-
-    const DisplayExpenses = ({docId, name, amount, category, recurring}) => {
-        console.log('log 2',docId)
-        
-        return (
-            <ScrollView>
-                <List.AccordionGroup>
-                    <List.Accordion title={`Expense Name: ${name}`} id='1'  >
-                        <List.Item title={`Category: ${category}`}  />
-                        <List.Item title={`Amount: $${amount}`} />
-                        <List.Item title={`Recurring: ${recurring}`} />
-                    
-                        <UpdateExpense docId={docId} category={category} name={name} amount={amount} recurring={recurring} setCategory={setCategory} />
-                       <View>
-                        <Button onPress={() => deleteExpense()} >delete</Button>
-                        </View>
-                    </List.Accordion>
-                </List.AccordionGroup>
-            </ScrollView>
-        )
-    }
 
     console.log('log 3', docId)
-    console.log(expenses.id)
+    // console.log(expenses.id)
     return (
         <ScrollView>
                 <NavBar navigation={navigation} />
@@ -99,7 +102,7 @@ const Expenses = ({navigation}) => {
                 style={{ flex: 1}}
                 data={expenses}
                 keyExtractor={(item) => item.id }
-                renderItem={({item}) => <DisplayExpenses {...item} docId={docId}  />}
+                renderItem={({item}) => <DisplayExpenses {...item} docId={docId} expenseRef={expenseRef}  />}
                     />
                     
 
