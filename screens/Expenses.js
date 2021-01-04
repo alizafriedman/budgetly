@@ -20,28 +20,51 @@ const Expenses = ({navigation, userId}) => {
     // const [loading, setLoading] =useState(true)
     const [visible, setVisible] = useState(false)
 
-    // const userId = firebase.auth().currentUser.uid
     const expenseRef = db.collection(`users/${userId}/expenses`)
     
 
 
     
+    // useEffect(() => {
+    //     return expenseRef.onSnapshot((querySnapshot) => {
+    //         const expenseList = []
+    //         querySnapshot.forEach(doc => {
+    //             const {category, name, amount, recurring} = doc.data()
+    //             expenseList.push({
+    //                 id: doc.id,
+    //                 category,
+    //                 name,
+    //                 amount,
+    //                 recurring
+    //             })
+    //             setDocId(doc.id)
+    //         })
+    //         setExpenses(expenseList)
+    //         console.log('useEffect', docId)
+    //     })
+    // }, [])
+
+
     useEffect(() => {
-        return expenseRef.onSnapshot((querySnapshot) => {
-            const expenseList = []
-            querySnapshot.forEach(doc => {
-                const {category, name, amount, recurring, id} = doc.data()
-                expenseList.push({
-                    id: doc.id,
-                    category,
-                    name,
-                    amount,
-                    recurring
+        const queryExpenses = async () => {
+            await expenseRef.onSnapshot((querySnapshot) => {
+                const expenseList = []
+                querySnapshot.forEach(doc => {
+                    const {category, name, amount, recurring} = doc.data()
+                    expenseList.push({
+                        id: doc.id, 
+                        category,
+                        name,
+                        amount,
+                        recurring
+                    })
+                    setDocId(doc.id)
+                    setExpenses(expenseList)
+
                 })
-                setDocId(doc.id)
             })
-            setExpenses(expenseList)
-        })
+        } 
+        queryExpenses()
     }, [])
   
 
@@ -89,10 +112,13 @@ const Expenses = ({navigation, userId}) => {
   
 
 
-    console.log('log 3', docId)
+    // console.log('log 3', docId)
+    console.log('useEffectRendered')
+
     // console.log(expenses.id)
     return (
-        <ScrollView>
+        <>
+         <View>
                 <NavBar navigation={navigation} />
                 <Button onPress={() => setVisible(true)} >add expense blah blah</Button>
                 
@@ -102,7 +128,7 @@ const Expenses = ({navigation, userId}) => {
                 keyExtractor={(item) => item.id }
                 renderItem={({item}) => <DisplayExpenses {...item} docId={docId} expenseRef={expenseRef}  />}
                     />
-                    
+            
 
                 {visible && 
                     <Provider>
@@ -126,7 +152,8 @@ const Expenses = ({navigation, userId}) => {
                     </Provider>
 
                 }   
-            </ScrollView> 
+            </View> 
+            </>
     )
 }
 

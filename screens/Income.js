@@ -8,7 +8,7 @@ import UpdateIncome from './UpdateIncome'
 
 
 
-const Income = ({navigation}) => {
+const Income = ({navigation, userId}) => {
     const [type, setType] = useState('')
     const [amount, setAmount] = useState('')
     const [loading, setLoading] = useState(true)
@@ -18,7 +18,7 @@ const Income = ({navigation}) => {
     const [visibleEdit, setVisibleEdit] = useState(false)
 
 
-    const userId = firebase.auth().currentUser.uid
+    // const userId = firebase.auth().currentUser.uid
     const ref = db.collection(`users/${userId}/income`)
 
 
@@ -27,16 +27,17 @@ const Income = ({navigation}) => {
             const incomeList = []
             querySnapshot.forEach(doc => {
                 const { type, amount } = doc.data();
-                setDocId(doc.id)
                 incomeList.push({
                     id: doc.id,
                     type,
                     amount
                 });
+                setDocId(doc.id)
             });
 
             setIncomes(incomeList)
-            setLoading(false)
+
+           
 
         })
     }, [])

@@ -12,15 +12,8 @@ import UpdateExpense from './UpdateExpense'
 
 
 const DisplayExpenses = ({ docId, name, amount, category, recurring, expenseRef }) => {
-    console.log('log 2', docId)
-    // const [expenses, setExpenses] = useState([])
-    // const [loading, setLoading] = useState(true)
-    // const [visible, setVisible] = useState(false)
 
-    // const userId = firebase.auth().currentUser.uid
-    // const ref = db.collection(`users/${userId}/expenses`)
-
-
+    console.log('log 4', docId)
     const deleteExpense = async () => {
         console.log('log 1', docId)
         await expenseRef.doc(docId).delete()

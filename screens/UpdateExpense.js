@@ -14,8 +14,6 @@ const UpdateExpense = ({docId, category, name, amount, recurring, expenseRef}) =
     const [updateRecurring, setUpdateRecurring] = useState(recurring)
     // const [loading, setLoading] = useState(true)
     
-    // const userId = firebase.auth().currentUser.uid
-    // const ref = db.collection(`users/${userId}/expenses`)
 
     const showDialog = () => setVisible(true);
     const hideDialog = () => setVisible(false);
