@@ -13,20 +13,21 @@ const Goals = ({navigation}) => {
     const [projectedAmount, setProjectedAmount] = useState('')
     const [description, setDescription] = useState('')
     const [timeframe, setTimeframe] = useState('')
-    const [docId, setDocId] = useState('')
+    const [docId, setDocId] = useState([])
     const [loading, setLoading] = useState(true)
     const [visible, setVisible] = useState(false)
 
-    const userId = firebase.auth().currentUser.uid
+    // const userId = firebase.auth().currentUser.uid
     const ref = db.collection(`users/${userId}/goals`)
 
 
     useEffect(() => {
         return ref.onSnapshot((querySnapshot) => {
             const goalsList = []
+            const docuId = []
             querySnapshot.forEach(doc => {
                 const { goalName, projectedAmount, description, timeframe } = doc.data();
-                setDocId(doc.id)
+                docuId.push(doc.id)
                 goalsList.push({
                     id: doc.id,
                     goalName,
@@ -35,7 +36,7 @@ const Goals = ({navigation}) => {
                     timeframe
                 });
             });
-
+            setDocId(docuId)
             setGoals(goalsList)
 
         })
@@ -58,17 +59,16 @@ const Goals = ({navigation}) => {
         setTimeframe('')
     }
 
-    const returnDash = () => {
-        navigation.navigate('Dashboard')
-    }
+  
 
-    const deleteGoal = async (docId) => {
+    const deleteGoal = async () => {
+        console.log(docId[id])
         await ref.doc(docId).delete();
 
     }
 
+    
     const DisplayGoals = ({docId, goalName, projectedAmount, description, timeframe}) => {
-        
         return (
             <View>
                 <List.AccordionGroup>
@@ -121,7 +121,6 @@ const Goals = ({navigation}) => {
                                 </Dialog.Content>
                                 <Dialog.Actions>
                                     <Button onPress={() => addGoals()}>Add Goals</Button>
-                                    {/* <Button onPress={() => returnDash()}>Return to Dashboard</Button> */}
                                 </Dialog.Actions>
                             </Dialog>
                         </Portal>

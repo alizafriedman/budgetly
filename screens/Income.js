@@ -15,10 +15,7 @@ const Income = ({navigation, userId}) => {
     const [docId, setDocId] = useState('')
     const [visible, setVisible] = useState(false)
     const [incomes, setIncomes] = useState([])
-    const [visibleEdit, setVisibleEdit] = useState(false)
 
-
-    // const userId = firebase.auth().currentUser.uid
     const ref = db.collection(`users/${userId}/income`)
 
 
@@ -36,9 +33,6 @@ const Income = ({navigation, userId}) => {
             });
 
             setIncomes(incomeList)
-
-           
-
         })
     }, [])
 
@@ -77,7 +71,7 @@ const Income = ({navigation, userId}) => {
                          } */}
                         <UpdateIncome docId={docId} type={type} amount={amount} loading={loading} setLoading={setLoading} navigation={navigation} />
                         <View>
-                            <Button onPress={() => deleteExpense()} >delete</Button>
+                            <Button onPress={() => deleteIncome()} >delete</Button>
                         </View>
                     </List.Accordion>
                 </List.AccordionGroup>
