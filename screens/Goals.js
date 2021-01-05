@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { View, Appbar, ScrollView, FlatList} from 'react-native'
+import { View, Appbar, ScrollView, FlatList, Pressable, Text} from 'react-native'
 import { TextInput, Button, List, Dialog, Portal,Provider } from 'react-native-paper'
 import firebase from 'firebase/app'
 import {db} from '../api/auth'
 import NavBar from './NavBar'
 import UpdateGoals from './UpdateGoals'
+import Test from './Test'
 
 
 const Goals = ({navigation}) => {
@@ -13,30 +14,30 @@ const Goals = ({navigation}) => {
     const [projectedAmount, setProjectedAmount] = useState('')
     const [description, setDescription] = useState('')
     const [timeframe, setTimeframe] = useState('')
-    const [docId, setDocId] = useState([])
+    const [docId, setDocId] = useState()
     const [loading, setLoading] = useState(true)
     const [visible, setVisible] = useState(false)
 
-    // const userId = firebase.auth().currentUser.uid
+    const userId = firebase.auth().currentUser.uid
     const ref = db.collection(`users/${userId}/goals`)
 
 
     useEffect(() => {
         return ref.onSnapshot((querySnapshot) => {
             const goalsList = []
-            const docuId = []
+            // const docuId = []
             querySnapshot.forEach(doc => {
                 const { goalName, projectedAmount, description, timeframe } = doc.data();
-                docuId.push(doc.id)
+                // docuId.push(doc.id)
                 goalsList.push({
-                    id: doc.id,
+                    goalId: doc.id,
                     goalName,
                     projectedAmount,
                     description,
                     timeframe
                 });
             });
-            setDocId(docuId)
+            // setDocId(docuId)
             setGoals(goalsList)
 
         })
@@ -61,14 +62,19 @@ const Goals = ({navigation}) => {
 
   
 
-    const deleteGoal = async () => {
-        console.log(docId[id])
-        await ref.doc(docId).delete();
+    const deleteGoal =  async() => {
+        
+        // console.log(goalId)
+        // console.log(docId)
+        await ref.doc().delete();
 
     }
 
     
-    const DisplayGoals = ({docId, goalName, projectedAmount, description, timeframe}) => {
+    const DisplayGoals = ({goalId, goalName, projectedAmount, description, timeframe}) => {
+        
+        console.log(goalId)
+        // setDocId(goalId)
         return (
             <View>
                 <List.AccordionGroup>
@@ -78,20 +84,35 @@ const Goals = ({navigation}) => {
                         <List.Item title={`Timeframe: ${timeframe}`} />
                         
                         <UpdateGoals 
-                        docId={docId} 
+                        // docId={docId} 
                         goalName={goalName}
                          projectedAmount={projectedAmount} 
                          description={description} 
-                         timeframe = {timeframe} />
-                        <View>
-                            <Button onPress={(docId) => deleteGoal(docId)} >delete</Button>
-                        </View>
+                         timeframe = {timeframe}
+                         goalId={goalId}
+                         key={goalId}
+                          />
+                      
+                            {/* <Button title="delete" onPress={deleteGoal} >
+                                delete
+                            </Button> */}
+                        <Test
+                            goalName={goalName}
+                            projectedAmount={projectedAmount}
+                            description={description}
+                            timeframe={timeframe}
+                            goalId={goalId}
+                         />
+                               
+                                
                 </List.Accordion>
                 </List.AccordionGroup>
             </View>
         )
     }
 
+
+    //data.forEach item.id
     return (
     
                 <ScrollView>
@@ -102,9 +123,10 @@ const Goals = ({navigation}) => {
                 style={{ flex: 1 }}
                 data={goals}
                 keyExtractor={(item) => item.id}
-                renderItem={({item}) => <DisplayGoals {...item} docId={docId}  />}
+                renderItem={({item}) => <DisplayGoals {...item} />}
 
                  />
+
 
 
                 {visible && 
