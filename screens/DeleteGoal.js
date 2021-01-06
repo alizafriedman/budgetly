@@ -5,20 +5,15 @@ import {db} from '../api/auth'
 
 
 
-const Test = ({goalId, goalName, projectedAmount, description, timeFrame}) => {
+const DeleteGoal = ({goalId}) => {
 
     const userId = firebase.auth().currentUser.uid
     const ref = db.collection(`users/${userId}/goals`)
 
     const deleteGoal = async () => {
-
-        console.log(goalId)
-        // console.log(docId)
         await ref.doc(goalId).delete();
 
     }
-    // console.log('banana')
-    // console.log(goalId)
     return (
     <Button onPress={deleteGoal} >delete</Button>
     )
@@ -26,4 +21,4 @@ const Test = ({goalId, goalName, projectedAmount, description, timeFrame}) => {
 
 
 
-export default Test;
+export default DeleteGoal;

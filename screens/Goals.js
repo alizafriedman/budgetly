@@ -5,7 +5,7 @@ import firebase from 'firebase/app'
 import {db} from '../api/auth'
 import NavBar from './NavBar'
 import UpdateGoals from './UpdateGoals'
-import Test from './Test'
+import DeleteGoal from './DeleteGoal'
 
 
 const Goals = ({navigation}) => {
@@ -13,9 +13,7 @@ const Goals = ({navigation}) => {
     const [goalName, setGoalName] = useState('')
     const [projectedAmount, setProjectedAmount] = useState('')
     const [description, setDescription] = useState('')
-    const [timeframe, setTimeframe] = useState('')
-    const [docId, setDocId] = useState()
-    const [loading, setLoading] = useState(true)
+    const [timeframe, setTimeframe] = useState('');
     const [visible, setVisible] = useState(false)
 
     const userId = firebase.auth().currentUser.uid
@@ -25,10 +23,10 @@ const Goals = ({navigation}) => {
     useEffect(() => {
         return ref.onSnapshot((querySnapshot) => {
             const goalsList = []
-            // const docuId = []
+
             querySnapshot.forEach(doc => {
                 const { goalName, projectedAmount, description, timeframe } = doc.data();
-                // docuId.push(doc.id)
+
                 goalsList.push({
                     goalId: doc.id,
                     goalName,
@@ -37,7 +35,6 @@ const Goals = ({navigation}) => {
                     timeframe
                 });
             });
-            // setDocId(docuId)
             setGoals(goalsList)
 
         })
@@ -62,19 +59,17 @@ const Goals = ({navigation}) => {
 
   
 
-    const deleteGoal =  async() => {
+    // const deleteGoal =  async() => {
         
-        // console.log(goalId)
-        // console.log(docId)
-        await ref.doc().delete();
+    //     // console.log(goalId)
+    //     // console.log(docId)
+    //     await ref.doc().delete();
 
-    }
+    // }
 
     
     const DisplayGoals = ({goalId, goalName, projectedAmount, description, timeframe}) => {
         
-        console.log(goalId)
-        // setDocId(goalId)
         return (
             <View>
                 <List.AccordionGroup>
@@ -84,7 +79,6 @@ const Goals = ({navigation}) => {
                         <List.Item title={`Timeframe: ${timeframe}`} />
                         
                         <UpdateGoals 
-                        // docId={docId} 
                         goalName={goalName}
                          projectedAmount={projectedAmount} 
                          description={description} 
@@ -92,17 +86,8 @@ const Goals = ({navigation}) => {
                          goalId={goalId}
                          key={goalId}
                           />
-                      
-                            {/* <Button title="delete" onPress={deleteGoal} >
-                                delete
-                            </Button> */}
-                        <Test
-                            goalName={goalName}
-                            projectedAmount={projectedAmount}
-                            description={description}
-                            timeframe={timeframe}
-                            goalId={goalId}
-                         />
+                           
+                        <DeleteGoal key={goalId} goalId={goalId}/>
                                
                                 
                 </List.Accordion>
