@@ -17,16 +17,14 @@ const Goals = ({navigation}) => {
     const [visible, setVisible] = useState(false)
 
     const userId = firebase.auth().currentUser.uid
-    const ref = db.collection(`users/${userId}/goals`)
+    const goalRef = db.collection(`users/${userId}/goals`)
 
 
     useEffect(() => {
-        return ref.onSnapshot((querySnapshot) => {
+        return goalRef.onSnapshot((querySnapshot) => {
             const goalsList = []
-
             querySnapshot.forEach(doc => {
                 const { goalName, projectedAmount, description, timeframe } = doc.data();
-
                 goalsList.push({
                     goalId: doc.id,
                     goalName,
@@ -36,7 +34,6 @@ const Goals = ({navigation}) => {
                 });
             });
             setGoals(goalsList)
-
         })
     }, [])
 
@@ -44,7 +41,7 @@ const Goals = ({navigation}) => {
     const addGoals = async () => {
         setVisible(false)
 
-        await ref.add({
+        await goalRef.add({
             goalName: goalName,
             projectedAmount: parseInt(projectedAmount),
             description: description,
@@ -59,16 +56,9 @@ const Goals = ({navigation}) => {
 
   
 
-    // const deleteGoal =  async() => {
-        
-    //     // console.log(goalId)
-    //     // console.log(docId)
-    //     await ref.doc().delete();
-
-    // }
 
     
-    const DisplayGoals = ({goalId, goalName, projectedAmount, description, timeframe}) => {
+    const DisplayGoals = ({userId, goalId, goalName, projectedAmount, description, timeframe}) => {
         
         return (
             <View>
@@ -87,7 +77,7 @@ const Goals = ({navigation}) => {
                          key={goalId}
                           />
                            
-                        <DeleteGoal key={goalId} goalId={goalId}/>
+                        <DeleteGoal goalId={goalId} userId={userId} />
                                
                                 
                 </List.Accordion>

@@ -6,8 +6,8 @@ import {db} from '../api/auth'
 
 
 
-const UpdateGoals = ({docId, goalName, projectedAmount, description, timeframe}) => {
-    const [visible, setVisible] = useState(false)
+const UpdateGoals = ({goalId, goalName, projectedAmount, description, timeframe}) => {
+    const [visible, setVisible] = useState(true)
     const [updateGoalName, setUpdateGoalName] = useState(goalName)
     const [updateProjAmount, setUpdateProjAmount] = useState(projectedAmount)
     const [updateDescription, setUpdateDescription] = useState(description)
@@ -15,7 +15,6 @@ const UpdateGoals = ({docId, goalName, projectedAmount, description, timeframe})
 
 
     const showDialog = () =>  setVisible(true)
-    const hideDialog = () =>  setVisible(false)
 
     const userId = firebase.auth().currentUser.uid
     const ref = db.collection(`users/${userId}/goals`)
@@ -23,8 +22,7 @@ const UpdateGoals = ({docId, goalName, projectedAmount, description, timeframe})
 
     const submitEdits = async () => {
         setVisible(false)
-
-        await ref.doc(docId).set({
+        await ref.doc(goalId).set({
             goalName: updateGoalName,
             projectedAmount: parseInt(updateProjAmount),
             description: updateDescription,
@@ -33,9 +31,11 @@ const UpdateGoals = ({docId, goalName, projectedAmount, description, timeframe})
     }
 
 
-
+console.log(goalId)
+console.log('updAte')
     return (
-        <Provider>
+        <>
+       <Provider>
             <ScrollView>
                 <Button onPress={showDialog}> edit here</Button>
                 <Portal>
@@ -47,17 +47,15 @@ const UpdateGoals = ({docId, goalName, projectedAmount, description, timeframe})
                             <TextInput label={'description'} editable={true} value={updateDescription} onChangeText={setUpdateDescription} />
                             <TextInput label={'timeframe'} editable={true} value={updateTimeframe} onChangeText={setUpdateTimeframe} />
                         
-                      
-                                <Button style={styles.button} onPress={() => {
-                                hideDialog()
-                                submitEdits() }} >submit edit</Button>
+                            <Button style={styles.button} onPress={submitEdits} >submit edit</Button>
                         </Dialog.Content>  
                         <Dialog.Actions>
-                        </Dialog.Actions>
+                    </Dialog.Actions>
                     </Dialog>
                 </Portal>
             </ScrollView>
         </Provider>
+        </>
     )
 
 
