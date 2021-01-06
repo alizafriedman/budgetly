@@ -12,10 +12,10 @@ const DeleteGoal = ({goalId}) => {
 
     const deleteGoal = async () => {
         await ref.doc(goalId).delete();
-
     }
+    
     return (
-    <Button onPress={deleteGoal} >delete</Button>
+        <Button onPress={deleteGoal} >delete</Button>
     )
 }
 

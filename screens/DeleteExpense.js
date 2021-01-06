@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Button, onPress } from 'react-native-paper'
 import firebase from 'firebase/app'
-import { db } from '../api/auth'
+import {db} from '../api/auth'
 
 
 

@@ -86,7 +86,7 @@ const Expenses = ({navigation}) => {
 
 
 
-    const addExpense = async (e) => {
+    const addExpense = async () => {
         setVisible(false)
 
         await expenseRef.add({
