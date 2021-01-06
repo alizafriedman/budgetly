@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react'
-import {TouchableOpacity, View, ScrollView, StyleSheet} from 'react-native'
+import React, {useState} from 'react'
+import {ScrollView, StyleSheet} from 'react-native'
 import {Button, Dialog,Portal, Provider, TextInput} from 'react-native-paper'
 import firebase from 'firebase/app'
 import {db} from '../api/auth'

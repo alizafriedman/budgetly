@@ -46,7 +46,6 @@ const Income = ({navigation}) => {
 
         setType('')
         setAmount('')
-
     }
 
    

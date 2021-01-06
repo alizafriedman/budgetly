@@ -9,6 +9,7 @@ import DeleteGoal from './DeleteGoal'
 
 
 const Goals = ({navigation}) => {
+
     const [goals, setGoals] = useState([])
     const [goalName, setGoalName] = useState('')
     const [projectedAmount, setProjectedAmount] = useState('')
@@ -55,8 +56,6 @@ const Goals = ({navigation}) => {
     }
 
   
-
-
     
     const DisplayGoals = ({ goalId, goalName, projectedAmount, description, timeframe}) => {
         
@@ -69,12 +68,12 @@ const Goals = ({navigation}) => {
                         <List.Item title={`Timeframe: ${timeframe}`} />
                         
                         <UpdateGoals 
-                        goalName={goalName}
-                         projectedAmount={projectedAmount} 
-                         description={description} 
-                         timeframe = {timeframe}
-                         goalId={goalId}
-                         key={goalId}
+                            goalName={goalName}
+                            projectedAmount={projectedAmount} 
+                            description={description} 
+                            timeframe = {timeframe}
+                            goalId={goalId}
+                            key={goalId}
                           />
                            
                         <DeleteGoal goalId={goalId} />
