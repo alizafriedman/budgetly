@@ -66,7 +66,8 @@ const Income = ({navigation}) => {
                          amount={amount} 
                          />
                         
-                        <DeleteIncome incomeId={incomeId} />
+                        <DeleteIncome 
+                        incomeId={incomeId} />
                     </List.Accordion>
                 </List.AccordionGroup>
             </View>
