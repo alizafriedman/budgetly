@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Appbar, FlatList, ScrollView } from 'react-native'
+import { View, Appbar, FlatList, ScrollView, StyleSheet } from 'react-native'
 import { Button, TextInput, List, Provider, Dialog, Portal } from 'react-native-paper'
 import firebase from 'firebase/app'
 import {db} from '../api/auth'
@@ -53,7 +53,7 @@ const Income = ({navigation}) => {
     const DisplayIncome = ({incomeId, type, amount}) => {
         
         return (
-            <View>
+            <View style={styles.modalContainer}>
                 <List.AccordionGroup>
                     <List.Accordion title={`Income Type: ${type}`} id='1' >
                         <List.Item title={`Type: ${type}`}/>
@@ -89,7 +89,7 @@ const Income = ({navigation}) => {
 
                     {visible && 
                         <Provider>
-                            <ScrollView>
+                            <ScrollView style={styles.modal}>
                                 <Portal>
                                     <Dialog visible={visible} >
                                         <Dialog.Title> add new income </Dialog.Title>
@@ -112,6 +112,13 @@ const Income = ({navigation}) => {
     )
 }
 
-
+const styles = StyleSheet.create({
+    modalContainer: {
+        flex: 1,
+    },
+    modal: {
+        marginTop: "60%"
+    },
+})
 
 export default Income;
