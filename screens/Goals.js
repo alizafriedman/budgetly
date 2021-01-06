@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Appbar, ScrollView, FlatList, Pressable, Text} from 'react-native'
+import { View, ScrollView, FlatList} from 'react-native'
 import { TextInput, Button, List, Dialog, Portal,Provider } from 'react-native-paper'
 import firebase from 'firebase/app'
 import {db} from '../api/auth'
@@ -9,6 +9,7 @@ import DeleteGoal from './DeleteGoal'
 
 
 const Goals = ({navigation}) => {
+
     const [goals, setGoals] = useState([])
     const [goalName, setGoalName] = useState('')
     const [projectedAmount, setProjectedAmount] = useState('')
@@ -55,8 +56,6 @@ const Goals = ({navigation}) => {
     }
 
   
-
-
     
     const DisplayGoals = ({ goalId, goalName, projectedAmount, description, timeframe}) => {
         
@@ -69,12 +68,12 @@ const Goals = ({navigation}) => {
                         <List.Item title={`Timeframe: ${timeframe}`} />
                         
                         <UpdateGoals 
-                        goalName={goalName}
-                         projectedAmount={projectedAmount} 
-                         description={description} 
-                         timeframe = {timeframe}
-                         goalId={goalId}
-                         key={goalId}
+                            goalName={goalName}
+                            projectedAmount={projectedAmount} 
+                            description={description} 
+                            timeframe = {timeframe}
+                            goalId={goalId}
+                            key={goalId}
                           />
                            
                         <DeleteGoal goalId={goalId} />
