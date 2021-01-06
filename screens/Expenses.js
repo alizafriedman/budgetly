@@ -39,53 +39,6 @@ const Expenses = ({navigation}) => {
     }, [])
 
 
-    // useEffect(() => {
-    //     const queryExpenses = async () => {
-    //         await expenseRef.onSnapshot((querySnapshot) => {
-    //             const expenseList = []
-    //             querySnapshot.forEach(doc => {
-    //                 const {category, name, amount, recurring} = doc.data()
-    //                 expenseList.push({
-    //                     expenseId: doc.id, 
-    //                     category,
-    //                     name,
-    //                     amount,
-    //                     recurring
-    //                 })
-    //                 setExpenses(expenseList)
-
-    //             })
-    //         })
-    //     } 
-    //     queryExpenses()
-    // }, [])
-  
-
-
-    // useEffect(() => {
-    //    const test = async() => {
-    //     const expenseList = []
-    //     const expenses = await expenseRef.get()
-    //     expenses.forEach(doc => {
-    //         const {category, name, amount, recurring} = doc.data()
-    //         setDocId(doc.id)
-    //         expenseList.push({
-    //             id: doc.id,
-    //             category, 
-    //             name, 
-    //             amount, 
-    //             recurring
-    //         })
-    //         setExpenses(expenseList)
-
-    //     })}
-
-    //     setLoading(false)
-    //     test()
-    // }, [])
-
-
-
     const addExpense = async () => {
         setVisible(false)
 
@@ -104,7 +57,7 @@ const Expenses = ({navigation}) => {
     }
 
   
-    const DisplayExpenses = ({ expenseId, userId, name, amount, category, recurring }) => {
+    const DisplayExpenses = ({ expenseId, name, amount, category, recurring }) => {
 
        
         return (
@@ -140,7 +93,7 @@ const Expenses = ({navigation}) => {
                 <FlatList 
                 style={{ flex: 1}}
                 data={expenses}
-                keyExtractor={(item) => item.id }
+                keyExtractor={(item) => item.expenseId }
                 renderItem={({item}) => <DisplayExpenses {...item}  />}
                     />
             

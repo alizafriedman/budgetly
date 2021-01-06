@@ -58,7 +58,7 @@ const Goals = ({navigation}) => {
 
 
     
-    const DisplayGoals = ({userId, goalId, goalName, projectedAmount, description, timeframe}) => {
+    const DisplayGoals = ({ goalId, goalName, projectedAmount, description, timeframe}) => {
         
         return (
             <View>
