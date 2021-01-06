@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Appbar, ScrollView, FlatList, Pressable, Text} from 'react-native'
+import { View, Appbar, ScrollView, FlatList, Pressable, Text, StyleSheet} from 'react-native'
 import { TextInput, Button, List, Dialog, Portal,Provider } from 'react-native-paper'
 import firebase from 'firebase/app'
 import {db} from '../api/auth'
@@ -106,7 +106,7 @@ const Goals = ({navigation}) => {
 
                 {visible && 
                 <Provider>
-                    <ScrollView>
+                    <ScrollView style={styles.modal}>
                         <Portal>
                             <Dialog visible={visible} > 
                                 <Dialog.Title>add new goal</Dialog.Title>
@@ -129,6 +129,11 @@ const Goals = ({navigation}) => {
     )
 }
 
+const styles = StyleSheet.create({
+    modal: {
+        marginTop: "60%"
+    },
+})
 
 
 export default Goals;

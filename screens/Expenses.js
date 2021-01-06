@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {View, Appbar, FlatList, ScrollView, Text, Pressable, TouchableOpacity } from 'react-native'
+import {View, Appbar, FlatList, ScrollView, Text, Pressable, TouchableOpacity, StyleSheet } from 'react-native'
 import {TextInput, Button,List, Dialog, Portal, Provider} from 'react-native-paper'
 import firebase from 'firebase/app'
 import {db} from '../api/auth'
@@ -100,7 +100,7 @@ const Expenses = ({navigation}) => {
 
                 {visible && 
                     <Provider>
-                        <ScrollView>
+                        <ScrollView style={styles.modal}>
                             <Portal>
                                 <Dialog visible={visible} >
                                     <Dialog.Title>add new expense</Dialog.Title>
@@ -125,5 +125,9 @@ const Expenses = ({navigation}) => {
     )
 }
 
-
+const styles = StyleSheet.create({
+    modal: {
+        marginTop: "60%"
+    }
+})
 export default Expenses;
