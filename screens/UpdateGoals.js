@@ -5,7 +5,6 @@ import firebase from 'firebase/app'
 import {db} from '../api/auth'
 
 
-
 const UpdateGoals = ({goalId, goalName, projectedAmount, description, timeframe}) => {
     const [visible, setVisible] = useState(true)
     const [updateGoalName, setUpdateGoalName] = useState(goalName)
@@ -31,8 +30,7 @@ const UpdateGoals = ({goalId, goalName, projectedAmount, description, timeframe}
     }
 
 
-console.log(goalId)
-console.log('updAte')
+
     return (
         <>
        <Provider>
@@ -57,9 +55,6 @@ console.log('updAte')
         </Provider>
         </>
     )
-
-
-
 }
 
 const styles = StyleSheet.create({

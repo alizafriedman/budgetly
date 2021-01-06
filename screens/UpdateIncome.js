@@ -3,12 +3,9 @@ import {ScrollView, TouchableOpacity, View } from 'react-native'
 import { Button, Dialog, Portal, Provider, TextInput} from 'react-native-paper'
 import firebase from 'firebase/app'
 import {db} from '../api/auth'
-// import Income from './Income'
 
 
-
-
-const UpdateIncome = ({docId, type, amount, loading, setLoading, navigation, setVisibleEdit}) => {
+const UpdateIncome = ({incomeId, type, amount}) => {
     const[visible, setVisible] = useState(false)
     const [updateType, setUpdateType] = useState(type)
     const [updateAmount, setUpdateAmount] = useState(amount)
@@ -17,21 +14,17 @@ const UpdateIncome = ({docId, type, amount, loading, setLoading, navigation, set
     const hideDialog = () => setVisible(false)
 
     const userId = firebase.auth().currentUser.uid
-    const ref = db.collection(`users/${userId}/income`).doc(docId)
+    const ref = db.collection(`users/${userId}/income`)
 
    
 
     const submitEdits = async() => {
         setVisible(false)
 
-        await ref.doc(docId).set({
+        await ref.doc(incomeId).set({
             type: updateType,
             amount: parseInt(updateAmount)
         })
-
-        // setUpdateType('')
-        // setUpdateAmount('')
-       
     }
 
    
@@ -39,7 +32,7 @@ return (
 
     <Provider>
         <ScrollView>
-            <Button onPress={showDialog} onPressOut={hideDialog} > edit here </Button>
+            <Button onPress={showDialog} > edit here </Button>
             <Portal>
                 <Dialog visible={visible}>
                     <Dialog.Title> update income </Dialog.Title>

@@ -5,17 +5,16 @@ import firebase from 'firebase/app'
 import {db} from '../api/auth'
 import NavBar from './NavBar'
 import UpdateIncome from './UpdateIncome'
+import DeleteIncome from './DeleteIncome'
 
 
-
-const Income = ({navigation, userId}) => {
+const Income = ({navigation}) => {
     const [type, setType] = useState('')
     const [amount, setAmount] = useState('')
-    const [loading, setLoading] = useState(true)
-    const [docId, setDocId] = useState('')
     const [visible, setVisible] = useState(false)
     const [incomes, setIncomes] = useState([])
 
+    const userId = firebase.auth().currentUser.uid
     const ref = db.collection(`users/${userId}/income`)
 
 
@@ -25,11 +24,10 @@ const Income = ({navigation, userId}) => {
             querySnapshot.forEach(doc => {
                 const { type, amount } = doc.data();
                 incomeList.push({
-                    id: doc.id,
+                    incomeId: doc.id,
                     type,
                     amount
                 });
-                setDocId(doc.id)
             });
 
             setIncomes(incomeList)
@@ -51,12 +49,8 @@ const Income = ({navigation, userId}) => {
 
     }
 
-    const deleteIncome = async () => {
-        await ref.doc(docId).delete()
-    };
-
-    console.log(docId)
-    const DisplayIncome = ({docId, type, amount}) => {
+   
+    const DisplayIncome = ({incomeId, type, amount}) => {
         
         return (
             <View>
@@ -66,13 +60,13 @@ const Income = ({navigation, userId}) => {
                         <List.Item title={`Amount: $${amount}`} />
                          
                         
-                        {/* {visibleEdit && 
-                            <UpdateIncome docId={docId} type={type} amount={amount} loading={loading} setLoading={setLoading} navigation={navigation} />
-                         } */}
-                        <UpdateIncome docId={docId} type={type} amount={amount} loading={loading} setLoading={setLoading} navigation={navigation} />
-                        <View>
-                            <Button onPress={() => deleteIncome()} >delete</Button>
-                        </View>
+                        <UpdateIncome 
+                        incomeId={incomeId} 
+                        type={type}
+                         amount={amount} 
+                         />
+                        
+                        <DeleteIncome incomeId={incomeId} />
                     </List.Accordion>
                 </List.AccordionGroup>
             </View>
@@ -81,7 +75,7 @@ const Income = ({navigation, userId}) => {
 
 
     return (
-        <>
+        
                 <ScrollView>
                     <NavBar navigation={navigation} />
                     <Button onPress={() => setVisible(true)}>Add income</Button>
@@ -89,7 +83,7 @@ const Income = ({navigation, userId}) => {
                     <FlatList
                         style={{ flex: 1 }}
                         data={incomes}
-                        keyExtractor={(item) => item.id}
+                        keyExtractor={(item) => item.incomeId}
                         renderItem={({ item }) => <DisplayIncome {...item} style={{ color: '#661327' }} />}
                     />
 
@@ -114,7 +108,7 @@ const Income = ({navigation, userId}) => {
                         </Provider>
                     }
             </ScrollView>
-        </>
+    
     )
 }
 

@@ -87,7 +87,6 @@ const Goals = ({navigation}) => {
     }
 
 
-    //data.forEach item.id
     return (
     
             <ScrollView>
@@ -97,7 +96,7 @@ const Goals = ({navigation}) => {
                 <FlatList 
                 style={{ flex: 1 }}
                 data={goals}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.goalId}
                 renderItem={({item}) => <DisplayGoals {...item} />}
 
                  />

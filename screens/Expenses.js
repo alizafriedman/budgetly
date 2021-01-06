@@ -7,7 +7,6 @@ import NavBar from './NavBar'
 import UpdateExpense from './UpdateExpense'
 import DeleteExpense from './DeleteExpense'
 
-//needs styling -- wont allow ability to scroll to fill out box to add
 
 const Expenses = ({navigation}) => {
 
@@ -121,7 +120,6 @@ const Expenses = ({navigation}) => {
 
                 }   
             </View> 
-            
     )
 }
 
