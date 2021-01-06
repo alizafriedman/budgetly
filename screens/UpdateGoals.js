@@ -6,7 +6,7 @@ import {db} from '../api/auth'
 
 
 const UpdateGoals = ({goalId, goalName, projectedAmount, description, timeframe}) => {
-    const [visible, setVisible] = useState(true)
+    const [visible, setVisible] = useState(false)
     const [updateGoalName, setUpdateGoalName] = useState(goalName)
     const [updateProjAmount, setUpdateProjAmount] = useState(projectedAmount)
     const [updateDescription, setUpdateDescription] = useState(description)
