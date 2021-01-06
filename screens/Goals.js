@@ -77,7 +77,7 @@ const Goals = ({navigation}) => {
                          key={goalId}
                           />
                            
-                        <DeleteGoal goalId={goalId} userId={userId} />
+                        <DeleteGoal goalId={goalId} />
                                
                                 
                 </List.Accordion>
@@ -90,7 +90,7 @@ const Goals = ({navigation}) => {
     //data.forEach item.id
     return (
     
-                <ScrollView>
+            <ScrollView>
                 <NavBar navigation={navigation} />
                 <Button onPress={() => setVisible(true)} > add goals</Button>
 

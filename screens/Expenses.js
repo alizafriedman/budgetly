@@ -5,67 +5,60 @@ import firebase from 'firebase/app'
 import {db} from '../api/auth'
 import NavBar from './NavBar'
 import UpdateExpense from './UpdateExpense'
-import DisplayExpenses from './DisplayExpenses'
+import DeleteExpense from './DeleteExpense'
 
 //needs styling -- wont allow ability to scroll to fill out box to add
 
-const Expenses = ({navigation, userId}) => {
+const Expenses = ({navigation}) => {
 
     const [expenses, setExpenses] = useState([])
     const[name, setName] = useState('')
     const [amount, setAmount] = useState('')
     const[category, setCategory]=useState('')
     const [recurring, setRecurring] = useState('')
-    const [docId, setDocId] = useState('')
-    // const [loading, setLoading] =useState(true)
     const [visible, setVisible] = useState(false)
 
+    const userId = firebase.auth().currentUser.uid
     const expenseRef = db.collection(`users/${userId}/expenses`)
     
-
-
-    
-    // useEffect(() => {
-    //     return expenseRef.onSnapshot((querySnapshot) => {
-    //         const expenseList = []
-    //         querySnapshot.forEach(doc => {
-    //             const {category, name, amount, recurring} = doc.data()
-    //             expenseList.push({
-    //                 id: doc.id,
-    //                 category,
-    //                 name,
-    //                 amount,
-    //                 recurring
-    //             })
-    //             setDocId(doc.id)
-    //         })
-    //         setExpenses(expenseList)
-    //         console.log('useEffect', docId)
-    //     })
-    // }, [])
-
-
     useEffect(() => {
-        const queryExpenses = async () => {
-            await expenseRef.onSnapshot((querySnapshot) => {
-                const expenseList = []
-                querySnapshot.forEach(doc => {
-                    const {category, name, amount, recurring} = doc.data()
-                    expenseList.push({
-                        id: doc.id, 
-                        category,
-                        name,
-                        amount,
-                        recurring
-                    })
-                    setDocId(doc.id)
-                    setExpenses(expenseList)
-
+        return expenseRef.onSnapshot((querySnapshot) => {
+            const expenseList = []
+            querySnapshot.forEach(doc => {
+                const {category, name, amount, recurring} = doc.data()
+                expenseList.push({
+                    expenseId: doc.id,
+                    category,
+                    name,
+                    amount,
+                    recurring
                 })
             })
-        } 
-        queryExpenses()
+            setExpenses(expenseList)
+        })
     }, [])
+
+
+    // useEffect(() => {
+    //     const queryExpenses = async () => {
+    //         await expenseRef.onSnapshot((querySnapshot) => {
+    //             const expenseList = []
+    //             querySnapshot.forEach(doc => {
+    //                 const {category, name, amount, recurring} = doc.data()
+    //                 expenseList.push({
+    //                     expenseId: doc.id, 
+    //                     category,
+    //                     name,
+    //                     amount,
+    //                     recurring
+    //                 })
+    //                 setExpenses(expenseList)
+
+    //             })
+    //         })
+    //     } 
+    //     queryExpenses()
+    // }, [])
   
 
 
@@ -95,6 +88,7 @@ const Expenses = ({navigation, userId}) => {
 
     const addExpense = async (e) => {
         setVisible(false)
+
         await expenseRef.add({
             category: category,
             name: name,
@@ -110,14 +104,35 @@ const Expenses = ({navigation, userId}) => {
     }
 
   
+    const DisplayExpenses = ({ expenseId, userId, name, amount, category, recurring }) => {
 
+       
+        return (
+            <ScrollView>
+                <List.AccordionGroup>
+                    <List.Accordion title={`Expense Name: ${name}`} id='1'  >
+                        <List.Item title={`Category: ${category}`} />
+                        <List.Item title={`Amount: $${amount}`} />
+                        <List.Item title={`Recurring: ${recurring}`} />
 
-    // console.log('log 3', docId)
-    console.log('useEffectRendered')
+                        <UpdateExpense 
+                        expenseId={expenseId} 
+                        category={category} 
+                        name={name} 
+                        amount={amount} 
+                        recurring={recurring} 
+                        />
 
-    // console.log(expenses.id)
+                        <DeleteExpense expenseId={expenseId} />
+
+                    </List.Accordion>
+                </List.AccordionGroup>
+            </ScrollView>
+        )
+    }
+
     return (
-        <>
+        
          <View>
                 <NavBar navigation={navigation} />
                 <Button onPress={() => setVisible(true)} >add expense blah blah</Button>
@@ -126,7 +141,7 @@ const Expenses = ({navigation, userId}) => {
                 style={{ flex: 1}}
                 data={expenses}
                 keyExtractor={(item) => item.id }
-                renderItem={({item}) => <DisplayExpenses {...item} docId={docId} expenseRef={expenseRef}  />}
+                renderItem={({item}) => <DisplayExpenses {...item}  />}
                     />
             
 
@@ -153,7 +168,7 @@ const Expenses = ({navigation, userId}) => {
 
                 }   
             </View> 
-            </>
+            
     )
 }
 
