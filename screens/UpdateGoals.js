@@ -1,27 +1,22 @@
-import React, {useState} from 'react'
-import {ScrollView, StyleSheet} from 'react-native'
-import {Button, Dialog,Portal, Provider, TextInput} from 'react-native-paper'
-import firebase from 'firebase/app'
-import {db} from '../api/auth'
+import React, {useState} from 'react';
+import {ScrollView, StyleSheet} from 'react-native';
+import {Button, Dialog,Portal, Provider, TextInput} from 'react-native-paper';
 
 
-const UpdateGoals = ({goalId, goalName, projectedAmount, description, timeframe}) => {
-    const [visible, setVisible] = useState(false)
-    const [updateGoalName, setUpdateGoalName] = useState(goalName)
-    const [updateProjAmount, setUpdateProjAmount] = useState(projectedAmount)
-    const [updateDescription, setUpdateDescription] = useState(description)
-    const [updateTimeframe, setUpdateTimeframe] = useState(timeframe)
+const UpdateGoals = ({goalId, goalName, projectedAmount, description, timeframe, goalRef}) => {
+    const [visible, setVisible] = useState(false);
+    const [updateGoalName, setUpdateGoalName] = useState(goalName);
+    const [updateProjAmount, setUpdateProjAmount] = useState(projectedAmount);
+    const [updateDescription, setUpdateDescription] = useState(description);
+    const [updateTimeframe, setUpdateTimeframe] = useState(timeframe);
 
 
-    const showDialog = () =>  setVisible(true)
-
-    const userId = firebase.auth().currentUser.uid
-    const ref = db.collection(`users/${userId}/goals`)
+    const showDialog = () =>  setVisible(true);
 
 
     const submitEdits = async () => {
         setVisible(false)
-        await ref.doc(goalId).set({
+        await goalRef.doc(goalId).set({
             goalName: updateGoalName,
             projectedAmount: parseInt(updateProjAmount),
             description: updateDescription,

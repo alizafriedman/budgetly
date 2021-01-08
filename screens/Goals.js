@@ -74,9 +74,13 @@ const Goals = ({navigation}) => {
                             timeframe = {timeframe}
                             goalId={goalId}
                             key={goalId}
+                            goalRef={goalRef}
                           />
                            
-                        <DeleteGoal goalId={goalId} />
+                        <DeleteGoal 
+                            goalId={goalId}
+                            goalRef={goalRef} 
+                        />
                                
                                 
                 </List.Accordion>

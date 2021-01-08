@@ -73,9 +73,13 @@ console.log('1', expenseId)
                         name={name} 
                         amount={amount} 
                         recurring={recurring} 
+                        expenseRef={expenseRef}
                         />
 
-                        <DeleteExpense expenseId={expenseId} />
+                        <DeleteExpense 
+                        expenseId={expenseId} 
+                        expenseRef={expenseRef}
+                        />
 
                     </List.Accordion>
                 </List.AccordionGroup>

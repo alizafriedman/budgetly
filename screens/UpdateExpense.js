@@ -1,23 +1,19 @@
-import React, {useState, useEffect} from 'react';
-import { ScrollView, TouchableOpacity, View, StyleSheet, ShadowPropTypesIOS } from 'react-native';
+import React, {useState} from 'react';
+import { ScrollView, StyleSheet } from 'react-native';
 import { Button, Dialog, Portal, Provider, TextInput } from 'react-native-paper';
-import firebase from 'firebase/app'
-import { db } from '../api/auth'
 
 
-const UpdateExpense = ({expenseId, category, name, amount, recurring}) => {
+
+const UpdateExpense = ({expenseId, category, name, amount, recurring, expenseRef}) => {
     const [visible, setVisible] = useState(false);
-    const [updateCategory, setUpdateCategory] = useState(category)
-    const [updateName, setUpdateName] = useState(name)
-    const [updateAmount, setUpdateAmount] = useState(amount)
-    const [updateRecurring, setUpdateRecurring] = useState(recurring)
+    const [updateCategory, setUpdateCategory] = useState(category);
+    const [updateName, setUpdateName] = useState(name);
+    const [updateAmount, setUpdateAmount] = useState(amount);
+    const [updateRecurring, setUpdateRecurring] = useState(recurring);
     
 
     const showDialog = () => setVisible(true);
     const hideDialog = () => setVisible(false);
-
-    const userId = firebase.auth().currentUser.uid
-    const expenseRef = db.collection(`users/${userId}/expenses`)
 
    
     const submitEdits = async () => {
