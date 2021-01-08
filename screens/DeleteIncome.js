@@ -15,7 +15,11 @@ const DeleteIncome = ({ incomeId }) => {
     }
 
     return (
-        <Button onPress={deleteIncome} >delete</Button>
+        <Button 
+        style={{
+            marginTop: '3%'
+        }}
+        onPress={deleteIncome} >delete</Button>
     )
 }
 
