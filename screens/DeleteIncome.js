@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { Button, onPress } from 'react-native-paper'
-import firebase from 'firebase/app'
-import { db } from '../api/auth'
+import React from 'react'
+import { Button } from 'react-native-paper'
 
 
+const DeleteIncome = ({ incomeId, incomeRef }) => {
 
-const DeleteIncome = ({ incomeId }) => {
-
-    const userId = firebase.auth().currentUser.uid
-    const ref = db.collection(`users/${userId}/income`)
 
     const deleteIncome = async () => {
-        await ref.doc(incomeId).delete();
+        await incomeRef.doc(incomeId).delete();
     }
 
     return (

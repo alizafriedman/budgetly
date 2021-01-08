@@ -5,7 +5,7 @@ import firebase from 'firebase/app'
 import {db} from '../api/auth'
 
 
-const UpdateIncome = ({incomeId, type, amount}) => {
+const UpdateIncome = ({incomeId, type, amount, incomeRef}) => {
     const[visible, setVisible] = useState(false)
     const [updateType, setUpdateType] = useState(type)
     const [updateAmount, setUpdateAmount] = useState(amount)
@@ -13,15 +13,11 @@ const UpdateIncome = ({incomeId, type, amount}) => {
     const showDialog = () => setVisible(true)
     const hideDialog = () => setVisible(false)
 
-    const userId = firebase.auth().currentUser.uid
-    const ref = db.collection(`users/${userId}/income`)
-
-   
 
     const submitEdits = async() => {
         setVisible(false)
 
-        await ref.doc(incomeId).set({
+        await incomeRef.doc(incomeId).set({
             type: updateType,
             amount: parseInt(updateAmount)
         })

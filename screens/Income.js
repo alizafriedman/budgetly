@@ -15,11 +15,11 @@ const Income = ({navigation}) => {
     const [incomes, setIncomes] = useState([])
 
     const userId = firebase.auth().currentUser.uid
-    const ref = db.collection(`users/${userId}/income`)
+    const incomeRef = db.collection(`users/${userId}/income`)
 
 
     useEffect(() => {
-        return ref.onSnapshot((querySnapshot) => {
+        return incomeRef.onSnapshot((querySnapshot) => {
             const incomeList = []
             querySnapshot.forEach(doc => {
                 const { type, amount } = doc.data();
@@ -38,7 +38,7 @@ const Income = ({navigation}) => {
     const addIncome = async () => {
         setVisible(false)
 
-        await ref.add({
+        await incomeRef.add({
             type: type,
             amount: parseInt(amount),
 
@@ -63,10 +63,14 @@ const Income = ({navigation}) => {
                         incomeId={incomeId} 
                         type={type}
                          amount={amount} 
+                         incomeRef={incomeRef}
                          />
                         
                         <DeleteIncome 
-                        incomeId={incomeId} />
+                        incomeId={incomeId} 
+                        incomeRef={incomeRef}
+                        />
+
                     </List.Accordion>
                 </List.AccordionGroup>
             </View>
