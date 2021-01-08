@@ -34,6 +34,7 @@ const Expenses = ({navigation}) => {
                 })
             })
             setExpenses(expenseList)
+            console.log(expenseList)
         })
     }, [])
 
@@ -55,9 +56,8 @@ const Expenses = ({navigation}) => {
         setRecurring('')
     }
 
-  
     const DisplayExpenses = ({ expenseId, name, amount, category, recurring }) => {
-
+console.log('1', expenseId)
        
         return (
             <ScrollView>
@@ -82,6 +82,7 @@ const Expenses = ({navigation}) => {
             </ScrollView>
         )
     }
+
 
     return (
         

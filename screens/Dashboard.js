@@ -11,22 +11,17 @@ const Dashboard = ({navigation}) => {
 
     const userId = firebase.auth().currentUser.uid
     const [firstName, setFirstName] = useState('');
-
-//switch to custom hook 
-    // useEffect(() => {
-    //     const getUserInfo = async () => {
-    //         const doc = await firebase.firestore().collection('users').doc(userId).get()
-            
-    //         // if(doc.exists) {
-    //         //     const userData = doc.data();
-    //         //     setFirstName(userData.firstName)
-    //         // }
-    //     }
-    //     getUserInfo()
-    // }, [])
+ 
+    useEffect(() => {
+        const getUserInfo = async () => {
+            const doc = await firebase.firestore().collection('users').doc(userId).get()
+            const userData = doc.data();
+            setFirstName(userData.fullName)
+        }
+        getUserInfo()
+    }, [])
 
     
-
 
   //dump auth here
     return (

@@ -7,8 +7,6 @@ import {db} from '../api/auth'
 
 const DeleteExpense = ({ expenseId }) => {
 
-console.log(expenseId)
-
     const userId = firebase.auth().currentUser.uid
     const ref = db.collection(`users/${userId}/expenses`)
 
