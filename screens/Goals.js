@@ -133,7 +133,7 @@ const Goals = ({navigation}) => {
 
 const styles = StyleSheet.create({
     modal: {
-        marginTop: "60%"
+        marginTop: "80%"
     },
 })
 
