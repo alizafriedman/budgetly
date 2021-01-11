@@ -53,6 +53,9 @@ const Income = ({navigation}) => {
         
         return (
             <View style={styles.modalContainer}>
+            <ScrollView showsHorizontalScrollIndicator={true}
+            scrollEnabled={true}
+             >
                 <List.AccordionGroup>
                     <List.Accordion title={`Income Type: ${type}`} id='1' >
                         <List.Item title={`Type: ${type}`}/>
@@ -73,6 +76,7 @@ const Income = ({navigation}) => {
 
                     </List.Accordion>
                 </List.AccordionGroup>
+                </ScrollView>
             </View>
         )
     };
@@ -80,15 +84,17 @@ const Income = ({navigation}) => {
 
     return (
         
-                <ScrollView>
+                <ScrollView showsHorizontalScrollIndicator={true}
+                scrollEnabled={true}
+                 >
                     <NavBar navigation={navigation} />
-                    <Button onPress={() => setVisible(true)}>Add income</Button>
 
                     <FlatList
                         style={{ flex: 1 }}
                         data={incomes}
                         keyExtractor={(item) => item.incomeId}
                         renderItem={({ item }) => <DisplayIncome {...item} style={{ color: '#661327' }} />}
+                        
                     />
 
                     {visible && 
@@ -111,6 +117,7 @@ const Income = ({navigation}) => {
                             </ScrollView>
                         </Provider>
                     }
+                    <Button onPress={() => setVisible(true)}>Add income</Button>
             </ScrollView>
     
     )

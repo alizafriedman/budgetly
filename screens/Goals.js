@@ -94,7 +94,6 @@ const Goals = ({navigation}) => {
     
             <ScrollView>
                 <NavBar navigation={navigation} />
-                <Button onPress={() => setVisible(true)} > add goals</Button>
 
                 <FlatList 
                 style={{ flex: 1 }}
@@ -126,6 +125,7 @@ const Goals = ({navigation}) => {
                 </ScrollView> 
             </Provider>
                 }
+         <Button onPress={() => setVisible(true)} > add goals</Button>
     </ScrollView>
 
     )

@@ -60,8 +60,8 @@ const Expenses = ({navigation}) => {
 console.log('1', expenseId)
        
         return (
-            <ScrollView>
-                <List.AccordionGroup>
+            <View style={styles.modalContainer}>
+                <List.AccordionGroup >
                     <List.Accordion title={`Expense Name: ${name}`} id='1'  >
                         <List.Item title={`Category: ${category}`} />
                         <List.Item title={`Amount: $${amount}`} />
@@ -83,25 +83,22 @@ console.log('1', expenseId)
 
                     </List.Accordion>
                 </List.AccordionGroup>
-            </ScrollView>
+            </View>
         )
     }
 
 
     return (
         
-         <View>
+         <ScrollView style={styles.expenseAccordian}>
                 <NavBar navigation={navigation} />
-                <Button onPress={() => setVisible(true)} >add expense blah blah</Button>
-                
+            
                 <FlatList 
                 style={{ flex: 1}}
                 data={expenses}
                 keyExtractor={(item) => item.expenseId }
                 renderItem={({item}) => <DisplayExpenses {...item}  />}
                     />
-            
-
                 {visible && 
                     <Provider>
                         <ScrollView style={styles.modal}>
@@ -122,15 +119,22 @@ console.log('1', expenseId)
                             </Portal>
                         </ScrollView>
                     </Provider>
-
                 }   
-            </View> 
+                <Button onPress={() => setVisible(true)} >ADD EXPENSE</Button>
+
+            </ScrollView> 
     )
 }
 
 const styles = StyleSheet.create({
     modal: {
         marginTop: "60%"
-    }
+    },
+    expenseAccordian: { 
+        
+    },
+    modalContainer: {
+        flex: 1,
+    },
 })
 export default Expenses;
