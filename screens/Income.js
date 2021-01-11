@@ -6,6 +6,7 @@ import {db} from '../api/auth'
 import NavBar from './NavBar'
 import UpdateIncome from './UpdateIncome'
 import DeleteIncome from './DeleteIncome'
+import IncomeGraph from './IncomeGraph'
 
 
 const Income = ({navigation}) => {
@@ -88,6 +89,8 @@ const Income = ({navigation}) => {
                 scrollEnabled={true}
                  >
                     <NavBar navigation={navigation} />
+
+                    <IncomeGraph amount={amount} type={type} />
 
                     <FlatList
                         style={{ flex: 1 }}

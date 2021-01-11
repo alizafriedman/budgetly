@@ -57,7 +57,6 @@ const Expenses = ({navigation}) => {
     }
 
     const DisplayExpenses = ({ expenseId, name, amount, category, recurring }) => {
-console.log('1', expenseId)
        
         return (
             <View style={styles.modalContainer}>
@@ -90,7 +89,10 @@ console.log('1', expenseId)
 
     return (
         
-         <ScrollView style={styles.expenseAccordian}>
+         <ScrollView 
+         showsHorizontalScrollIndicator={true}
+         style={styles.expenseAccordian}
+         >
                 <NavBar navigation={navigation} />
             
                 <FlatList 

@@ -61,6 +61,9 @@ const Goals = ({navigation}) => {
         
         return (
             <View>
+                <ScrollView showsHorizontalScrollIndicator={true}
+                    scrollEnabled={true}
+                >
                 <List.AccordionGroup>
                     <List.Accordion title={`Goal Name: ${goalName}`} id="1" >
                         <List.Item title={`Projected Amount: $${projectedAmount}`} />
@@ -85,6 +88,7 @@ const Goals = ({navigation}) => {
                                 
                 </List.Accordion>
                 </List.AccordionGroup>
+                </ScrollView>
             </View>
         )
     }
@@ -92,7 +96,9 @@ const Goals = ({navigation}) => {
 
     return (
     
-            <ScrollView>
+            <ScrollView 
+            showsHorizontalScrollIndicator={true}
+            >
                 <NavBar navigation={navigation} />
 
                 <FlatList 
