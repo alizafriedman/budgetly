@@ -59,9 +59,10 @@ const Expenses = ({navigation}) => {
     const DisplayExpenses = ({ expenseId, name, amount, category, recurring }) => {
        
         return (
-            <View style={styles.modalContainer}>
+            <View style={styles.modalContainer}
+           >
                 <List.AccordionGroup >
-                    <List.Accordion title={`Expense Name: ${name}`} id='1'  >
+                    <List.Accordion title={`Expense Name: ${name}`} id='0'  >
                         <List.Item title={`Category: ${category}`} />
                         <List.Item title={`Amount: $${amount}`} />
                         <List.Item title={`Recurring: ${recurring}`} />
@@ -103,9 +104,12 @@ const Expenses = ({navigation}) => {
                     />
                 {visible && 
                     <Provider>
-                        <ScrollView style={styles.modal}>
-                            <Portal>
-                                <Dialog visible={visible} >
+                        <ScrollView style={styles.modal}
+                        >
+                            <Portal
+                             onPress={()=> {setVisible=(false)}}>
+                                <Dialog visible={visible} 
+                                >
                                     <Dialog.Title>add new expense</Dialog.Title>
                                         <Dialog.Content>
                                             <TextInput label={'category '} value={category} onChangeText={setCategory} />
