@@ -7,6 +7,7 @@ import NavBar from './NavBar'
 import UpdateIncome from './UpdateIncome'
 import DeleteIncome from './DeleteIncome'
 import IncomeGraph from './IncomeGraph'
+import IncomeBarChart from './IncomeBarChart'
 
 
 const Income = ({navigation}) => {
@@ -92,6 +93,8 @@ const Income = ({navigation}) => {
 
                     <IncomeGraph incomes={incomes} />
 
+
+                    {/* <IncomeBarChart incomes={incomes}/> */}
                     <FlatList
                         style={{ flex: 1 }}
                         data={incomes}
