@@ -1,11 +1,12 @@
 import React from 'react';
 import {PieChart} from 'react-native-chart-kit';
 import Income from './Income';
+import { Dimensions, View } from "react-native";
+const screenWidth = Dimensions.get("window").width;
 
 
 
-
-const IncomeGraph = ({type, amount}) => {
+const IncomeGraph = ({incomes}) => {
 
     const chartConfig = {
         backgroundGradientFrom: "#1E2923",
@@ -20,33 +21,49 @@ const IncomeGraph = ({type, amount}) => {
 
 const data = [
     {
+        // type: `${type}`,
         type: 'type',
-        amount: 324,
+        misc: 234,
         color: '#661327',
-        legendFontColor: '#661327',
+        legendFontColor: '#1E2923"',
         legendFontSize: 15
     },
      {
         type: 'type',
-        amount: 7564,
-        color: '#661327',
-        legendFontColor: '#661327',
+        misc: 234,
+         color: '#B3576D',
+         legendFontColor: '#1E2923"',
         legendFontSize: 15
     }
 ]
-console.log(amount)
+
+
+    // const data = 
+    //     incomes.map((income) => {
+    //     type: `${type}`;
+    //     amount: `${amount}`;
+    //     color: '#B3576D';
+    //      legendFontColor: '#1E2923"';
+    //     legendFontSize: 15
+    //     })
+    
+
+console.log(incomes)
 return (
+
+<View>
         <PieChart
             data={data}
-            width={100}
+            width={screenWidth}
             height={100}
             chartConfig={chartConfig}
-            accessor={amount}
-        backgroundColor={'#661327'}
-            // paddingLeft={}
-            // center={}
+            accessor={'misc'}
+        backgroundColor={'transparent'}
+            paddingLeft={'15'}
+            center={[10,50]}
             absolute
         />
+    </View>
 
     )
 }

@@ -90,7 +90,7 @@ const Income = ({navigation}) => {
                  >
                     <NavBar navigation={navigation} />
 
-                    <IncomeGraph amount={amount} type={type} />
+                    <IncomeGraph incomes={incomes} />
 
                     <FlatList
                         style={{ flex: 1 }}
