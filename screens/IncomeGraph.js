@@ -5,6 +5,7 @@ import {PieChart} from 'react-native-chart-kit';
 
 
 const screenWidth = Dimensions.get('window').width;
+let randomColor = require('randomcolor') 
 
 
 const IncomeGraph = ({incomes}) => {
@@ -14,6 +15,7 @@ const IncomeGraph = ({incomes}) => {
         backgroundGradientFromOpacity: 0,
         backgroundGradientTo: "#A95EC6",
         backgroundGradientToOpacity: 0.5,
+        fillShadowGradient: '#A95EC6',
         color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
         strokeWidth: 2, // optional, default 3
         barPercentage: 0.5,
@@ -27,7 +29,7 @@ const data = incomes.map((income) => {
     const incomeData = {
         type: income.type,
         amount: income.amount,
-        color: '#3D2247',
+        color: randomColor(),
         legendFontColor: '#A95EC6',
         legendFontSize: 15
     }
