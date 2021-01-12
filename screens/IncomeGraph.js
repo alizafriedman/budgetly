@@ -10,9 +10,9 @@ const screenWidth = Dimensions.get('window').width;
 const IncomeGraph = ({incomes}) => {
 
     const chartConfig = {
-        backgroundGradientFrom: "#1E2923",
+        backgroundGradientFrom: "#3D2247",
         backgroundGradientFromOpacity: 0,
-        backgroundGradientTo: "#08130D",
+        backgroundGradientTo: "#A95EC6",
         backgroundGradientToOpacity: 0.5,
         color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
         strokeWidth: 2, // optional, default 3
@@ -24,18 +24,18 @@ const IncomeGraph = ({incomes}) => {
 
 
 const data = incomes.map((income) => {
-    const apple = {
+    const incomeData = {
         type: income.type,
         amount: income.amount,
-        color: '#A95EC6',
+        color: '#3D2247',
         legendFontColor: '#A95EC6',
         legendFontSize: 15
     }
-    
-    return apple;
-    
+   
+    return incomeData;
 
-})
+});
+
 
 console.log(data)
 return (
@@ -48,7 +48,7 @@ return (
         accessor={'amount'}
         backgroundColor={'transparent'}
         paddingLeft={'15'}
-        center={[10,50]}
+        // center={[10,50]}
         absolute
          />
     </View>
