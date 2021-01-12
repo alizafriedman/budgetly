@@ -30,7 +30,7 @@ const UpdateExpense = ({expenseId, category, name, amount, recurring, expenseRef
 
     return (
         <Provider>
-            <ScrollView>
+            <ScrollView style={styles.modal}>
                 <Button onPress={showDialog}>edit</Button>
                 <Portal>
                     <Dialog visible={visible}>
@@ -43,8 +43,9 @@ const UpdateExpense = ({expenseId, category, name, amount, recurring, expenseRef
                             
                             <Button style={styles.button} onPress={() => 
                                 {   hideDialog()
-                                    submitEdits()  }} >done edits</Button>
-                       
+                                    submitEdits()  }} >Submit</Button>
+                       <Dialog.Actions>
+                       </Dialog.Actions>
                        </Dialog.Content>
                     </Dialog>
                 </Portal>
@@ -69,6 +70,9 @@ const styles = StyleSheet.create({
         zIndex: 100
 
     },
+    modal: {
+        marginTop: "10%"
+    }
 
 
 })
