@@ -8,7 +8,6 @@ import UpdateExpense from './UpdateExpense'
 import DeleteExpense from './DeleteExpense'
 // import ExpensesBarChart from './ExpensesBarChart'
 import ExpenseGraph from './ExpenseGraph';
-import ExpensGraph from './ExpenseGraph'
 
 
 const Expenses = ({navigation}) => {

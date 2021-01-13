@@ -7,11 +7,29 @@ const randomColor = require('randomcolor');
 
 const ExpenseGraph = ({expenses}) => {
 
+    const chartConfig = {
+        backgroundGradientFrom: "#3D2247",
+        backgroundGradientFromOpacity: 0,
+        backgroundGradientTo: "#A95EC6",
+        backgroundGradientToOpacity: 0.5,
+        fillShadowGradient: '#A95EC6',
+        color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+        strokeWidth: 2, // optional, default 3
+        barPercentage: 0.5,
+        useShadowColorFromDataset: false // optional
+    };
+
 
 const data = expenses.map((expense) => {
     const expenseData = {
-        name: expense.category
+        name: expense.category,
+        amount: expense.amount,
+        color: randomColor(),
+        legendFontColor: '#A95EC6',
+        legendFontSize: 17
     }
+
+    return expenseData;
 })
 
     return (
@@ -23,7 +41,7 @@ const data = expenses.map((expense) => {
                 width={screenWidth}
                 height={220}
                 chartConfig={chartConfig}
-                accessor={}
+                accessor={'amount'}
                 backgroundColor={'transparent'}
                 paddingLeft={'15'}
                 avoidFalseZero={true}
@@ -44,4 +62,4 @@ const data = expenses.map((expense) => {
 
 
 
-export default ExpensGraph;
+export default ExpenseGraph;
