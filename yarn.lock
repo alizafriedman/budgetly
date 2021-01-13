@@ -5591,7 +5591,7 @@
   "resolved" "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.10.1.tgz"
   "version" "2.10.1"
 
-"react-native-svg@> 6.4.1":
+"react-native-svg@^12.1.0", "react-native-svg@> 6.4.1":
   "integrity" "sha512-1g9qBRci7man8QsHoXn6tP3DhCDiypGgc6+AOWq+Sy+PmP6yiyf8VmvKuoqrPam/tf5x+ZaBT2KI0gl7bptZ7w=="
   "resolved" "https://registry.npmjs.org/react-native-svg/-/react-native-svg-12.1.0.tgz"
   "version" "12.1.0"

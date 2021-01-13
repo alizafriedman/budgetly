@@ -7,7 +7,6 @@ import NavBar from './NavBar'
 import UpdateIncome from './UpdateIncome'
 import DeleteIncome from './DeleteIncome'
 import IncomeGraph from './IncomeGraph'
-import IncomeBarChart from './IncomeBarChart'
 
 
 const Income = ({navigation}) => {

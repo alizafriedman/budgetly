@@ -16,7 +16,7 @@ const IncomeGraph = ({incomes}) => {
         backgroundGradientTo: "#A95EC6",
         backgroundGradientToOpacity: 0.5,
         fillShadowGradient: '#A95EC6',
-        // color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+        color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
         strokeWidth: 2, // optional, default 3
         barPercentage: 0.5,
         useShadowColorFromDataset: false // optional
@@ -33,7 +33,6 @@ const data = incomes.map((income) => {
         legendFontColor: '#A95EC6',
         legendFontSize: 15
     }
-   console.log(incomeData)
     return incomeData;
 
 });
@@ -47,12 +46,12 @@ return (
         width={screenWidth}
         height={220}
         chartConfig={chartConfig}
-        accessor='amount'
+        accessor={'amount'}
         backgroundColor={'transparent'}
         paddingLeft={'15'}
         // center={[10,50]}
         avoidFalseZero={true}
-        absolute
+        
          />
     </View>
 )

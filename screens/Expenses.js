@@ -6,16 +6,20 @@ import {db} from '../api/auth'
 import NavBar from './NavBar'
 import UpdateExpense from './UpdateExpense'
 import DeleteExpense from './DeleteExpense'
+// import ExpensesBarChart from './ExpensesBarChart'
+import ExpenseGraph from './ExpenseGraph';
+import ExpensGraph from './ExpenseGraph'
 
 
 const Expenses = ({navigation}) => {
 
-    const [expenses, setExpenses] = useState([])
     const[name, setName] = useState('')
     const [amount, setAmount] = useState('')
     const[category, setCategory]=useState('')
     const [recurring, setRecurring] = useState('')
     const [visible, setVisible] = useState(false)
+    const [expenses, setExpenses] = useState([])
+
 
     const userId = firebase.auth().currentUser.uid
     const expenseRef = db.collection(`users/${userId}/expenses`)
@@ -95,6 +99,9 @@ const Expenses = ({navigation}) => {
          style={styles.expenseAccordian}
          >
                 <NavBar navigation={navigation} />
+
+                {/* <ExpensesBarChart expenses={expenses} /> */}
+                <ExpenseGraph  expenses={expenses}/>
             
                 <FlatList 
                 style={{ flex: 1}}
