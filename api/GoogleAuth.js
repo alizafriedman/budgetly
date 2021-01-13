@@ -1,3 +1,5 @@
+import React, {useEffect, useState} from 'react';
+import {View, StyleSheet} from 'react-native';
 import {
     GoogleSignin,
     GoogleSigninButton,
@@ -33,14 +35,53 @@ const configureGoogleSignin = () => {
 }
 
 
-const GoogleSignin = () => {
+const GoogleAuth = () => {
     const [userInfo, setUserInfo] = useState();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [error, setError] = useState();
 
+    const signIn = async() => {
+        await GoogleSignin.hasPlayServices();
+        const userInfo = await GoogleSignIn.SignIn();
+        setUserInfo(userInfo);
+        setError(null);
+        setIsLoggedIn(true);
+    }
 
+    const signOut = async() => {
+        await GoogleSignin.revokeAccess();
+        await GoogleSignin.signOut();
+        setIsLoggedIn(false);
+        }
+
+    const getCurrentUserInfo = async () => {
+        const userInfo = await GoogleSignin.signInSilently();
+        setUserInfo(userInfo);
+        setIsLoggedIn(false);
+    }
+        
+    return (
+       <View style={style.container}>
+
+            <GoogleSigninButton 
+
+            />
+       </View>
+    )
 
 }
 
 
-export default GoogleSignin;
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    signInButton: {
+        width: 200,
+        height: 50
+    }
+})
+
+export default GoogleAuth;
