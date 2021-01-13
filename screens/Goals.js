@@ -6,7 +6,7 @@ import {db} from '../api/auth'
 import NavBar from './NavBar'
 import UpdateGoals from './UpdateGoals'
 import DeleteGoal from './DeleteGoal'
-
+import GoalsGraph from './GoalsGraph'
 
 const Goals = ({navigation}) => {
 
@@ -20,7 +20,7 @@ const Goals = ({navigation}) => {
     const userId = firebase.auth().currentUser.uid
     const goalRef = db.collection(`users/${userId}/goals`)
 
-
+//time frame calculated how??
     useEffect(() => {
         return goalRef.onSnapshot((querySnapshot) => {
             const goalsList = []
@@ -101,6 +101,7 @@ const Goals = ({navigation}) => {
             >
                 <NavBar navigation={navigation} />
 
+                <GoalsGraph goals={goals} />
                 <FlatList 
                 style={{ flex: 1 }}
                 data={goals}

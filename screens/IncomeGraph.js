@@ -31,7 +31,7 @@ const data = incomes.map((income) => {
         amount: income.amount,
         color: randomColor(),
         legendFontColor: '#A95EC6',
-        legendFontSize: 15
+        legendFontSize: 17
     }
     return incomeData;
 
