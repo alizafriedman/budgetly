@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import firebase from 'firebase/app'
-
+import GoogleAuth from '../api/temp'
 const WelcomeScreen = ({navigation}) => {
 
     return (
@@ -25,6 +25,8 @@ const WelcomeScreen = ({navigation}) => {
                 onPress={() => navigation.navigate('Sign In')}>
                     <Text  style={styles.buttonText} > Sign In </Text>
                 </TouchableOpacity>
+
+                <GoogleAuth />
                 
             </View>
         </View>

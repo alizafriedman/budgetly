@@ -5,9 +5,10 @@ import firebase from 'firebase/app'
 import {logOut} from '../api/auth'
 import {dashScreens} from '../api/misc'
 import NavBar from '../screens/NavBar'
+import ExpenseGraph from './ExpenseGraph'
 
 
-const Dashboard = ({navigation}) => {
+const Dashboard = ({navigation, expenses}) => {
 
     const userId = firebase.auth().currentUser.uid
     const [firstName, setFirstName] = useState('');
@@ -32,6 +33,8 @@ const Dashboard = ({navigation}) => {
             <View style={styles.dashboard}>
                 <Text style={styles.titleText} > dashboard </Text>
                 <Text style={styles.text} > hi {firstName} </Text>
+
+                {/* <ExpenseGraph expenses={expenses} /> */}
             
                     {dashScreens.map((screen, idx) => (
                         <List.Item userId={userId} title={`${screen}`} key={idx} onPress={() => {navigation.navigate(`${screen}`)}} />))}

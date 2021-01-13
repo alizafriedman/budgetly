@@ -14,6 +14,7 @@ const NavBar = ({navigation}) => {
         navigation.replace('Home')
     }
     
+
 return (
         <View style={styles.container}>
 

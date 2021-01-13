@@ -3,9 +3,9 @@ import { View, Text, StatusBar, ScrollView, StyleSheet, SafeAreaView, Button } f
 import {
     GoogleSignin,
     GoogleSigninButton,
-    statusCodes,
     } from 'react-native-google-signin';
-import { WEB_CLIENT_ID } from "../config/keys"
+import WEB_CLIENT_ID  from "../config/keys"
+
  export default GoogleAuth = () => {
   const [loggedIn, setloggedIn] = useState(false);
   const [user, setUser] = useState([]);
@@ -21,7 +21,8 @@ import { WEB_CLIENT_ID } from "../config/keys"
         accessToken,
       );
       await auth().signInWithCredential(credential);
-    } catch (error) {
+    } 
+    catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
         alert('Cancel');
