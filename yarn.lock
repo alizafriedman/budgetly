@@ -3006,6 +3006,13 @@
     "fbjs" "1.0.0"
     "fontfaceobserver" "^2.1.0"
 
+"expo-google-sign-in@^8.4.0":
+  "integrity" "sha512-7kf0Nsy+WSizJPIUUQIGK6qiKbpLRjm3YKrqREeGpYiebOyi51lWw78CM6ylcb+FN2vb9d/kTEzinAfTgsPQ7w=="
+  "resolved" "https://registry.npmjs.org/expo-google-sign-in/-/expo-google-sign-in-8.4.0.tgz"
+  "version" "8.4.0"
+  dependencies:
+    "invariant" "^2.2.4"
+
 "expo-keep-awake@~8.3.0":
   "integrity" "sha512-zrMsvZLHColfSex5Yf6h5vw3mgJiG48FX36+fOXUqq/erCtDkqY2NB7PmhDaj6lWRJ0OuXa90uYXNveXBJyhfA=="
   "resolved" "https://registry.yarnpkg.com/expo-keep-awake/-/expo-keep-awake-8.3.0.tgz"

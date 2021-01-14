@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
-import {
-    GoogleSignin,
-    GoogleSigninButton,
-    statusCodes
-} from '@react-native-community/google-signin';
+// import {
+//     GoogleSigninButton,
+//     GoogleSignin
+    
+// } from '@react-native-community/google-signin';
 import {WEB_CLIENT_ID} from '../config/authKeys'
+import * as GoogleSignIn from 'expo-google-sign-in'
 
 
 
@@ -23,9 +24,9 @@ import {WEB_CLIENT_ID} from '../config/authKeys'
 // )
 
 
-useEffect(() => {
-    configureGoogleSignin();
-}, [])
+// useEffect(() => {
+//     configureGoogleSignin();
+// }, [])
 
 const configureGoogleSignin = () => {
     GoogleSignin.configure({
@@ -42,10 +43,21 @@ const GoogleAuth = () => {
 
     const signIn = async() => {
         await GoogleSignin.hasPlayServices();
-        const userInfo = await GoogleSignIn.SignIn();
+        const userInfo = await GoogleSignIn.initAsync();
+        // if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        //     return 'apple'
+        //     // user cancelled the login flow
+        // } else if (error.code === statusCodes.IN_PROGRESS) {
+        //     return 'orange'
+        //     // operation (e.g. sign in) is in progress already
+        // } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        //     return 'banana'
+        //     // play services not available or outdated
+        // } else {
         setUserInfo(userInfo);
         setError(null);
         setIsLoggedIn(true);
+        
     }
 
     const signOut = async() => {
@@ -61,10 +73,15 @@ const GoogleAuth = () => {
     }
         
     return (
-       <View style={style.container}>
+       <View style={styles.container}>
 
             <GoogleSigninButton 
-
+                style={styles.signInButton}
+                size={GoogleSigninButton.Size.Wide}
+                color={GoogleSigninButton.Color.Dark}
+                // style={{ width: 192, height: 48 }}
+                onPress={() => signIn()}
+                disabled={this.state.isSigninInProgress}
             />
        </View>
     )
