@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import firebase from 'firebase/app'
-import GoogleAuth from '../api/GoogleAuth'
+import GoogleAuth from '../api/temp'
 const WelcomeScreen = ({navigation}) => {
 
     return (
