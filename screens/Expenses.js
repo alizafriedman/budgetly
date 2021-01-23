@@ -10,7 +10,8 @@ import DeleteExpense from './DeleteExpense'
 import ExpenseGraph from './ExpenseGraph';
 
 
-const Expenses = ({navigation, expenses}) => {
+const Expenses = ({navigation, route}) => {
+    const {expenses} = route.params
 
     const[name, setName] = useState('')
     const [amount, setAmount] = useState('')

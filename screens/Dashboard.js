@@ -65,7 +65,6 @@ const Dashboard = ({navigation}) => {
     }
     
     
-    
     return (
   
         <View style={styles.container}>
@@ -75,8 +74,8 @@ const Dashboard = ({navigation}) => {
                 <Text style={styles.titleText} > dashboard </Text>
                 <Text style={styles.text} > hi {firstName} </Text>
                
-                <Text onPress={() => { navigation.navigate('Expenses') 
-            }}  >Expenses</Text>
+                <Button onPress={() => { navigation.navigate('Expenses', {expenses: expenses}) 
+            }}  >Expenses</Button>
                 <ExpenseGraph expenses={expenses} />
 
             
