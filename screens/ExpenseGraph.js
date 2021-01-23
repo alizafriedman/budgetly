@@ -4,6 +4,7 @@ import {PieChart} from 'react-native-chart-kit';
 
 const screenWidth = Dimensions.get('window').width;
 const randomColor = require('randomcolor');
+const apple = randomColor()
 
 const ExpenseGraph = ({expenses}) => {
 
@@ -25,7 +26,7 @@ const data = expenses.map((expense) => {
         name: expense.category,
         amount: expense.amount,
         color: randomColor(),
-        legendFontColor: '#A95EC6',
+        legendFontColor: randomColor(),
         legendFontSize: 17
     }
 
@@ -46,17 +47,8 @@ const data = expenses.map((expense) => {
                 paddingLeft={'15'}
                 avoidFalseZero={true}
             />
-
-
-
-
         </View>
-
     )
-
-
-
-
 }
 
 

@@ -10,36 +10,36 @@ import DeleteExpense from './DeleteExpense'
 import ExpenseGraph from './ExpenseGraph';
 
 
-const Expenses = ({navigation}) => {
+const Expenses = ({navigation, expenses}) => {
 
     const[name, setName] = useState('')
     const [amount, setAmount] = useState('')
     const[category, setCategory]=useState('')
     const [recurring, setRecurring] = useState('')
     const [visible, setVisible] = useState(false)
-    const [expenses, setExpenses] = useState([])
+    // const [expenses, setExpenses] = useState([])
 
 
     const userId = firebase.auth().currentUser.uid
     const expenseRef = db.collection(`users/${userId}/expenses`)
     
-    useEffect(() => {
-        return expenseRef.onSnapshot((querySnapshot) => {
-            const expenseList = []
-            querySnapshot.forEach(doc => {
-                const {category, name, amount, recurring} = doc.data()
-                expenseList.push({
-                    expenseId: doc.id,
-                    category,
-                    name,
-                    amount,
-                    recurring
-                })
-            })
-            setExpenses(expenseList)
-            console.log(expenseList)
-        })
-    }, [])
+    // useEffect(() => {
+    //     return expenseRef.onSnapshot((querySnapshot) => {
+    //         const expenseList = []
+    //         querySnapshot.forEach(doc => {
+    //             const {category, name, amount, recurring} = doc.data()
+    //             expenseList.push({
+    //                 expenseId: doc.id,
+    //                 category,
+    //                 name,
+    //                 amount,
+    //                 recurring
+    //             })
+    //         })
+    //         setExpenses(expenseList)
+    //         console.log(expenseList)
+    //     })
+    // }, [])
 
 
     const addExpense = async () => {
@@ -89,7 +89,7 @@ const Expenses = ({navigation}) => {
             </View>
         )
     }
-
+console.log(expenses)
 
     return (
         
@@ -99,8 +99,7 @@ const Expenses = ({navigation}) => {
          >
                 <NavBar navigation={navigation} />
 
-                {/* <ExpensesBarChart expenses={expenses} /> */}
-                <ExpenseGraph  expenses={expenses}/>
+                {/* <ExpenseGraph  expenses={expenses}/> */}
             
                 <FlatList 
                 style={{ flex: 1}}

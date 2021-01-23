@@ -18,9 +18,9 @@ const GoalsGraph = ({goals}) => {
         backgroundGradientToOpacity: 0.5,
         fillShadowGradient: '#A95EC6',
         color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-        strokeWidth: 2, // optional, default 3
+        strokeWidth: 2, 
         barPercentage: 0.5,
-        useShadowColorFromDataset: false // optional
+        useShadowColorFromDataset: false 
     };
 
 
@@ -55,7 +55,7 @@ const GoalsGraph = ({goals}) => {
             />
         </View>
     )
-}
+};
 
 
 

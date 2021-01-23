@@ -1,30 +1,34 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native'
-import {Appbar, Icon, List, Drawer, Button} from 'react-native-paper'
+import React, {useState, useEffect} from 'react'
+import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
+import {Appbar, Icon, List, Drawer, Button} from 'react-native-paper';
 import firebase from 'firebase/app'
 import {logOut} from '../api/auth'
 import {dashScreens} from '../api/misc'
 import NavBar from '../screens/NavBar'
 import ExpenseGraph from './ExpenseGraph'
+import { expensesEffect } from '../api/misc'
 
 
-const Dashboard = ({navigation, expenses}) => {
-
+const Dashboard = ({navigation}) => {
     const userId = firebase.auth().currentUser.uid
-    const [firstName, setFirstName] = useState('');
+    const [firstName, setFirstName] = useState('')
+    const [expenses, setExpenses] = useState([])
+
  
     useEffect(() => {
         const getUserInfo = async () => {
             const doc = await firebase.firestore().collection('users').doc(userId).get()
-            const userData = doc.data();
+            const userData = doc.data()
             setFirstName(userData.fullName)
         }
         getUserInfo()
+        setExpenses(expensesEffect)
     }, [])
 
     
+    
 
-  //dump auth here
+
     return (
   
         <View style={styles.container}>
@@ -34,10 +38,10 @@ const Dashboard = ({navigation, expenses}) => {
                 <Text style={styles.titleText} > dashboard </Text>
                 <Text style={styles.text} > hi {firstName} </Text>
 
-                {/* <ExpenseGraph expenses={expenses} /> */}
+                <ExpenseGraph expenses={expenses} />
             
                     {dashScreens.map((screen, idx) => (
-                        <List.Item userId={userId} title={`${screen}`} key={idx} onPress={() => {navigation.navigate(`${screen}`)}} />))}
+                        <List.Item userId={userId} title={`${screen}`} key={idx} expenses={expenses} onPress={() => {navigation.navigate(`${screen}`)}} />))}
 
                         <List.Item title='Log Out' 
                         onPress={() => { logOut() 
