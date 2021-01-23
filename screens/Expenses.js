@@ -17,7 +17,6 @@ const Expenses = ({navigation, expenses}) => {
     const[category, setCategory]=useState('')
     const [recurring, setRecurring] = useState('')
     const [visible, setVisible] = useState(false)
-    // const [expenses, setExpenses] = useState([])
 
 
     const userId = firebase.auth().currentUser.uid
@@ -99,7 +98,7 @@ console.log(expenses)
          >
                 <NavBar navigation={navigation} />
 
-                {/* <ExpenseGraph  expenses={expenses}/> */}
+                <ExpenseGraph  expenses={expenses}/>
             
                 <FlatList 
                 style={{ flex: 1}}

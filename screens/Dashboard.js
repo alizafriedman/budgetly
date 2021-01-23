@@ -2,15 +2,17 @@ import React, {useState, useEffect} from 'react'
 import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 import {Appbar, Icon, List, Drawer, Button} from 'react-native-paper';
 import firebase from 'firebase/app'
+import { db } from '../api/auth'
+
 import {logOut} from '../api/auth'
 import {dashScreens} from '../api/misc'
 import NavBar from '../screens/NavBar'
 import ExpenseGraph from './ExpenseGraph'
-import { expensesEffect } from '../api/misc'
 
 
 const Dashboard = ({navigation}) => {
     const userId = firebase.auth().currentUser.uid
+    const expenseRef = db.collection(`users/${userId}/expenses`)
     const [firstName, setFirstName] = useState('')
     const [expenses, setExpenses] = useState([])
 
@@ -22,13 +24,48 @@ const Dashboard = ({navigation}) => {
             setFirstName(userData.fullName)
         }
         getUserInfo()
-        setExpenses(expensesEffect)
+        banana()
+        
     }, [])
 
+    //   useEffect(() => {
+    //     return expenseRef.onSnapshot((querySnapshot) => {
+    //         const expenseList = []
+    //         querySnapshot.forEach(doc => {
+    //             const {category, name, amount, recurring} = doc.data()
+    //             expenseList.push({
+    //                 expenseId: doc.id,
+    //                 category,
+    //                 name,
+    //                 amount,
+    //                 recurring
+    //             })
+    //         })
+    //         setExpenses(expenseList)
+    //         console.log(expenseList)
+    //     })
+    // }, [])
+
+    const banana = async () => {
+        return expenseRef.onSnapshot((querySnapshot) => {
+            const expenseList = []
+            querySnapshot.forEach(doc => {
+                const {category, name, amount, recurring} = doc.data()
+                expenseList.push({
+                    expenseId: doc.id,
+                    category,
+                    name,
+                    amount,
+                    recurring
+                })
+            })
+            setExpenses(expenseList)
+            console.log(expenseList)
+        })
+    }
     
     
-
-
+    
     return (
   
         <View style={styles.container}>
@@ -37,11 +74,14 @@ const Dashboard = ({navigation}) => {
             <View style={styles.dashboard}>
                 <Text style={styles.titleText} > dashboard </Text>
                 <Text style={styles.text} > hi {firstName} </Text>
-
+               
+                <Text onPress={() => { navigation.navigate('Expenses') 
+            }}  >Expenses</Text>
                 <ExpenseGraph expenses={expenses} />
+
             
                     {dashScreens.map((screen, idx) => (
-                        <List.Item userId={userId} title={`${screen}`} key={idx} expenses={expenses} onPress={() => {navigation.navigate(`${screen}`)}} />))}
+                        <List.Item userId={userId} title={`${screen}`} key={idx} onPress={() => {navigation.navigate(`${screen}`)}} />))}
 
                         <List.Item title='Log Out' 
                         onPress={() => { logOut() 
