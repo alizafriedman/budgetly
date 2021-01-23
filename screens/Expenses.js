@@ -1,45 +1,20 @@
-import React, {useState, useEffect} from 'react'
-import {View, Appbar, FlatList, ScrollView, Text, Pressable, TouchableOpacity, StyleSheet } from 'react-native'
+import React, {useState} from 'react'
+import {View, FlatList, ScrollView, StyleSheet } from 'react-native'
 import {TextInput, Button,List, Dialog, Portal, Provider} from 'react-native-paper'
-import firebase from 'firebase/app'
-import {db} from '../api/auth'
 import NavBar from './NavBar'
 import UpdateExpense from './UpdateExpense'
 import DeleteExpense from './DeleteExpense'
-// import ExpensesBarChart from './ExpensesBarChart'
 import ExpenseGraph from './ExpenseGraph';
 
 
 const Expenses = ({navigation, route}) => {
-    const {expenses} = route.params
+    const {expenses, expenseRef} = route.params
 
     const[name, setName] = useState('')
     const [amount, setAmount] = useState('')
     const[category, setCategory]=useState('')
     const [recurring, setRecurring] = useState('')
     const [visible, setVisible] = useState(false)
-
-
-    const userId = firebase.auth().currentUser.uid
-    const expenseRef = db.collection(`users/${userId}/expenses`)
-    
-    // useEffect(() => {
-    //     return expenseRef.onSnapshot((querySnapshot) => {
-    //         const expenseList = []
-    //         querySnapshot.forEach(doc => {
-    //             const {category, name, amount, recurring} = doc.data()
-    //             expenseList.push({
-    //                 expenseId: doc.id,
-    //                 category,
-    //                 name,
-    //                 amount,
-    //                 recurring
-    //             })
-    //         })
-    //         setExpenses(expenseList)
-    //         console.log(expenseList)
-    //     })
-    // }, [])
 
 
     const addExpense = async () => {

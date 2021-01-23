@@ -8,11 +8,13 @@ import {logOut} from '../api/auth'
 import {dashScreens} from '../api/misc'
 import NavBar from '../screens/NavBar'
 import ExpenseGraph from './ExpenseGraph'
+import UpdateExpense from './UpdateExpense';
 
 
 const Dashboard = ({navigation}) => {
     const userId = firebase.auth().currentUser.uid
     const expenseRef = db.collection(`users/${userId}/expenses`)
+   
     const [firstName, setFirstName] = useState('')
     const [expenses, setExpenses] = useState([])
 
@@ -24,29 +26,12 @@ const Dashboard = ({navigation}) => {
             setFirstName(userData.fullName)
         }
         getUserInfo()
-        banana()
+        expenseArray()
         
     }, [])
 
-    //   useEffect(() => {
-    //     return expenseRef.onSnapshot((querySnapshot) => {
-    //         const expenseList = []
-    //         querySnapshot.forEach(doc => {
-    //             const {category, name, amount, recurring} = doc.data()
-    //             expenseList.push({
-    //                 expenseId: doc.id,
-    //                 category,
-    //                 name,
-    //                 amount,
-    //                 recurring
-    //             })
-    //         })
-    //         setExpenses(expenseList)
-    //         console.log(expenseList)
-    //     })
-    // }, [])
 
-    const banana = async () => {
+    const expenseArray = async () => {
         return expenseRef.onSnapshot((querySnapshot) => {
             const expenseList = []
             querySnapshot.forEach(doc => {
@@ -74,7 +59,7 @@ const Dashboard = ({navigation}) => {
                 <Text style={styles.titleText} > dashboard </Text>
                 <Text style={styles.text} > hi {firstName} </Text>
                
-                <Button onPress={() => { navigation.navigate('Expenses', {expenses: expenses}) 
+                <Button onPress={() => { navigation.navigate('Expenses', {expenses: expenses, expenseRef: expenseRef, expenseArray: expenseArray}) 
             }}  >Expenses</Button>
                 <ExpenseGraph expenses={expenses} />
 
