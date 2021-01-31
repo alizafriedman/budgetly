@@ -4,10 +4,9 @@ import {PieChart} from 'react-native-chart-kit';
 
 const screenWidth = Dimensions.get('window').width;
 const randomColor = require('randomcolor');
-const apple = randomColor()
 
 const ExpenseGraph = ({expenses}) => {
-
+    console.log(expenses)
     const chartConfig = {
         backgroundGradientFrom: "#3D2247",
         backgroundGradientFromOpacity: 0,

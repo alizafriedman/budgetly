@@ -9,7 +9,7 @@ import ExpenseGraph from './ExpenseGraph';
 
 const Expenses = ({navigation, route}) => {
     const {expenses, expenseRef} = route.params
-
+    // console.log(route.params.expenses)
     const[name, setName] = useState('')
     const [amount, setAmount] = useState('')
     const[category, setCategory]=useState('')

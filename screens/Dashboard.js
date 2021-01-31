@@ -9,6 +9,7 @@ import {dashScreens} from '../api/misc'
 import NavBar from '../screens/NavBar'
 import ExpenseGraph from './ExpenseGraph'
 import UpdateExpense from './UpdateExpense';
+import Expenses from './Expenses';
 
 
 const Dashboard = ({navigation}) => {
@@ -59,9 +60,13 @@ const Dashboard = ({navigation}) => {
                 <Text style={styles.titleText} > dashboard </Text>
                 <Text style={styles.text} > hi {firstName} </Text>
                
-                <Button onPress={() => { navigation.navigate('Expenses', {expenses: expenses, expenseRef: expenseRef, expenseArray: expenseArray}) 
-            }}  >Expenses</Button>
+                {/* <Button onPress={() => { navigation.navigate('Expenses',{screen: 'Expenses', params: {expenses: expenses, expenseRef: expenseRef, expenseArray: expenseArray}}) 
+            }}  >Expenses</Button> */}
+
+                <TouchableOpacity onPress={() => navigation.navigate('Expenses', {expenses:expenses})} >
                 <ExpenseGraph expenses={expenses} />
+                </TouchableOpacity>
+                
 
             
                     {dashScreens.map((screen, idx) => (
