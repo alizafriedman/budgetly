@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, View} from 'react-native';
+import {Dimensions, View, Text} from 'react-native';
 import {PieChart} from 'react-native-chart-kit';
 
 
@@ -42,6 +42,8 @@ const GoalsGraph = ({goals}) => {
 
     return (
         <View>
+            <Text>Goals</Text>
+            
             <PieChart 
                 data={data}
                 width={screenWidth}

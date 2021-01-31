@@ -10,14 +10,19 @@ import NavBar from '../screens/NavBar'
 import ExpenseGraph from './ExpenseGraph'
 import UpdateExpense from './UpdateExpense';
 import Expenses from './Expenses';
+import GoalsGraph from './GoalsGraph';
 
 
 const Dashboard = ({navigation}) => {
     const userId = firebase.auth().currentUser.uid
     const expenseRef = db.collection(`users/${userId}/expenses`)
+    const goalRef = db.collection(`users/${userId}/goals`)
+
    
     const [firstName, setFirstName] = useState('')
     const [expenses, setExpenses] = useState([])
+    const [goals, setGoals] = useState([])
+
 
  
     useEffect(() => {
@@ -28,6 +33,7 @@ const Dashboard = ({navigation}) => {
         }
         getUserInfo()
         expenseArray()
+        goalsArray()
         
     }, [])
 
@@ -46,10 +52,27 @@ const Dashboard = ({navigation}) => {
                 })
             })
             setExpenses(expenseList)
-            console.log(expenseList)
         })
     }
     
+
+    const goalsArray = async () => {
+        return goalRef.onSnapshot((querySnapshot) => {
+            const goalsList = []
+            querySnapshot.forEach(doc => {
+                const {goalName, projectedAmount, description, timeframe} = doc.data()
+                goalsList.push({
+                    goalId: doc.id,
+                    goalName,
+                    projectedAmount, 
+                    description,
+                    timeframe
+                })
+            })
+            setGoals(goalsList)
+        })
+    }
+  
     
     return (
   
@@ -67,6 +90,9 @@ const Dashboard = ({navigation}) => {
                 <ExpenseGraph expenses={expenses} />
                 </TouchableOpacity>
                 
+                <TouchableOpacity onPress={() => navigation.navigate('Goals', { goals: goals })} >
+                    <GoalsGraph goals={goals} />
+                </TouchableOpacity>
 
             
                     {dashScreens.map((screen, idx) => (

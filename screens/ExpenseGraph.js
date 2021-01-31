@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, View} from 'react-native';
+import {Dimensions, View, Text} from 'react-native';
 import {PieChart} from 'react-native-chart-kit';
 
 const screenWidth = Dimensions.get('window').width;
@@ -34,9 +34,9 @@ const data = expenses.map((expense) => {
 
     return (
         <View>
+            <Text>Expenses</Text>
 
             <PieChart
-            
                 data = {data}
                 width={screenWidth}
                 height={220}
@@ -46,6 +46,7 @@ const data = expenses.map((expense) => {
                 paddingLeft={'15'}
                 avoidFalseZero={true}
             />
+            
         </View>
     )
 }

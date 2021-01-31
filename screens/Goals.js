@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Appbar, ScrollView, FlatList, Pressable, Text, StyleSheet} from 'react-native'
+import { View, ScrollView, FlatList, StyleSheet} from 'react-native'
 import { TextInput, Button, List, Dialog, Portal,Provider } from 'react-native-paper'
 import firebase from 'firebase/app'
 import {db} from '../api/auth'
@@ -8,35 +8,14 @@ import UpdateGoals from './UpdateGoals'
 import DeleteGoal from './DeleteGoal'
 import GoalsGraph from './GoalsGraph'
 
-const Goals = ({navigation}) => {
+const Goals = ({navigation, route}) => {
+    const {goals, goalRef} = route.params
 
-    const [goals, setGoals] = useState([])
     const [goalName, setGoalName] = useState('')
     const [projectedAmount, setProjectedAmount] = useState('')
     const [description, setDescription] = useState('')
     const [timeframe, setTimeframe] = useState('');
     const [visible, setVisible] = useState(false)
-
-    const userId = firebase.auth().currentUser.uid
-    const goalRef = db.collection(`users/${userId}/goals`)
-
-//time frame calculated how??
-    useEffect(() => {
-        return goalRef.onSnapshot((querySnapshot) => {
-            const goalsList = []
-            querySnapshot.forEach(doc => {
-                const { goalName, projectedAmount, description, timeframe } = doc.data();
-                goalsList.push({
-                    goalId: doc.id,
-                    goalName,
-                    projectedAmount,
-                    description,
-                    timeframe
-                });
-            });
-            setGoals(goalsList)
-        })
-    }, [])
 
 
     const addGoals = async () => {
@@ -55,7 +34,7 @@ const Goals = ({navigation}) => {
         setTimeframe('')
     }
 
-  
+  console.log(goals)
     
     const DisplayGoals = ({ goalId, goalName, projectedAmount, description, timeframe}) => {
         
