@@ -1,21 +1,25 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {View, FlatList, ScrollView, StyleSheet } from 'react-native'
 import {TextInput, Button,List, Dialog, Portal, Provider} from 'react-native-paper'
 import NavBar from './NavBar'
 import UpdateExpense from './UpdateExpense'
 import DeleteExpense from './DeleteExpense'
 import ExpenseGraph from './ExpenseGraph';
+import firebase from 'firebase/app'
+import { db } from '../api/auth'
 
 
 const Expenses = ({navigation, route}) => {
-    const {expenses, expenseRef} = route.params
-    
+    const {expenses, userId} = route.params
+
+    const expenseRef = db.collection(`users/${userId}/expenses`)
+
+
     const[name, setName] = useState('')
     const [amount, setAmount] = useState('')
     const[category, setCategory]=useState('')
     const [recurring, setRecurring] = useState('')
     const [visible, setVisible] = useState(false)
-
 
     const addExpense = async () => {
         setVisible(false)
@@ -74,7 +78,7 @@ console.log(expenses)
          >
                 <NavBar navigation={navigation} />
 
-                <ExpenseGraph  expenses={expenses}/>
+                {/* <ExpenseGraph  expenses={expenses}/> */}
             
                 <FlatList 
                 style={{ flex: 1}}

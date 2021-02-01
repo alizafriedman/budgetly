@@ -11,6 +11,7 @@ import ExpenseGraph from './ExpenseGraph'
 import UpdateExpense from './UpdateExpense';
 import Expenses from './Expenses';
 import GoalsGraph from './GoalsGraph';
+import IncomeGraph from './IncomeGraph'
 
 
 const Dashboard = ({navigation}) => {
@@ -73,7 +74,6 @@ const Dashboard = ({navigation}) => {
         })
     }
   
-    
     return (
   
         <View style={styles.container}>
@@ -83,17 +83,16 @@ const Dashboard = ({navigation}) => {
                 <Text style={styles.titleText} > dashboard </Text>
                 <Text style={styles.text} > hi {firstName} </Text>
                
-                {/* <Button onPress={() => { navigation.navigate('Expenses',{screen: 'Expenses', params: {expenses: expenses, expenseRef: expenseRef, expenseArray: expenseArray}}) 
-            }}  >Expenses</Button> */}
 
-                <TouchableOpacity onPress={() => navigation.navigate('Expenses', {expenses:expenses})} >
+                {/* <TouchableOpacity onPress={() => navigation.navigate('Expenses', {expenses:expenses, userId: userId})} >
                 <ExpenseGraph expenses={expenses} />
                 </TouchableOpacity>
                 
                 <TouchableOpacity onPress={() => navigation.navigate('Goals', { goals: goals })} >
                     <GoalsGraph goals={goals} />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
+<IncomeGraph />
             
                     {dashScreens.map((screen, idx) => (
                         <List.Item userId={userId} title={`${screen}`} key={idx} onPress={() => {navigation.navigate(`${screen}`)}} />))}
